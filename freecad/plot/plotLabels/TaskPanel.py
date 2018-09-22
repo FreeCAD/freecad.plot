@@ -26,8 +26,8 @@ import FreeCADGui as Gui
 
 from PySide import QtGui, QtCore
 
-import Plot
-from plotUtils import Paths
+from freecad.plot import Plot
+from freecad.plot.plotUtils import Paths
 
 
 class TaskPanel:

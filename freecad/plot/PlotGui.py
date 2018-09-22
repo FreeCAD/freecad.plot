@@ -36,7 +36,7 @@ FreeCADGui.addIconPath(":/Plot/icons")
 
 class Save:
     def Activated(self):
-        import plotSave
+        from freecad.plot import plotSave
         plotSave.load()
 
     def GetResources(self):
@@ -55,7 +55,7 @@ class Save:
 
 class Axes:
     def Activated(self):
-        import plotAxes
+        from freecad.plot import plotAxes
         plotAxes.load()
 
     def GetResources(self):
@@ -72,7 +72,7 @@ class Axes:
 
 class Series:
     def Activated(self):
-        import plotSeries
+        from freecad.plot import plotSeries
         plotSeries.load()
 
     def GetResources(self):
@@ -91,7 +91,7 @@ class Series:
 
 class Grid:
     def Activated(self):
-        import Plot
+        from freecad.plot import Plot
         plt = Plot.getPlot()
         if not plt:
             msg = QtGui.QApplication.translate(
@@ -119,7 +119,7 @@ class Grid:
 
 class Legend:
     def Activated(self):
-        import Plot
+        from freecad.plot import Plot
         plt = Plot.getPlot()
         if not plt:
             msg = QtGui.QApplication.translate(
@@ -145,7 +145,7 @@ class Legend:
 
 class Labels:
     def Activated(self):
-        import plotLabels
+        from freecad.plot import plotLabels
         plotLabels.load()
 
     def GetResources(self):
@@ -162,7 +162,7 @@ class Labels:
 
 class Positions:
     def Activated(self):
-        import plotPositions
+        from freecad.plot import plotPositions
         plotPositions.load()
 
     def GetResources(self):

@@ -21,16 +21,20 @@
 #*                                                                         *
 #***************************************************************************
 
+import FreeCADGui as Gui
+import os, sys
 
-class PlotWorkbench(Workbench):
+__dir__ = os.path.dirname(__file__)
+
+class PlottingWorkbench(Gui.Workbench):
     """Workbench of Plot module."""
     def __init__(self):
-        self.__class__.Icon = FreeCAD.getResourceDir() + "Mod/Plot/resources/icons/PlotWorkbench.svg"
-        self.__class__.MenuText = "Plot"
+        self.__class__.Icon = os.path.join(__dir__, "resources", "icons", "PlotWorkbench.svg")
+        self.__class__.MenuText = "Plotting"
         self.__class__.ToolTip = "The Plot module is used to edit/save output plots performed by other tools"
 
-    from plotUtils import Paths
-    import PlotGui
+    from freecad.plot.plotUtils import Paths
+    import freecad.plot.PlotGui
 
     def Initialize(self):
         from PySide import QtCore, QtGui
@@ -58,4 +62,4 @@ class PlotWorkbench(Workbench):
             FreeCAD.Console.PrintMessage(msg + '\n')
 
 
-Gui.addWorkbench(PlotWorkbench())
+Gui.addWorkbench(PlottingWorkbench())

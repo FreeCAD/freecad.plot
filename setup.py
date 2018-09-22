@@ -1,18 +1,19 @@
 from setuptools import setup
 import os
-# from freecad.workbench_starterkit.version import __version__
-# name: this is the name of the distribution.
-# Packages using the same name here cannot be installed together
 
 version_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 
                             "freecad", "plot", "version.py")
 with open(version_path) as fp:
     exec(fp.read())
 
-setup(name='freecad.workbench_starterkit',
+setup(name='freecad.plot',
       version=str(__version__),
       packages=['freecad',
-                'freecad.plot'],
+                'freecad.plot.plotAxes',
+                'freecad.plot.plotLabels',
+                'freecad.plot.plotPositions',
+                'freecad.plot.plotSave',
+                'freecad.plot.plotUtils'],
       maintainer="looooo",
       maintainer_email="sppedflyer@gmail.com",
       url="https://github.com/FreeCAD/ship",
