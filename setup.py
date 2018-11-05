@@ -8,14 +8,24 @@ with open(version_path) as fp:
     exec(fp.read())
     
 # try to create a resource file
-proc = sub.Popen(["pyside-rcc", "-o", "Ship_rc.py", "resources/Ship.qrc"], stdout=sub.PIPE, stderr=sub.PIPE)
-out, err = proc.communicate()
-print(out)
-print(err)
+# assume either pyside2-rcc or pyside-rcc are available.
+# if both are available pyside2-rcc is used.
+rc_input = os.path.abspath(os.path.join("freecad", "plot", "resources", "Plot.qrc"))
+rc_output = os.path.join("freecad", "plot", "Plot_rc.py")
+try:
+    proc = sub.Popen(["pyside2-rcc", "-o", rc_output, rc_input], stdout=sub.PIPE, stderr=sub.PIPE)
+    out, err = proc.communicate()
+except FileNotFoundError:
+    proc = sub.Popen(["pyside-rcc", "-o", rc_output, rc_input], stdout=sub.PIPE, stderr=sub.PIPE)
+    out, err = proc.communicate()
+
+print(out.decode("utf8"))
+print(err.decode("utf8"))
 
 setup(name='freecad.plot',
       version=str(__version__),
       packages=['freecad',
+                'freecad.plot',
                 'freecad.plot.plotAxes',
                 'freecad.plot.plotLabels',
                 'freecad.plot.plotPositions',
@@ -23,7 +33,7 @@ setup(name='freecad.plot',
                 'freecad.plot.plotUtils'],
       maintainer="looooo",
       maintainer_email="sppedflyer@gmail.com",
-      url="https://github.com/FreeCAD/ship",
+      url="https://github.com/FreeCAD/plot",
       description="externalized plot workbench. Created by Jose Luis Cercos Pita",
       install_requires=['numpy', 'matplotlib'], # should be satisfied by FreeCAD's system dependencies already
       include_package_data=True)
