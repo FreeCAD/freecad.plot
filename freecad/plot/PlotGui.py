@@ -27,7 +27,7 @@ import FreeCAD
 import FreeCADGui
 import os
 
-import Plot_rc
+from . import Plot_rc
 
 
 FreeCADGui.addLanguagePath(":/Plot/translations")
