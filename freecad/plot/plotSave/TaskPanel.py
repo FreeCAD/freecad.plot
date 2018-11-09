@@ -34,7 +34,7 @@ from freecad.plot.plotUtils import Paths
 
 class TaskPanel:
     def __init__(self):
-        self.ui = Paths.modulePath() + "/plotSave/TaskPanel.ui"
+        self.ui = os.path.join(Paths.modulePath(), "plotSave", "TaskPanel.ui")
 
     def accept(self):
         plt = Plot.getPlot()

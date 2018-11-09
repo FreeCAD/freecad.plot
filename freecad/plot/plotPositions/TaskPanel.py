@@ -21,6 +21,7 @@
 #*                                                                         *
 #***************************************************************************
 
+import os
 import FreeCAD as App
 import FreeCADGui as Gui
 
@@ -32,7 +33,7 @@ from freecad.plot.plotUtils import Paths
 
 class TaskPanel:
     def __init__(self):
-        self.ui = Paths.modulePath() + "/plotPositions/TaskPanel.ui"
+        self.ui = os.path.join(Paths.modulePath(), "plotPositions", "TaskPanel.ui")
         self.skip = False
         self.item = 0
         self.names = []

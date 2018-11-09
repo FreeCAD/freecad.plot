@@ -21,6 +21,7 @@
 #*                                                                         *
 #***************************************************************************
 
+import os
 import FreeCAD as App
 import FreeCADGui as Gui
 
@@ -36,7 +37,7 @@ import matplotlib.colors as Colors
 
 class TaskPanel:
     def __init__(self):
-        self.ui = Paths.modulePath() + "/plotSeries/TaskPanel.ui"
+        self.ui = os.path.join(Paths.modulePath(), "plotSeries", "TaskPanel.ui")
         self.skip = False
         self.item = 0
         self.plt = None
