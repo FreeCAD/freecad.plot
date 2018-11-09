@@ -32,7 +32,7 @@ from freecad.plot.plotUtils import Paths
 
 class TaskPanel:
     def __init__(self):
-        self.ui = Paths.modulePath() + "/plotAxes/TaskPanel.ui"
+        self.ui = os.path.join(Paths.modulePath(),"plotAxes", "TaskPanel.ui")
         self.skip = False
 
     def accept(self):

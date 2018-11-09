@@ -28,21 +28,15 @@ import os
 
 def modulePath():
     """returns the current Plot module path."""
-    path1 = FreeCAD.ConfigGet("AppHomePath") + "Mod/Plot"
-    path2 = FreeCAD.ConfigGet("UserAppData") + "Mod/Plot"
-    if os.path.exists(path2):
-        return path2
-    else:
-        return path1
+    return os.path.join(os.path.os.path.dirname(__file__), "..")
 
 
 def iconsPath():
     """returns the current Plot module icons path."""
-    path = modulePath() + "/resources/icons"
-    return path
+    return os.path.join(modulePath(), "resources", "icons")
 
 
 def translationsPath():
     """returns the current Plot module translations path."""
     path = modulePath() + "/resources/translations"
-    return path
+    return os.path.join(modulePath(), "resources", "translations")
