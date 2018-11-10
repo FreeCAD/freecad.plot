@@ -224,14 +224,14 @@ class TaskPanel:
         form.style = self.widget(QtGui.QComboBox, "lineStyle")
         form.marker = self.widget(QtGui.QComboBox, "markers")
         # Line styles
-        linestyles = Line2D.lineStyles.keys()
+        linestyles = list(Line2D.lineStyles.keys())
         for i in range(0, len(linestyles)):
             style = linestyles[i]
             string = "\'" + str(style) + "\'"
             string += " (" + Line2D.lineStyles[style] + ")"
             form.style.addItem(string)
         # Markers
-        markers = Line2D.markers.keys()
+        markers = list(Line2D.markers.keys())
         for i in range(0, len(markers)):
             marker = markers[i]
             string = "\'" + str(marker) + "\'"
@@ -278,10 +278,10 @@ class TaskPanel:
                 form.label.setEnabled(True)
             # Set line style and marker
             style = form.style.currentIndex()
-            linestyles = Line2D.lineStyles.keys()
+            linestyles = list(Line2D.lineStyles.keys())
             serie.line.set_linestyle(linestyles[style])
             marker = form.marker.currentIndex()
-            markers = Line2D.markers.keys()
+            markers = list(Line2D.markers.keys())
             serie.line.set_marker(markers[marker])
             # Set line width and marker size
             serie.line.set_linewidth(form.width.value())
@@ -397,13 +397,13 @@ class TaskPanel:
             form.label.setText(serie.name)
         # Set line style and marker
         form.style.setCurrentIndex(0)
-        linestyles = Line2D.lineStyles.keys()
+        linestyles = list(Line2D.lineStyles.keys())
         for i in range(0, len(linestyles)):
             style = linestyles[i]
             if style == serie.line.get_linestyle():
                 form.style.setCurrentIndex(i)
         form.marker.setCurrentIndex(0)
-        markers = Line2D.markers.keys()
+        markers = list(Line2D.markers.keys())
         for i in range(0, len(markers)):
             marker = markers[i]
             if marker == serie.line.get_marker():

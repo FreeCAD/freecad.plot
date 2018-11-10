@@ -30,7 +30,7 @@ from distutils.version import LooseVersion as V
 try:
     import matplotlib
     matplotlib.use('Qt5Agg')
-    matplotlib.rcParams['backend.qt5']='PySide2'
+    # matplotlib.rcParams['backend.qt5']='PySide2'
     import matplotlib.pyplot as plt
     from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
     if V(matplotlib.__version__) < V("1.4.0"):
