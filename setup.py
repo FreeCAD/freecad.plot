@@ -13,11 +13,14 @@ with open(version_path) as fp:
 rc_input = os.path.abspath(os.path.join("freecad", "plot", "resources", "Plot.qrc"))
 rc_output = os.path.join("freecad", "plot", "Plot_rc.py")
 try:
-    proc = sub.Popen(["pyside2-rcc", "-o", rc_output, rc_input], stdout=sub.PIPE, stderr=sub.PIPE)
-    out, err = proc.communicate()
-except FileNotFoundError:
-    proc = sub.Popen(["pyside-rcc", "-o", rc_output, rc_input], stdout=sub.PIPE, stderr=sub.PIPE)
-    out, err = proc.communicate()
+    try:
+        proc = sub.Popen(["pyside2-rcc", "-o", rc_output, rc_input], stdout=sub.PIPE, stderr=sub.PIPE)
+        out, err = proc.communicate()
+    except FileNotFoundError:
+        proc = sub.Popen(["pyside-rcc", "-o", rc_output, rc_input], stdout=sub.PIPE, stderr=sub.PIPE)
+        out, err = proc.communicate()
+except Exception as e:
+    print("An error occured while trying to create the resource file: \n" + str(e))
 
 print(out.decode("utf8"))
 print(err.decode("utf8"))
