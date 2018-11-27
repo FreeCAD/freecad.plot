@@ -51,7 +51,10 @@ class TaskPanel:
         form.sizeX = self.widget(QtGui.QDoubleSpinBox, "sizeX")
         form.sizeY = self.widget(QtGui.QDoubleSpinBox, "sizeY")
         form.dpi = self.widget(QtGui.QSpinBox, "dpi")
-        path = unicode(form.path.text())
+        try:
+            path = unicode(form.path.text())
+        except NameError:
+            path = str(form.path.text())
         size = (form.sizeX.value(), form.sizeY.value())
         dpi = form.dpi.value()
         Plot.save(path, size, dpi)
@@ -204,7 +207,10 @@ class TaskPanel:
                                                  path,
                                                  file_choices)
         if path:
-            form.path.setText(path)
+            try:
+                form.path.setText(path)
+            except TypeError:
+                form.path.setText(path[0])
 
     def onMdiArea(self, subWin):
         """Executed when a new window is selected on the mdi area.
