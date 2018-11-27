@@ -28,6 +28,7 @@ import FreeCADGui as Gui
 from PySide import QtGui, QtCore
 
 from freecad import plot
+from freecad.plot import Plot
 from freecad.plot.plotUtils import Paths
 
 
@@ -595,10 +596,10 @@ class TaskPanel:
         # Set dimensions
         ax = plt.axes
         bb = ax.get_position()
-        form.xMin.setValue(int(100 * bb._get_xmin()))
-        form.xMax.setValue(int(100 * bb._get_xmax()))
-        form.yMin.setValue(int(100 * bb._get_ymin()))
-        form.yMax.setValue(int(100 * bb._get_ymax()))
+        form.xMin.setValue(int(100 * bb.min[0]))
+        form.xMax.setValue(int(100 * bb.max[0]))
+        form.yMin.setValue(int(100 * bb.min[1]))
+        form.yMax.setValue(int(100 * bb.max[1]))
         # Set alignment and offset
         xPos = ax.xaxis.get_ticks_position()
         yPos = ax.yaxis.get_ticks_position()
