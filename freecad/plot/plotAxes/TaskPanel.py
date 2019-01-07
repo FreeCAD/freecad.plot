@@ -31,6 +31,11 @@ from freecad import plot
 from freecad.plot import Plot
 from freecad.plot.plotUtils import Paths
 
+try:
+    unicode        # Python 2
+except NameError:
+    unicode = str  # Python 3
+
 
 class TaskPanel:
     def __init__(self):
