@@ -21,6 +21,7 @@
 #*                                                                         *
 #***************************************************************************
 
+import FreeCAD
 import FreeCADGui as Gui
 import os, sys
 
