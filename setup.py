@@ -1,13 +1,13 @@
 from setuptools import setup
 import os
-from freecad.plot.PlotGui import CompileResources
+from freecad.plot.compile_resources import compile_resources
 
 version_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 
                             "freecad", "plot", "version.py")
 with open(version_path) as fp:
     exec(fp.read())
     
-CompileResources()
+compile_resources()
 
 setup(name='freecad.plot',
       version=str(__version__),
