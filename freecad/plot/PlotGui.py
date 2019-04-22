@@ -33,7 +33,7 @@ try:
 except ImportError:
     print("Plot: Trying to compile resources")
     from . import compile_resources
-    compile_resources()
+    compile_resources.compile_resources()
     from . import Plot_rc
 
 
