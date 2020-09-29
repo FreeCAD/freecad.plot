@@ -25,42 +25,13 @@ import FreeCAD
 import FreeCADGui as Gui
 import os, sys
 
-__dir__ = os.path.dirname(__file__)
+import matplotlib
+import matplotlib.pyplot as plt
 
-class PlotWorkbench(Gui.Workbench):
-    """Workbench of Plot module."""
-    def __init__(self):
-        self.__class__.Icon = os.path.join(__dir__, "resources", "icons", "PlotWorkbench.svg")
-        self.__class__.MenuText = "Plot"
-        self.__class__.ToolTip = "The Plot module is used to edit/save output plots performed by other tools"
+matplotlib.use("module://freecad.plot.freecad_backend")
+matplotlib.style.use('seaborn-colorblind')
 
-    from freecad.plot.plotUtils import Paths
-    import freecad.plot.PlotGui
+matplotlib.rcParams["figure.facecolor"] = "efefef"
+matplotlib.rcParams["axes.facecolor"] = "efefef"
 
-    def Initialize(self):
-        from PySide import QtCore, QtGui
-        cmdlst = ["Plot_SaveFig",
-                  "Plot_Axes",
-                  "Plot_Series",
-                  "Plot_Grid",
-                  "Plot_Legend",
-                  "Plot_Labels",
-                  "Plot_Positions"]
-        self.appendToolbar(str(QtCore.QT_TRANSLATE_NOOP(
-            "Plot",
-            "Plot edition tools")), cmdlst)
-        self.appendMenu(str(QtCore.QT_TRANSLATE_NOOP(
-            "Plot",
-            "Plot")), cmdlst)
-        try:
-            import matplotlib
-        except ImportError:
-            from PySide import QtCore, QtGui
-            msg = QtGui.QApplication.translate(
-                "plot_console",
-                "matplotlib not found, Plot module will be disabled",
-                None)
-            FreeCAD.Console.PrintMessage(msg + '\n')
-
-
-Gui.addWorkbench(PlotWorkbench())
+plt.ion()
