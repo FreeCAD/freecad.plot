@@ -37,23 +37,13 @@ class FigureManager(FigureManagerBase):
 
         FigureManager.all_widgets.append(self.widget)
 
-        self.toolbar = self._get_toolbar(self.canvas, self.widget)
-        self.widget.layout().setMenuBar(self.toolbar)
+        self.toolbar = NavigationToolbar2QT(self.canvas, self.widget, False)
+        self.toolbar.setOrientation(QtCore.Qt.Vertical)
+        self.widget.layout().addWidget(self.toolbar)
         self.canvas.set_widget_name = self.set_widget_name
 
     def show(self):
         self.canvas.draw_idle()
-
-    def _get_toolbar(self, canvas, parent):
-        # must be inited after the window, drawingArea and figure
-        # attrs are set
-        if matplotlib.rcParams['toolbar'] == 'toolbar2':
-            toolbar = NavigationToolbar2QT(canvas, parent, True)
-        elif matplotlib.rcParams['toolbar'] == 'toolmanager':
-            toolbar = ToolbarQt(self.toolmanager, self.window)
-        else:
-            toolbar = None
-        return toolbar
 
     def set_widget_name(self):
         if not self.widget.windowTitle() and plt.gca().get_title():
