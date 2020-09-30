@@ -25,6 +25,16 @@ import FreeCAD
 import FreeCADGui as Gui
 import os, sys
 
+import matplotlib
+import matplotlib.pyplot as plt
+
+matplotlib.use("module://freecad.plot.freecad_backend")
+matplotlib.style.use('seaborn-colorblind')
+matplotlib.rcParams["figure.facecolor"] = "efefef"
+matplotlib.rcParams["axes.facecolor"] = "efefef"
+
+plt.ion()
+
 __dir__ = os.path.dirname(__file__)
 
 class PlotWorkbench(Gui.Workbench):
