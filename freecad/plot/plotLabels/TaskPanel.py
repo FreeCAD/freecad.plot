@@ -215,9 +215,9 @@ class TaskPanel:
             self.updateUI()
             return
 
-        Plot.title(unicode(form.title.text()))
-        Plot.xlabel(unicode(form.xLabel.text()))
-        Plot.ylabel(unicode(form.yLabel.text()))
+        Plot.title(unicode(self.form.title.text()))
+        Plot.xlabel(unicode(self.form.xLabel.text()))
+        Plot.ylabel(unicode(self.form.yLabel.text()))
         plt.update()
 
     def onFontSizes(self, value):
