@@ -21,14 +21,13 @@
 #*                                                                         *
 #***************************************************************************
 
-import os
 import FreeCAD as App
 import FreeCADGui as Gui
 
 from PySide import QtGui, QtCore
 
 from freecad.plot import Plot
-from freecad.plot.plotUtils import Paths
+from freecad.plot import Plot_rc
 
 try:
     unicode        # Python 2
@@ -38,7 +37,9 @@ except NameError:
 
 class TaskPanel:
     def __init__(self):
-        self.ui = os.path.join(Paths.modulePath(), "plotLabels", "TaskPanel.ui")
+        self.name = "plot labels"
+        self.ui = ":/ui/TaskPanel_plotLabels.ui"
+        self.form = Gui.PySideUic.loadUi(self.ui)
         self.skip = False
 
     def accept(self):
@@ -69,16 +70,13 @@ class TaskPanel:
         pass
 
     def setupUi(self):
-        mw = self.getMainWindow()
-        form = mw.findChild(QtGui.QWidget, "TaskPanel")
-        form.axId = self.widget(QtGui.QSpinBox, "axesIndex")
-        form.title = self.widget(QtGui.QLineEdit, "title")
-        form.titleSize = self.widget(QtGui.QSpinBox, "titleSize")
-        form.xLabel = self.widget(QtGui.QLineEdit, "titleX")
-        form.xSize = self.widget(QtGui.QSpinBox, "xSize")
-        form.yLabel = self.widget(QtGui.QLineEdit, "titleY")
-        form.ySize = self.widget(QtGui.QSpinBox, "ySize")
-        self.form = form
+        self.form.axId = self.widget(QtGui.QSpinBox, "axesIndex")
+        self.form.title = self.widget(QtGui.QLineEdit, "title")
+        self.form.titleSize = self.widget(QtGui.QSpinBox, "titleSize")
+        self.form.xLabel = self.widget(QtGui.QLineEdit, "titleX")
+        self.form.xSize = self.widget(QtGui.QSpinBox, "xSize")
+        self.form.yLabel = self.widget(QtGui.QLineEdit, "titleY")
+        self.form.ySize = self.widget(QtGui.QSpinBox, "ySize")
         self.retranslateUi()
         # Look for active axes if can
         axId = 0
@@ -86,27 +84,27 @@ class TaskPanel:
         if plt:
             while plt.axes != plt.axesList[axId]:
                 axId = axId + 1
-            form.axId.setValue(axId)
+            self.form.axId.setValue(axId)
         self.updateUI()
-        QtCore.QObject.connect(form.axId,
+        QtCore.QObject.connect(self.form.axId,
                                QtCore.SIGNAL('valueChanged(int)'),
                                self.onAxesId)
-        QtCore.QObject.connect(form.title,
+        QtCore.QObject.connect(self.form.title,
                                QtCore.SIGNAL("editingFinished()"),
                                self.onLabels)
-        QtCore.QObject.connect(form.xLabel,
+        QtCore.QObject.connect(self.form.xLabel,
                                QtCore.SIGNAL("editingFinished()"),
                                self.onLabels)
-        QtCore.QObject.connect(form.yLabel,
+        QtCore.QObject.connect(self.form.yLabel,
                                QtCore.SIGNAL("editingFinished()"),
                                self.onLabels)
-        QtCore.QObject.connect(form.titleSize,
+        QtCore.QObject.connect(self.form.titleSize,
                                QtCore.SIGNAL("valueChanged(int)"),
                                self.onFontSizes)
-        QtCore.QObject.connect(form.xSize,
+        QtCore.QObject.connect(self.form.xSize,
                                QtCore.SIGNAL("valueChanged(int)"),
                                self.onFontSizes)
-        QtCore.QObject.connect(form.ySize,
+        QtCore.QObject.connect(self.form.ySize,
                                QtCore.SIGNAL("valueChanged(int)"),
                                self.onFontSizes)
         QtCore.QObject.connect(
@@ -201,16 +199,12 @@ class TaskPanel:
                 self.updateUI()
                 self.skip = False
                 return
-            # Get again all the subwidgets (to avoid PySide Pitfalls)
-            mw = self.getMainWindow()
-            form = mw.findChild(QtGui.QWidget, "TaskPanel")
-            form.axId = self.widget(QtGui.QSpinBox, "axesIndex")
 
-            form.axId.setMaximum(len(plt.axesList))
-            if form.axId.value() >= len(plt.axesList):
-                form.axId.setValue(len(plt.axesList) - 1)
+            self.form.axId.setMaximum(len(plt.axesList))
+            if self.form.axId.value() >= len(plt.axesList):
+                self.form.axId.setValue(len(plt.axesList) - 1)
             # Send new control to Plot instance
-            plt.setActiveAxes(form.axId.value())
+            plt.setActiveAxes(self.form.axId.value())
             self.updateUI()
             self.skip = False
 
@@ -220,12 +214,6 @@ class TaskPanel:
         if not plt:
             self.updateUI()
             return
-        # Get again all the subwidgets (to avoid PySide Pitfalls)
-        mw = self.getMainWindow()
-        form = mw.findChild(QtGui.QWidget, "TaskPanel")
-        form.title = self.widget(QtGui.QLineEdit, "title")
-        form.xLabel = self.widget(QtGui.QLineEdit, "titleX")
-        form.yLabel = self.widget(QtGui.QLineEdit, "titleY")
 
         Plot.title(unicode(form.title.text()))
         Plot.xlabel(unicode(form.xLabel.text()))
@@ -239,17 +227,11 @@ class TaskPanel:
         if not plt:
             self.updateUI()
             return
-        # Get again all the subwidgets (to avoid PySide Pitfalls)
-        mw = self.getMainWindow()
-        form = mw.findChild(QtGui.QWidget, "TaskPanel")
-        form.titleSize = self.widget(QtGui.QSpinBox, "titleSize")
-        form.xSize = self.widget(QtGui.QSpinBox, "xSize")
-        form.ySize = self.widget(QtGui.QSpinBox, "ySize")
 
         ax = plt.axes
-        ax.title.set_fontsize(form.titleSize.value())
-        ax.xaxis.label.set_fontsize(form.xSize.value())
-        ax.yaxis.label.set_fontsize(form.ySize.value())
+        ax.title.set_fontsize(self.form.titleSize.value())
+        ax.xaxis.label.set_fontsize(self.form.xSize.value())
+        ax.yaxis.label.set_fontsize(self.form.ySize.value())
         plt.update()
 
     def onMdiArea(self, subWin):
@@ -264,30 +246,20 @@ class TaskPanel:
 
     def updateUI(self):
         """ Setup UI controls values if possible """
-        # Get again all the subwidgets (to avoid PySide Pitfalls)
-        mw = self.getMainWindow()
-        form = mw.findChild(QtGui.QWidget, "TaskPanel")
-        form.axId = self.widget(QtGui.QSpinBox, "axesIndex")
-        form.title = self.widget(QtGui.QLineEdit, "title")
-        form.titleSize = self.widget(QtGui.QSpinBox, "titleSize")
-        form.xLabel = self.widget(QtGui.QLineEdit, "titleX")
-        form.xSize = self.widget(QtGui.QSpinBox, "xSize")
-        form.yLabel = self.widget(QtGui.QLineEdit, "titleY")
-        form.ySize = self.widget(QtGui.QSpinBox, "ySize")
 
         plt = Plot.getPlot()
-        form.axId.setEnabled(bool(plt))
-        form.title.setEnabled(bool(plt))
-        form.titleSize.setEnabled(bool(plt))
-        form.xLabel.setEnabled(bool(plt))
-        form.xSize.setEnabled(bool(plt))
-        form.yLabel.setEnabled(bool(plt))
-        form.ySize.setEnabled(bool(plt))
+        self.form.axId.setEnabled(bool(plt))
+        self.form.title.setEnabled(bool(plt))
+        self.form.titleSize.setEnabled(bool(plt))
+        self.form.xLabel.setEnabled(bool(plt))
+        self.form.xSize.setEnabled(bool(plt))
+        self.form.yLabel.setEnabled(bool(plt))
+        self.form.ySize.setEnabled(bool(plt))
         if not plt:
             return
         # Ensure that active axes is correct
-        index = min(form.axId.value(), len(plt.axesList) - 1)
-        form.axId.setValue(index)
+        index = min(self.form.axId.value(), len(plt.axesList) - 1)
+        self.form.axId.setValue(index)
         # Store data before starting changing it.
 
         ax = plt.axes
@@ -298,13 +270,13 @@ class TaskPanel:
         xx = ax.xaxis.label.get_fontsize()
         yy = ax.yaxis.label.get_fontsize()
         # Set labels
-        form.title.setText(t)
-        form.xLabel.setText(x)
-        form.yLabel.setText(y)
+        self.form.title.setText(t)
+        self.form.xLabel.setText(x)
+        self.form.yLabel.setText(y)
         # Set font sizes
-        form.titleSize.setValue(tt)
-        form.xSize.setValue(xx)
-        form.ySize.setValue(yy)
+        self.form.titleSize.setValue(tt)
+        self.form.xSize.setValue(xx)
+        self.form.ySize.setValue(yy)
 
 
 def createTask():

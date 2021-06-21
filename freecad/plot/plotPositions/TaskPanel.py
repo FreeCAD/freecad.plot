@@ -21,19 +21,20 @@
 #*                                                                         *
 #***************************************************************************
 
-import os
 import FreeCAD as App
 import FreeCADGui as Gui
 
 from PySide import QtGui, QtCore
 
 from freecad.plot import Plot
-from freecad.plot.plotUtils import Paths
+from freecad.plot import Plot_rc
 
 
 class TaskPanel:
     def __init__(self):
-        self.ui = os.path.join(Paths.modulePath(), "plotPositions", "TaskPanel.ui")
+        self.name = "plot positions"
+        self.ui = ":/ui/TaskPanel_plotPositions.ui"
+        self.form = Gui.PySideUic.loadUi(self.ui)
         self.skip = False
         self.item = 0
         self.names = []
@@ -68,29 +69,26 @@ class TaskPanel:
         pass
 
     def setupUi(self):
-        mw = self.getMainWindow()
-        form = mw.findChild(QtGui.QWidget, "TaskPanel")
-        form.items = self.widget(QtGui.QListWidget, "items")
-        form.x = self.widget(QtGui.QDoubleSpinBox, "x")
-        form.y = self.widget(QtGui.QDoubleSpinBox, "y")
-        form.s = self.widget(QtGui.QDoubleSpinBox, "size")
-        self.form = form
+        self.form.items = self.widget(QtGui.QListWidget, "items")
+        self.form.x = self.widget(QtGui.QDoubleSpinBox, "x")
+        self.form.y = self.widget(QtGui.QDoubleSpinBox, "y")
+        self.form.s = self.widget(QtGui.QDoubleSpinBox, "size")
         self.retranslateUi()
         self.updateUI()
         QtCore.QObject.connect(
-            form.items,
+            self.form.items,
             QtCore.SIGNAL("currentRowChanged(int)"),
             self.onItem)
         QtCore.QObject.connect(
-            form.x,
+            self.form.x,
             QtCore.SIGNAL("valueChanged(double)"),
             self.onData)
         QtCore.QObject.connect(
-            form.y,
+            self.form.y,
             QtCore.SIGNAL("valueChanged(double)"),
             self.onData)
         QtCore.QObject.connect(
-            form.s,
+            self.form.s,
             QtCore.SIGNAL("valueChanged(double)"),
             self.onData)
         QtCore.QObject.connect(
@@ -165,24 +163,18 @@ class TaskPanel:
         if not plt:
             self.updateUI()
             return
-        mw = self.getMainWindow()
-        form = mw.findChild(QtGui.QWidget, "TaskPanel")
-        form.items = self.widget(QtGui.QListWidget, "items")
-        form.x = self.widget(QtGui.QDoubleSpinBox, "x")
-        form.y = self.widget(QtGui.QDoubleSpinBox, "y")
-        form.s = self.widget(QtGui.QDoubleSpinBox, "size")
         if not self.skip:
             self.skip = True
             name = self.names[self.item]
             obj = self.objs[self.item]
-            x = form.x.value()
-            y = form.y.value()
-            s = form.s.value()
+            x = self.form.x.value()
+            y = self.form.y.value()
+            s = self.form.s.value()
             # x/y labels only have one position control
             if name.find('x label') >= 0:
-                form.y.setValue(x)
+                self.form.y.setValue(x)
             elif name.find('y label') >= 0:
-                form.x.setValue(y)
+                self.form.x.setValue(y)
             # title and labels only have one size control
             if name.find('title') >= 0 or name.find('label') >= 0:
                 obj.set_position((x, y))
@@ -205,20 +197,14 @@ class TaskPanel:
 
     def updateUI(self):
         """Setup the UI control values if it is possible."""
-        mw = self.getMainWindow()
-        form = mw.findChild(QtGui.QWidget, "TaskPanel")
-        form.items = self.widget(QtGui.QListWidget, "items")
-        form.x = self.widget(QtGui.QDoubleSpinBox, "x")
-        form.y = self.widget(QtGui.QDoubleSpinBox, "y")
-        form.s = self.widget(QtGui.QDoubleSpinBox, "size")
         plt = Plot.getPlot()
-        form.items.setEnabled(bool(plt))
-        form.x.setEnabled(bool(plt))
-        form.y.setEnabled(bool(plt))
-        form.s.setEnabled(bool(plt))
+        self.form.items.setEnabled(bool(plt))
+        self.form.x.setEnabled(bool(plt))
+        self.form.y.setEnabled(bool(plt))
+        self.form.s.setEnabled(bool(plt))
         if not plt:
             self.plt = plt
-            form.items.clear()
+            self.form.items.clear()
             return
         # Refill items list only if Plot instance have been changed
         if self.plt != plt:
@@ -234,28 +220,22 @@ class TaskPanel:
             y = p[1]
             s = obj.get_size()
             if name.find('x label') >= 0:
-                form.y.setEnabled(False)
-                form.y.setValue(x)
+                self.form.y.setEnabled(False)
+                self.form.y.setValue(x)
             elif name.find('y label') >= 0:
-                form.x.setEnabled(False)
-                form.x.setValue(y)
+                self.form.x.setEnabled(False)
+                self.form.x.setValue(y)
         else:
             x = plt.legPos[0]
             y = plt.legPos[1]
             s = obj.get_texts()[-1].get_fontsize()
         # Send it to controls
-        form.x.setValue(x)
-        form.y.setValue(y)
-        form.s.setValue(s)
+        self.form.x.setValue(x)
+        self.form.y.setValue(y)
+        self.form.s.setValue(s)
 
     def setList(self):
         """ Setup UI controls values if possible """
-        mw = self.getMainWindow()
-        form = mw.findChild(QtGui.QWidget, "TaskPanel")
-        form.items = self.widget(QtGui.QListWidget, "items")
-        form.x = self.widget(QtGui.QDoubleSpinBox, "x")
-        form.y = self.widget(QtGui.QDoubleSpinBox, "y")
-        form.s = self.widget(QtGui.QDoubleSpinBox, "size")
         # Clear lists
         self.names = []
         self.objs = []
@@ -277,13 +257,13 @@ class TaskPanel:
                 self.names.append('legend')
                 self.objs.append(ax.legend_)
         # Send list to widget
-        form.items.clear()
+        self.form.items.clear()
         for name in self.names:
-            form.items.addItem(name)
+            self.form.items.addItem(name)
         # Ensure that selected item is correct
         if self.item >= len(self.names):
             self.item = len(self.names) - 1
-            form.items.setCurrentIndex(self.item)
+            self.form.items.setCurrentIndex(self.item)
 
 
 def createTask():

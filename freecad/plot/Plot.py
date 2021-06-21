@@ -29,14 +29,10 @@ from distutils.version import LooseVersion as V
 
 try:
     import matplotlib
-    # matplotlib.use('Qt5Agg')
-    # matplotlib.rcParams['backend.qt5']='PySide2'
+    matplotlib.use('Qt5Agg')
     import matplotlib.pyplot as plt
     from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-    if V(matplotlib.__version__) < V("1.4.0"):
-       from matplotlib.backends.backend_qt5agg import NavigationToolbar2QTAgg as NavigationToolbar
-    else:
-       from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+    from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 
     from matplotlib.figure import Figure
 except ImportError:
