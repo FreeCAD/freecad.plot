@@ -54,7 +54,6 @@ class PlotWorkbench(Gui.Workbench):
         self.__class__.MenuText = "Plot"
         self.__class__.ToolTip = "The Plot module is used to edit/save output plots performed by other tools"
 
-    from freecad.plot.plotUtils import Paths
     import freecad.plot.PlotGui
 
     def Initialize(self):
