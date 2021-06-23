@@ -1,6 +1,7 @@
 import os
 import subprocess as sub
 
+
 def compile_resources():
     # try to create a resource file
     # assume either pyside2-rcc or pyside-rcc are available.
@@ -18,3 +19,7 @@ def compile_resources():
         print(err)
     except Exception as e:
         print("An error occured while trying to create the resource file: \n" + str(e))
+
+
+if __name__ == '__main__':
+    compile_resources()
