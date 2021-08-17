@@ -26,8 +26,8 @@ import FreeCADGui as Gui
 
 from PySide import QtGui, QtCore
 
+from FreeCAD.Plot import Plot
 from freecad import plot
-from freecad.plot import Plot
 from freecad.plot import Plot_rc
 
 try:
