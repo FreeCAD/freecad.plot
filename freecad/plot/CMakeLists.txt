@@ -3,7 +3,6 @@ IF (BUILD_GUI)
 ENDIF (BUILD_GUI)
 
 SET(PlotMain_SRCS
-    Plot.py
     InitGui.py
     PlotGui.py
 )

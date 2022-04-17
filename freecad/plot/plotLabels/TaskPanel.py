@@ -26,7 +26,7 @@ import FreeCADGui as Gui
 
 from PySide import QtGui, QtCore
 
-from freecad.plot import Plot
+from FreeCAD.Plot import Plot
 from freecad.plot import Plot_rc
 
 try:
@@ -283,6 +283,6 @@ def createTask():
     panel = TaskPanel()
     Gui.Control.showDialog(panel)
     if panel.setupUi():
-        Gui.Control.closeDialog(panel)
+        Gui.Control.closeDialog()
         return None
     return panel

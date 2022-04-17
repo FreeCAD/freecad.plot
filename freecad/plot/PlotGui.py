@@ -93,7 +93,7 @@ class Series:
 
 class Grid:
     def Activated(self):
-        from freecad.plot import Plot
+        from FreeCAD.Plot import Plot
         plt = Plot.getPlot()
         if not plt:
             msg = QtGui.QApplication.translate(
@@ -119,7 +119,7 @@ class Grid:
 
 class Legend:
     def Activated(self):
-        from freecad.plot import Plot
+        from FreeCAD.Plot import Plot
         plt = Plot.getPlot()
         if not plt:
             msg = QtGui.QApplication.translate(
