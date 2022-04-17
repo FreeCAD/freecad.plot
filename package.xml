@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<package format="1" xmlns="https://wiki.freecad.org/Package_Metadata">
+  <name>Plot Workbench</name>
+  <description>Some tools to manipulate the FreeCAD plots</description>
+  <version>2022.4.17</version>
+  <date>2022-04-17</date>
+  <maintainer email="jlcercos@gmail.com">Jose Luis Cercós Pita</maintainer>
+  <license file="LICENSE">LGPLv2.1</license>
+  <url type="repository" branch="master">https://github.com/FreeCAD/freecad.plot</url>
+  <url type="bugtracker">https://github.com/FreeCAD/freecad.pot/issues</url>
+  <url type="documentation">https://wiki.freecad.org/Plot_Workbench</url>
+
+  <icon>freecad/plot/resources/icons/Plot_Icon.svg</icon>
+
+  <content>
+    <workbench>
+      <name>Plot Workbench</name>
+      <classname>PlotWorkbench</classname>
+      <subdirectory>./</subdirectory>
+      <icon>freecad/plot/resources/icons/Plot_Icon.svg</icon>
+      <depend>matplotlib</depend>
+      <tag>plot</tag>
+    </workbench>
+  </content>
+
+</package>
