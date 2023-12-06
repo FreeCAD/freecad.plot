@@ -39,7 +39,21 @@ if PyQt5WasLoaded:
     import PyQt5.QtCore
 
 matplotlib.use("module://freecad.plot.freecad_backend")
-matplotlib.style.use('seaborn-colorblind')
+style_list = ['default', 'classic'] + sorted(
+    style for style in plt.style.available
+    if style != 'classic' and not style.startswith('_') and 'colorblind' in style)
+sorted_style_list = sorted(style_list, reverse = True)
+if len(sorted_style_list) > 1:
+    matplotlib.style.use(sorted_style_list[1])
+elif len(sorted_style_list) == 1:
+    matplotlib.style.use(sorted_style_list[0])
+else:
+    from PySide import QtCore, QtGui
+    msg = QtGui.QApplication.translate(
+        "plot_console",
+        "matplotlib style sheets not found",
+        None)
+    FreeCAD.Console.PrintWarning(msg + '\n')
 matplotlib.rcParams["figure.facecolor"] = "efefef"
 matplotlib.rcParams["axes.facecolor"] = "efefef"
 
