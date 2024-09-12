@@ -21,13 +21,13 @@
 #*                                                                         *
 #***************************************************************************
 
+import os
 import FreeCAD as App
 import FreeCADGui as Gui
 
 from PySide import QtGui, QtCore
 
 from FreeCAD.Plot import Plot
-from freecad.plot import Plot_rc
 
 try:
     unicode        # Python 2
@@ -38,7 +38,9 @@ except NameError:
 class TaskPanel:
     def __init__(self):
         self.name = "plot labels"
-        self.ui = ":/ui/TaskPanel_plotLabels.ui"
+        self.ui = os.path.join(os.path.dirname(__file__),
+                               "../resources/ui/",
+                               "TaskPanel_plotLabels.ui")
         self.form = Gui.PySideUic.loadUi(self.ui)
         self.skip = False
 

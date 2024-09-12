@@ -21,19 +21,21 @@
 #*                                                                         *
 #***************************************************************************
 
+import os
 import FreeCAD as App
 import FreeCADGui as Gui
 
 from PySide import QtGui, QtCore
 
 from FreeCAD.Plot import Plot
-from freecad.plot import Plot_rc
 
 
 class TaskPanel:
     def __init__(self):
         self.name = "plot positions"
-        self.ui = ":/ui/TaskPanel_plotPositions.ui"
+        self.ui = os.path.join(os.path.dirname(__file__),
+                               "../resources/ui/",
+                               "TaskPanel_plotPositions.ui")
         self.form = Gui.PySideUic.loadUi(self.ui)
         self.skip = False
         self.item = 0

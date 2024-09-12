@@ -21,13 +21,13 @@
 #*                                                                         *
 #***************************************************************************
 
+import os
 import FreeCAD as App
 import FreeCADGui as Gui
 
 from PySide import QtGui, QtCore
 
 from FreeCAD.Plot import Plot
-from freecad.plot import Plot_rc
 
 import matplotlib
 from matplotlib.lines import Line2D
@@ -37,7 +37,9 @@ import matplotlib.colors as Colors
 class TaskPanel:
     def __init__(self):
         self.name = "plot series editor"
-        self.ui = ":/ui/TaskPanel_plotSeries.ui"
+        self.ui = os.path.join(os.path.dirname(__file__),
+                               "../resources/ui/",
+                               "TaskPanel_plotSeries.ui")
         self.form = Gui.PySideUic.loadUi(self.ui)
         self.skip = False
         self.item = 0

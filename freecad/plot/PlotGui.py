@@ -21,23 +21,17 @@
 #*                                                                         *
 #***************************************************************************
 
+import os
 import PySide
 from PySide import QtCore, QtGui
 import FreeCAD
 import FreeCADGui
 
 
-try:
-    from . import Plot_rc
-except ImportError:
-    print("Plot: Trying to compile resources")
-    from . import compile_resources
-    compile_resources.compile_resources()
-    from . import Plot_rc
-
-
-FreeCADGui.addLanguagePath(":/Plot/translations")
-FreeCADGui.addIconPath(":/Plot/icons")
+FreeCADGui.addLanguagePath(os.path.join(os.path.dirname(__file__),
+                                        "resources/translations"))
+FreeCADGui.addIconPath(os.path.join(os.path.dirname(__file__),
+                                        "resources/icons"))
 
 
 class Save:
