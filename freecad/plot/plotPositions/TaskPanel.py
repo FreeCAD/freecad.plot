@@ -119,37 +119,37 @@ class TaskPanel:
 
     def retranslateUi(self):
         """Set the user interface locale strings."""
-        self.form.setWindowTitle(QtGui.QApplication.translate(
+        self.form.setWindowTitle(App.Qt.translate(
             "plot_positions",
             "Set positions and sizes",
             None))
         self.widget(QtGui.QLabel, "posLabel").setText(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_positions",
                 "Position",
                 None))
         self.widget(QtGui.QLabel, "sizeLabel").setText(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_positions",
                 "Size",
                 None))
         self.widget(QtGui.QListWidget, "items").setToolTip(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_positions",
                 "List of modifiable items",
                 None))
         self.widget(QtGui.QDoubleSpinBox, "x").setToolTip(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_positions",
                 "X item position",
                 None))
         self.widget(QtGui.QDoubleSpinBox, "y").setToolTip(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_positions",
                 "Y item position",
                 None))
         self.widget(QtGui.QDoubleSpinBox, "size").setToolTip(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_positions",
                 "Item size",
                 None))

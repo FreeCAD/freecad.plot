@@ -147,72 +147,72 @@ class TaskPanel:
 
     def retranslateUi(self):
         """Set the user interface locale strings."""
-        self.form.setWindowTitle(QtGui.QApplication.translate(
+        self.form.setWindowTitle(App.Qt.translate(
             "plot_series",
             "Configure series",
             None))
         self.widget(QtGui.QCheckBox, "isLabel").setText(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_series",
                 "No label",
                 None))
         self.widget(QtGui.QPushButton, "remove").setText(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_series",
                 "Remove series",
                 None))
         self.widget(QtGui.QLabel, "styleLabel").setText(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_series",
                 "Line style",
                 None))
         self.widget(QtGui.QLabel, "markerLabel").setText(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_series",
                 "Marker",
                 None))
         self.widget(QtGui.QListWidget, "items").setToolTip(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_series",
                 "List of available series",
                 None))
         self.widget(QtGui.QLineEdit, "label").setToolTip(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_series",
                 "Line title",
                 None))
         self.widget(QtGui.QCheckBox, "isLabel").setToolTip(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_series",
                 "If checked, series will not be considered for legend",
                 None))
         self.widget(QtGui.QComboBox, "lineStyle").setToolTip(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_series",
                 "Line style",
                 None))
         self.widget(QtGui.QComboBox, "markers").setToolTip(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_series",
                 "Marker style",
                 None))
         self.widget(QtGui.QDoubleSpinBox, "lineWidth").setToolTip(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_series",
                 "Line width",
                 None))
         self.widget(QtGui.QSpinBox, "markerSize").setToolTip(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_series",
                 "Marker size",
                 None))
         self.widget(QtGui.QPushButton, "color").setToolTip(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_series",
                 "Line and marker color",
                 None))
         self.widget(QtGui.QPushButton, "remove").setToolTip(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_series",
                 "Removes this series",
                 None))

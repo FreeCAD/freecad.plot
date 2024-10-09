@@ -41,7 +41,7 @@ class TaskPanel:
     def accept(self):
         plt = Plot.getPlot()
         if not plt:
-            msg = QtGui.QApplication.translate(
+            msg = App.Qt.translate(
                 "plot_console",
                 "Plot document must be selected in order to save it",
                 None)
@@ -117,42 +117,42 @@ class TaskPanel:
 
     def retranslateUi(self):
         """Set the user interface locale strings."""
-        self.form.setWindowTitle(QtGui.QApplication.translate(
+        self.form.setWindowTitle(App.Qt.translate(
             "plot_save",
             "Save figure",
             None))
         self.widget(QtGui.QLabel, "sizeLabel").setText(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_save",
                 "Inches",
                 None))
         self.widget(QtGui.QLabel, "dpiLabel").setText(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_save",
                 "Dots per Inch",
                 None))
         self.widget(QtGui.QLineEdit, "path").setToolTip(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_save",
                 "Output image file path",
                 None))
         self.widget(QtGui.QPushButton, "pathButton").setToolTip(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_save",
                 "Show a file selection dialog",
                 None))
         self.widget(QtGui.QDoubleSpinBox, "sizeX").setToolTip(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_save",
                 "X image size",
                 None))
         self.widget(QtGui.QDoubleSpinBox, "sizeY").setToolTip(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_save",
                 "Y image size",
                 None))
         self.widget(QtGui.QSpinBox, "dpi").setToolTip(
-            QtGui.QApplication.translate(
+            App.Qt.translate(
                 "plot_save",
                 "Dots per point, with size will define output image"
                 " resolution",
