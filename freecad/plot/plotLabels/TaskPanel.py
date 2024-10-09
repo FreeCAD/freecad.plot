@@ -130,7 +130,7 @@ class TaskPanel:
         name -- Name of the widget
         """
         mw = self.getMainWindow()
-        form = mw.findChild(QtGui.QWidget, "TaskPanel")
+        form = mw.findChild(QtGui.QWidget, "TaskPanel_plotLabels")
         return form.findChild(class_id, name)
 
     def retranslateUi(self):
