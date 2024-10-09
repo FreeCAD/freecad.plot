@@ -48,12 +48,9 @@ if len(sorted_style_list) > 1:
 elif len(sorted_style_list) == 1:
     matplotlib.style.use(sorted_style_list[0])
 else:
-    from PySide import QtCore, QtGui
-    msg = QtGui.QApplication.translate(
-        "plot_console",
-        "matplotlib style sheets not found",
-        None)
-    FreeCAD.Console.PrintWarning(msg + '\n')
+    FreeCAD.Console.PrintWarning(
+        FreeCAD.Qt.translate("plot_console", "matplotlib style sheets not found") + "\n"
+    )
 matplotlib.rcParams["figure.facecolor"] = "efefef"
 matplotlib.rcParams["axes.facecolor"] = "efefef"
 
@@ -61,17 +58,25 @@ plt.ion()
 
 __dir__ = os.path.dirname(__file__)
 
+
 class PlotWorkbench(Gui.Workbench):
     """Workbench of Plot module."""
+
     def __init__(self):
-        self.__class__.Icon = os.path.join(__dir__, "resources", "icons", "Plot_Workbench.svg")
-        self.__class__.MenuText = "Plot"
-        self.__class__.ToolTip = "The Plot module is used to edit/save output plots performed by other tools"
+        Gui.addLanguagePath(os.path.join(__dir__, "resources", "translations"))
+        Gui.updateLocale()
+        self.__class__.Icon = os.path.join(
+            __dir__, "resources", "icons", "Plot_Workbench.svg"
+        )
+        self.__class__.MenuText = FreeCAD.Qt.translate("Workbench", "Plot")
+        self.__class__.ToolTip = FreeCAD.Qt.translate(
+            "Workbench",
+            "The Plot module is used to edit/save output plots performed by other tools",
+        )
 
     import freecad.plot.PlotGui
 
     def Initialize(self):
-        from PySide import QtCore, QtGui
         cmdlst = ["Plot_SaveFig",
                   "Plot_Axes",
                   "Plot_Series",
@@ -79,21 +84,19 @@ class PlotWorkbench(Gui.Workbench):
                   "Plot_Legend",
                   "Plot_Labels",
                   "Plot_Positions"]
-        self.appendToolbar(str(QtCore.QT_TRANSLATE_NOOP(
-            "Plot",
-            "Plot edition tools")), cmdlst)
-        self.appendMenu(str(QtCore.QT_TRANSLATE_NOOP(
-            "Plot",
-            "Plot")), cmdlst)
+        QT_TRANSLATE_NOOP = FreeCAD.Qt.QT_TRANSLATE_NOOP
+
+        self.appendToolbar(QT_TRANSLATE_NOOP("Plot", "Plot edition tools"), cmdlst)
+        self.appendMenu(QT_TRANSLATE_NOOP("Plot", "Plot"), cmdlst)
         try:
             import matplotlib
         except ImportError:
-            from PySide import QtCore, QtGui
-            msg = QtGui.QApplication.translate(
-                "plot_console",
-                "matplotlib not found, Plot module will be disabled",
-                None)
-            FreeCAD.Console.PrintMessage(msg + '\n')
+            FreeCAD.Console.PrintMessage(
+                FreeCAD.Qt.translate(
+                    "plot_console", "matplotlib not found, Plot module will be disabled"
+                )
+                + "\n"
+            )
 
 
 Gui.addWorkbench(PlotWorkbench())
