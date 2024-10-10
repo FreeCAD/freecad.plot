@@ -43,7 +43,7 @@
        <item>
         <widget class="QSpinBox" name="axesIndex">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
            <horstretch>5</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
