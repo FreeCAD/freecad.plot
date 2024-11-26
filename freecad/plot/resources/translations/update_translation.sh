@@ -4,7 +4,7 @@
 #
 # Create, update and release translation files.
 #
-# Supported locales on FreeCAD <2024-10-09, FreeCADGui.supportedLocales(), total=44>:
+# Supported locales on FreeCAD <2024-11-25, FreeCADGui.supportedLocales(), total=44>:
 # 	{'English': 'en', 'Afrikaans': 'af', 'Arabic': 'ar', 'Basque': 'eu', 'Belarusian': 'be',
 # 	'Bulgarian': 'bg', 'Catalan': 'ca', 'Chinese Simplified': 'zh-CN',
 # 	'Chinese Traditional': 'zh-TW', 'Croatian': 'hr', 'Czech': 'cs', 'Danish': 'da',
@@ -39,7 +39,7 @@
 # NOTE: WORKFLOW MAINTAINER (CROWDIN)
 # - Execute the script passing the '-U' flag
 # 	$ ./update_translation.sh -U
-# - Upload the updated file to CrowdIn and wait for translators do their thing ;-)
+# - Upload the updated file to Crowdin and wait for translators do their thing ;-)
 # - Once done, download the translated files, copy them to `freecad/plot/resources/translations`
 # 	and release all the files to update the changes
 # 	$ ./update_translation.sh -R
@@ -108,7 +108,7 @@ if [ $# -eq 1 ]; then
 	if [ "$1" == "-R" ]; then
 		find . -type f -name '*_*.ts' | while IFS= read -r file; do
 			# Release all locales
-			$LRELEASE "$file"
+			$LRELEASE -nounfinished "$file"
 			echo
 		done
 	elif [ "$1" == "-U" ]; then
@@ -122,7 +122,7 @@ elif [ $# -eq 2 ]; then
 	if is_locale_supported "$LOCALE"; then
 		if [ "$1" == "-r" ]; then
 			# Release locale (creation of *.qm file from *.ts file)
-			$LRELEASE "${WB}_${LOCALE}.ts"
+			$LRELEASE -nounfinished "${WB}_${LOCALE}.ts"
 		elif [ "$1" == "-u" ]; then
 			# Update main & locale files
 			update_locale
@@ -131,7 +131,7 @@ elif [ $# -eq 2 ]; then
 	else
 		echo "Verify your language code. Case sensitive."
 		echo "If it's correct, ask a maintainer to add support for your language on FreeCAD."
-		echo -e "\nSupported locales, '\033[1;34mFreeCADGui.supportedLocales()\033[m': \033[1;33m"
+		echo -e "Supported locales, '\033[1;34mFreeCADGui.supportedLocales()\033[m': \033[1;33m"
 		for locale in $(printf "%s\n" "${supported_locales[@]}" | sort); do
 			echo -n "$locale "
 		done
