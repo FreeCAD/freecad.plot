@@ -1,34 +1,40 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
-from .PySide import QtCore, QtWidgets
+from .PySide import QtWidgets , QtCore
 
 import FreeCADGui
 
-import matplotlib
 import matplotlib.pyplot as plt
-from matplotlib.backend_bases import FigureManagerBase
-from matplotlib.backends.backend_qt5agg import FigureCanvas as FigCan
-from matplotlib.backends.backend_qt5agg import FigureManager as FigMan
-from matplotlib.backends.backend_qt5 import NavigationToolbar2QT, ToolbarQt
-from matplotlib import backend_tools, cbook
+
+from matplotlib.backends.backend_qt import NavigationToolbar2QT
 from matplotlib._pylab_helpers import Gcf
+from matplotlib.backend_bases import FigureManagerBase , FigureCanvasBase
 
 
-class PlotWidget(QtWidgets.QWidget):
-    def __init__(self, manager, close_foo=None):
-        super(PlotWidget, self).__init__(manager.mdi)
-        self.manager = manager
+class PlotWidget ( QtWidgets.QWidget ):
+
+    def __init__ ( self , manager , close_foo = None ):
+
+        super(PlotWidget,self).__init__(manager.mdi)
+
         self.close_foo = close_foo
+        self.manager = manager
 
-    def closeEvent(self, *args):
+    def closeEvent ( self , * args ):
+
         self.manager.close_foo()
-        super(PlotWidget, self).closeEvent(*args)
+
+        super(PlotWidget,self).closeEvent( * args )
 
 
-class FigureManager(FigureManagerBase):
+class FigureManager ( FigureManagerBase ):
+
     all_widgets = []
-    def __init__(self, canvas, num):
-        super().__init__(canvas, num)
+
+    def __init__ ( self , canvas , num ):
+
+        super().__init__(canvas,num)
+
         self.mw = FreeCADGui.getMainWindow()
         self.mdi = self.mw.findChild(QtWidgets.QMdiArea)
         self.widget = PlotWidget(self)
@@ -57,8 +63,11 @@ class FigureManager(FigureManagerBase):
         except AttributeError:
             pass
 
-class FigureCanvas(FigCan):
+class FigureCanvas ( FigureCanvasBase ):
+
     def draw_idle(self):
+
         super().draw_idle()
-        if hasattr(self, "set_widget_name"):
-            self.set_widget_name()
+
+        # if hasattr(self,'set_widget_name'):
+        #     self.set_widget_name()
