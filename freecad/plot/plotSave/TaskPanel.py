@@ -167,9 +167,9 @@ class TaskPanel:
                                                  file_choices)
         if path:
             try:
-                form.path.setText(path)
+                self.form.path.setText(path)
             except TypeError:
-                form.path.setText(path[0])
+                self.form.path.setText(path[0])
 
     def onMdiArea(self, subWin):
         """Executed when a new window is selected on the mdi area.
