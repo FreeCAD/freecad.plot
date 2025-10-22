@@ -2,20 +2,11 @@
 
 import FreeCAD
 import FreeCADGui as Gui
-import os, sys
+import os
 
 import matplotlib
 
-# Force matplotlib to use PySide backend by temporarily unloading PyQt
-PyQt5WasLoaded = False
-if 'PyQt5.QtCore' in sys.modules:
-    del sys.modules['PyQt5.QtCore']
-    PyQt5WasLoaded = True
-
 import matplotlib.pyplot as plt
-
-if PyQt5WasLoaded:
-    import PyQt5.QtCore
 
 matplotlib.use("module://freecad.plot.freecad_backend")
 style_list = ['default', 'classic'] + sorted(
