@@ -1,26 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <package format="1" xmlns="https://wiki.freecad.org/Package_Metadata">
-  <name>Plot Workbench</name>
-  <description>Some tools to manipulate the FreeCAD plots</description>
-  <version>2024.11.26</version>
-  <date>2024-11-26</date>
-  <maintainer email="jlcercos@gmail.com">Jose Luis Cercós Pita</maintainer>
-  <license file="LICENSE">LGPL-2.1-or-later</license>
-  <url type="repository" branch="master">https://github.com/FreeCAD/freecad.plot</url>
-  <url type="bugtracker">https://github.com/FreeCAD/freecad.pot/issues</url>
-  <url type="documentation">https://wiki.freecad.org/Plot_Workbench</url>
+    <name>Plot Workbench</name>
+    <description>Some tools to manipulate the FreeCAD plots</description>
+    <version>2024.11.26</version>
+    <date>2024-11-26</date>
+    <maintainer email="jlcercos@gmail.com">Jose Luis Cercós Pita</maintainer>
 
-  <icon>freecad/plot/resources/icons/Plot_Icon.svg</icon>
+    <author
+        email = 'jlcercos@gmail.com'
+    >Jose Luis Cercós Pita</author>
 
-  <content>
-    <workbench>
-      <name>Plot Workbench</name>
-      <classname>PlotWorkbench</classname>
-      <subdirectory>./</subdirectory>
-      <icon>freecad/plot/resources/icons/Plot_Icon.svg</icon>
-      <depend>matplotlib</depend>
-      <tag>plot</tag>
-    </workbench>
-  </content>
+    <author>looooo</author>
+    <author>hasecilu</author>
+
+    <license file="LICENSE">LGPL-2.1-or-later</license>
+    <url type="repository" branch="master">https://github.com/FreeCAD/freecad.plot</url>
+    <url type="bugtracker">https://github.com/FreeCAD/freecad.pot/issues</url>
+    <url type="documentation">https://wiki.freecad.org/Plot_Workbench</url>
+
+    <icon>freecad/plot/resources/icons/Plot_Icon.svg</icon>
+
+    <content>
+        <workbench>
+        <name>Plot Workbench</name>
+        <classname>PlotWorkbench</classname>
+        <subdirectory>./</subdirectory>
+        <icon>freecad/plot/resources/icons/Plot_Icon.svg</icon>
+        <depend>matplotlib</depend>
+        <tag>plot</tag>
+        </workbench>
+    </content>
 
 </package>
