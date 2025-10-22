@@ -4,7 +4,7 @@ import os
 import FreeCAD as App
 import FreeCADGui as Gui
 
-from ..PySide import QtGui, QtCore
+from ..PySide import QtWidgets , QtCore
 
 from FreeCAD.Plot import Plot
 
@@ -52,15 +52,15 @@ class TaskPanel:
         pass
 
     def setupUi(self):
-        self.form.items = self.widget(QtGui.QListWidget, "items")
-        self.form.label = self.widget(QtGui.QLineEdit, "label")
-        self.form.isLabel = self.widget(QtGui.QCheckBox, "isLabel")
-        self.form.style = self.widget(QtGui.QComboBox, "lineStyle")
-        self.form.marker = self.widget(QtGui.QComboBox, "markers")
-        self.form.width = self.widget(QtGui.QDoubleSpinBox, "lineWidth")
-        self.form.size = self.widget(QtGui.QSpinBox, "markerSize")
-        self.form.color = self.widget(QtGui.QPushButton, "color")
-        self.form.remove = self.widget(QtGui.QPushButton, "remove")
+        self.form.items = self.widget(QtWidgets.QListWidget, "items")
+        self.form.label = self.widget(QtWidgets.QLineEdit, "label")
+        self.form.isLabel = self.widget(QtWidgets.QCheckBox, "isLabel")
+        self.form.style = self.widget(QtWidgets.QComboBox, "lineStyle")
+        self.form.marker = self.widget(QtWidgets.QComboBox, "markers")
+        self.form.width = self.widget(QtWidgets.QDoubleSpinBox, "lineWidth")
+        self.form.size = self.widget(QtWidgets.QSpinBox, "markerSize")
+        self.form.color = self.widget(QtWidgets.QPushButton, "color")
+        self.form.remove = self.widget(QtWidgets.QPushButton, "remove")
         self.retranslateUi()
         self.fillStyles()
         self.updateUI()
@@ -107,7 +107,7 @@ class TaskPanel:
         return False
 
     def getMainWindow(self):
-        toplevel = QtGui.QApplication.topLevelWidgets()
+        toplevel = QtWidgets.QApplication.topLevelWidgets()
         for i in toplevel:
             if i.metaObject().className() == "Gui::MainWindow":
                 return i
@@ -121,7 +121,7 @@ class TaskPanel:
         name -- Name of the widget
         """
         mw = self.getMainWindow()
-        form = mw.findChild(QtGui.QWidget, "TaskPanel_plotSeries")
+        form = mw.findChild(QtWidgets.QWidget, "TaskPanel_plotSeries")
         return form.findChild(class_id, name)
 
     def retranslateUi(self):
@@ -130,67 +130,67 @@ class TaskPanel:
             "plot_series",
             "Configure series",
             None))
-        self.widget(QtGui.QCheckBox, "isLabel").setText(
+        self.widget(QtWidgets.QCheckBox, "isLabel").setText(
             App.Qt.translate(
                 "plot_series",
                 "No label",
                 None))
-        self.widget(QtGui.QPushButton, "remove").setText(
+        self.widget(QtWidgets.QPushButton, "remove").setText(
             App.Qt.translate(
                 "plot_series",
                 "Remove series",
                 None))
-        self.widget(QtGui.QLabel, "styleLabel").setText(
+        self.widget(QtWidgets.QLabel, "styleLabel").setText(
             App.Qt.translate(
                 "plot_series",
                 "Line style",
                 None))
-        self.widget(QtGui.QLabel, "markerLabel").setText(
+        self.widget(QtWidgets.QLabel, "markerLabel").setText(
             App.Qt.translate(
                 "plot_series",
                 "Marker",
                 None))
-        self.widget(QtGui.QListWidget, "items").setToolTip(
+        self.widget(QtWidgets.QListWidget, "items").setToolTip(
             App.Qt.translate(
                 "plot_series",
                 "List of available series",
                 None))
-        self.widget(QtGui.QLineEdit, "label").setToolTip(
+        self.widget(QtWidgets.QLineEdit, "label").setToolTip(
             App.Qt.translate(
                 "plot_series",
                 "Line title",
                 None))
-        self.widget(QtGui.QCheckBox, "isLabel").setToolTip(
+        self.widget(QtWidgets.QCheckBox, "isLabel").setToolTip(
             App.Qt.translate(
                 "plot_series",
                 "If checked, series will not be considered for legend",
                 None))
-        self.widget(QtGui.QComboBox, "lineStyle").setToolTip(
+        self.widget(QtWidgets.QComboBox, "lineStyle").setToolTip(
             App.Qt.translate(
                 "plot_series",
                 "Line style",
                 None))
-        self.widget(QtGui.QComboBox, "markers").setToolTip(
+        self.widget(QtWidgets.QComboBox, "markers").setToolTip(
             App.Qt.translate(
                 "plot_series",
                 "Marker style",
                 None))
-        self.widget(QtGui.QDoubleSpinBox, "lineWidth").setToolTip(
+        self.widget(QtWidgets.QDoubleSpinBox, "lineWidth").setToolTip(
             App.Qt.translate(
                 "plot_series",
                 "Line width",
                 None))
-        self.widget(QtGui.QSpinBox, "markerSize").setToolTip(
+        self.widget(QtWidgets.QSpinBox, "markerSize").setToolTip(
             App.Qt.translate(
                 "plot_series",
                 "Marker size",
                 None))
-        self.widget(QtGui.QPushButton, "color").setToolTip(
+        self.widget(QtWidgets.QPushButton, "color").setToolTip(
             App.Qt.translate(
                 "plot_series",
                 "Line and marker color",
                 None))
-        self.widget(QtGui.QPushButton, "remove").setToolTip(
+        self.widget(QtWidgets.QPushButton, "remove").setToolTip(
             App.Qt.translate(
                 "plot_series",
                 "Removes this series",
@@ -266,7 +266,7 @@ class TaskPanel:
             self.updateUI()
             return
         # Show widget to select color
-        col = QtGui.QColorDialog.getColor()
+        col = QtWidgets.QColorDialog.getColor()
         # Send color to widget and serie
         if col.isValid():
             serie = plt.series[self.item]
@@ -367,8 +367,8 @@ class TaskPanel:
     def setList(self):
         """Setup the UI control values if it is possible."""
         mw = self.getMainWindow()
-        form = mw.findChild(QtGui.QWidget, "TaskPanel")
-        self.form.items = self.widget(QtGui.QListWidget, "items")
+        form = mw.findChild(QtWidgets.QWidget, "TaskPanel")
+        self.form.items = self.widget(QtWidgets.QListWidget, "items")
         self.form.items.clear()
         series = Plot.series()
         for i in range(0, len(series)):

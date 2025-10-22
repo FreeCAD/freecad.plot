@@ -4,7 +4,7 @@ import os
 import FreeCAD as App
 import FreeCADGui as Gui
 
-from ..PySide import QtGui, QtCore
+from ..PySide import QtWidgets , QtCore
 
 from FreeCAD.Plot import Plot
 
@@ -51,13 +51,13 @@ class TaskPanel:
         pass
 
     def setupUi(self):
-        self.form.axId = self.widget(QtGui.QSpinBox, "axesIndex")
-        self.form.title = self.widget(QtGui.QLineEdit, "title")
-        self.form.titleSize = self.widget(QtGui.QSpinBox, "titleSize")
-        self.form.xLabel = self.widget(QtGui.QLineEdit, "titleX")
-        self.form.xSize = self.widget(QtGui.QSpinBox, "xSize")
-        self.form.yLabel = self.widget(QtGui.QLineEdit, "titleY")
-        self.form.ySize = self.widget(QtGui.QSpinBox, "ySize")
+        self.form.axId = self.widget(QtWidgets.QSpinBox, "axesIndex")
+        self.form.title = self.widget(QtWidgets.QLineEdit, "title")
+        self.form.titleSize = self.widget(QtWidgets.QSpinBox, "titleSize")
+        self.form.xLabel = self.widget(QtWidgets.QLineEdit, "titleX")
+        self.form.xSize = self.widget(QtWidgets.QSpinBox, "xSize")
+        self.form.yLabel = self.widget(QtWidgets.QLineEdit, "titleY")
+        self.form.ySize = self.widget(QtWidgets.QSpinBox, "ySize")
         self.retranslateUi()
         # Look for active axes if can
         axId = 0
@@ -95,7 +95,7 @@ class TaskPanel:
         return False
 
     def getMainWindow(self):
-        toplevel = QtGui.QApplication.topLevelWidgets()
+        toplevel = QtWidgets.QApplication.topLevelWidgets()
         for i in toplevel:
             if i.metaObject().className() == "Gui::MainWindow":
                 return i
@@ -109,7 +109,7 @@ class TaskPanel:
         name -- Name of the widget
         """
         mw = self.getMainWindow()
-        form = mw.findChild(QtGui.QWidget, "TaskPanel_plotLabels")
+        form = mw.findChild(QtWidgets.QWidget, "TaskPanel_plotLabels")
         return form.findChild(class_id, name)
 
     def retranslateUi(self):
@@ -119,52 +119,52 @@ class TaskPanel:
             "plot_labels",
             "Set labels",
             None))
-        self.widget(QtGui.QLabel, "axesLabel").setText(
+        self.widget(QtWidgets.QLabel, "axesLabel").setText(
             App.Qt.translate("plot_labels",
                                          "Active axes",
                                          None))
-        self.widget(QtGui.QLabel, "titleLabel").setText(
+        self.widget(QtWidgets.QLabel, "titleLabel").setText(
             App.Qt.translate("plot_labels",
                                          "Title",
                                          None))
-        self.widget(QtGui.QLabel, "xLabel").setText(
+        self.widget(QtWidgets.QLabel, "xLabel").setText(
             App.Qt.translate("plot_labels",
                                          "X label",
                                          None))
-        self.widget(QtGui.QLabel, "yLabel").setText(
+        self.widget(QtWidgets.QLabel, "yLabel").setText(
             App.Qt.translate("plot_labels",
                                          "Y label",
                                          None))
-        self.widget(QtGui.QSpinBox, "axesIndex").setToolTip(App.Qt.translate(
+        self.widget(QtWidgets.QSpinBox, "axesIndex").setToolTip(App.Qt.translate(
             "plot_labels",
             "Index of the active axes",
             None))
-        self.widget(QtGui.QLineEdit, "title").setToolTip(
+        self.widget(QtWidgets.QLineEdit, "title").setToolTip(
             App.Qt.translate(
                 "plot_labels",
                 "Title (associated to active axes)",
                 None))
-        self.widget(QtGui.QSpinBox, "titleSize").setToolTip(
+        self.widget(QtWidgets.QSpinBox, "titleSize").setToolTip(
             App.Qt.translate(
                 "plot_labels",
                 "Title font size",
                 None))
-        self.widget(QtGui.QLineEdit, "titleX").setToolTip(
+        self.widget(QtWidgets.QLineEdit, "titleX").setToolTip(
             App.Qt.translate(
                 "plot_labels",
                 "X axis title",
                 None))
-        self.widget(QtGui.QSpinBox, "xSize").setToolTip(
+        self.widget(QtWidgets.QSpinBox, "xSize").setToolTip(
             App.Qt.translate(
                 "plot_labels",
                 "X axis title font size",
                 None))
-        self.widget(QtGui.QLineEdit, "titleY").setToolTip(
+        self.widget(QtWidgets.QLineEdit, "titleY").setToolTip(
             App.Qt.translate(
                 "plot_labels",
                 "Y axis title",
                 None))
-        self.widget(QtGui.QSpinBox, "ySize").setToolTip(
+        self.widget(QtWidgets.QSpinBox, "ySize").setToolTip(
             App.Qt.translate(
                 "plot_labels",
                 "Y axis title font size",

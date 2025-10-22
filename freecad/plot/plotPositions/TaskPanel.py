@@ -4,7 +4,7 @@ import os
 import FreeCAD as App
 import FreeCADGui as Gui
 
-from ..PySide import QtGui, QtCore
+from ..PySide import QtWidgets , QtCore
 
 from FreeCAD.Plot import Plot
 
@@ -50,10 +50,10 @@ class TaskPanel:
         pass
 
     def setupUi(self):
-        self.form.items = self.widget(QtGui.QListWidget, "items")
-        self.form.x = self.widget(QtGui.QDoubleSpinBox, "x")
-        self.form.y = self.widget(QtGui.QDoubleSpinBox, "y")
-        self.form.s = self.widget(QtGui.QDoubleSpinBox, "size")
+        self.form.items = self.widget(QtWidgets.QListWidget, "items")
+        self.form.x = self.widget(QtWidgets.QDoubleSpinBox, "x")
+        self.form.y = self.widget(QtWidgets.QDoubleSpinBox, "y")
+        self.form.s = self.widget(QtWidgets.QDoubleSpinBox, "size")
         self.retranslateUi()
         self.updateUI()
         QtCore.QObject.connect(
@@ -79,7 +79,7 @@ class TaskPanel:
         return False
 
     def getMainWindow(self):
-        toplevel = QtGui.QApplication.topLevelWidgets()
+        toplevel = QtWidgets.QApplication.topLevelWidgets()
         for i in toplevel:
             if i.metaObject().className() == "Gui::MainWindow":
                 return i
@@ -93,7 +93,7 @@ class TaskPanel:
         name -- Name of the widget
         """
         mw = self.getMainWindow()
-        form = mw.findChild(QtGui.QWidget, "TaskPanel_plotPositions")
+        form = mw.findChild(QtWidgets.QWidget, "TaskPanel_plotPositions")
         return form.findChild(class_id, name)
 
     def retranslateUi(self):
@@ -102,32 +102,32 @@ class TaskPanel:
             "plot_positions",
             "Set positions and sizes",
             None))
-        self.widget(QtGui.QLabel, "posLabel").setText(
+        self.widget(QtWidgets.QLabel, "posLabel").setText(
             App.Qt.translate(
                 "plot_positions",
                 "Position",
                 None))
-        self.widget(QtGui.QLabel, "sizeLabel").setText(
+        self.widget(QtWidgets.QLabel, "sizeLabel").setText(
             App.Qt.translate(
                 "plot_positions",
                 "Size",
                 None))
-        self.widget(QtGui.QListWidget, "items").setToolTip(
+        self.widget(QtWidgets.QListWidget, "items").setToolTip(
             App.Qt.translate(
                 "plot_positions",
                 "List of modifiable items",
                 None))
-        self.widget(QtGui.QDoubleSpinBox, "x").setToolTip(
+        self.widget(QtWidgets.QDoubleSpinBox, "x").setToolTip(
             App.Qt.translate(
                 "plot_positions",
                 "X item position",
                 None))
-        self.widget(QtGui.QDoubleSpinBox, "y").setToolTip(
+        self.widget(QtWidgets.QDoubleSpinBox, "y").setToolTip(
             App.Qt.translate(
                 "plot_positions",
                 "Y item position",
                 None))
-        self.widget(QtGui.QDoubleSpinBox, "size").setToolTip(
+        self.widget(QtWidgets.QDoubleSpinBox, "size").setToolTip(
             App.Qt.translate(
                 "plot_positions",
                 "Item size",

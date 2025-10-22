@@ -4,7 +4,7 @@ import os
 import FreeCAD as App
 import FreeCADGui as Gui
 
-from ..PySide import QtGui, QtCore
+from ..PySide import QtWidgets , QtCore
 
 from FreeCAD.Plot import Plot
 
@@ -57,11 +57,11 @@ class TaskPanel:
         pass
 
     def setupUi(self):
-        self.form.path = self.widget(QtGui.QLineEdit, "path")
-        self.form.pathButton = self.widget(QtGui.QPushButton, "pathButton")
-        self.form.sizeX = self.widget(QtGui.QDoubleSpinBox, "sizeX")
-        self.form.sizeY = self.widget(QtGui.QDoubleSpinBox, "sizeY")
-        self.form.dpi = self.widget(QtGui.QSpinBox, "dpi")
+        self.form.path = self.widget(QtWidgets.QLineEdit, "path")
+        self.form.pathButton = self.widget(QtWidgets.QPushButton, "pathButton")
+        self.form.sizeX = self.widget(QtWidgets.QDoubleSpinBox, "sizeX")
+        self.form.sizeY = self.widget(QtWidgets.QDoubleSpinBox, "sizeY")
+        self.form.dpi = self.widget(QtWidgets.QSpinBox, "dpi")
         self.retranslateUi()
         home = os.getenv('USERPROFILE') or os.getenv('HOME')
         self.form.path.setText(os.path.join(home, "plot.png"))
@@ -77,7 +77,7 @@ class TaskPanel:
         return False
 
     def getMainWindow(self):
-        toplevel = QtGui.QApplication.topLevelWidgets()
+        toplevel = QtWidgets.QApplication.topLevelWidgets()
         for i in toplevel:
             if i.metaObject().className() == "Gui::MainWindow":
                 return i
@@ -91,7 +91,7 @@ class TaskPanel:
         name -- Name of the widget
         """
         mw = self.getMainWindow()
-        form = mw.findChild(QtGui.QWidget, "TaskPanel_plotSave")
+        form = mw.findChild(QtWidgets.QWidget, "TaskPanel_plotSave")
         return form.findChild(class_id, name)
 
     def retranslateUi(self):
@@ -100,37 +100,37 @@ class TaskPanel:
             "plot_save",
             "Save figure",
             None))
-        self.widget(QtGui.QLabel, "sizeLabel").setText(
+        self.widget(QtWidgets.QLabel, "sizeLabel").setText(
             App.Qt.translate(
                 "plot_save",
                 "Inches",
                 None))
-        self.widget(QtGui.QLabel, "dpiLabel").setText(
+        self.widget(QtWidgets.QLabel, "dpiLabel").setText(
             App.Qt.translate(
                 "plot_save",
                 "Dots per Inch",
                 None))
-        self.widget(QtGui.QLineEdit, "path").setToolTip(
+        self.widget(QtWidgets.QLineEdit, "path").setToolTip(
             App.Qt.translate(
                 "plot_save",
                 "Output image file path",
                 None))
-        self.widget(QtGui.QPushButton, "pathButton").setToolTip(
+        self.widget(QtWidgets.QPushButton, "pathButton").setToolTip(
             App.Qt.translate(
                 "plot_save",
                 "Show a file selection dialog",
                 None))
-        self.widget(QtGui.QDoubleSpinBox, "sizeX").setToolTip(
+        self.widget(QtWidgets.QDoubleSpinBox, "sizeX").setToolTip(
             App.Qt.translate(
                 "plot_save",
                 "X image size",
                 None))
-        self.widget(QtGui.QDoubleSpinBox, "sizeY").setToolTip(
+        self.widget(QtWidgets.QDoubleSpinBox, "sizeY").setToolTip(
             App.Qt.translate(
                 "plot_save",
                 "Y image size",
                 None))
-        self.widget(QtGui.QSpinBox, "dpi").setToolTip(
+        self.widget(QtWidgets.QSpinBox, "dpi").setToolTip(
             App.Qt.translate(
                 "plot_save",
                 "Dots per point, with size will define output image"
@@ -161,7 +161,7 @@ class TaskPanel:
                         "Portable Document Format (*.pdf)|*.pdf;;"
                         "PostScript (*.ps)|*.ps;;"
                         "Encapsulated PostScript (*.eps)|*.eps")
-        path = QtGui.QFileDialog.getSaveFileName(None,
+        path = QtWidgets.QFileDialog.getSaveFileName(None,
                                                  'Save figure',
                                                  path,
                                                  file_choices)
