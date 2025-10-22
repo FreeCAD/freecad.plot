@@ -4,7 +4,7 @@ import os
 import FreeCAD as App
 import FreeCADGui as Gui
 
-from PySide import QtGui, QtCore
+from ..PySide import QtGui, QtCore
 
 from FreeCAD.Plot import Plot
 from freecad import plot

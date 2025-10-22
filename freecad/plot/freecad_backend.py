@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
-from PySide import QtCore, QtWidgets
+from .PySide import QtCore, QtWidgets
 
 import FreeCADGui
 
