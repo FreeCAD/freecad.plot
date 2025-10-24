@@ -208,12 +208,12 @@
            </property>
            <item>
             <property name="text">
-             <string>y at Left</string>
+             <string>Left</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>y at Right</string>
+             <string>Right</string>
             </property>
            </item>
           </widget>
@@ -246,12 +246,12 @@
            </property>
            <item>
             <property name="text">
-             <string>x at bottom</string>
+             <string>Bottom</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>x at top</string>
+             <string>Top</string>
             </property>
            </item>
           </widget>
