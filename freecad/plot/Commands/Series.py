@@ -21,5 +21,5 @@ class Series:
         return {
             'MenuText' : text ,
             'ToolTip' : tooltip ,
-            'Pixmap' : 'Plot_Series'
+            'Pixmap' : 'Series'
         }

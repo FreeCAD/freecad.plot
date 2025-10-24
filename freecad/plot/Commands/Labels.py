@@ -21,6 +21,6 @@ class Labels:
         return {
             'MenuText' : text ,
             'ToolTip' : tooltip ,
-            'Pixmap' : 'Plot_Labels'
+            'Pixmap' : 'Labels'
         }
 

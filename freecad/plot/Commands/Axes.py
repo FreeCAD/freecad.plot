@@ -21,7 +21,7 @@ class Axes:
         return {
             'MenuText' : text ,
             'ToolTip' : tooltip ,
-            'Pixmap' : 'Plot_Axes'
+            'Pixmap' : 'Axes'
         }
 
 

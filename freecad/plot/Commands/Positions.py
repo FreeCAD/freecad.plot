@@ -20,6 +20,6 @@ class Positions :
         return {
             'MenuText' : text ,
             'ToolTip' : tooltip ,
-            'Pixmap' : 'Plot_Positions'
+            'Pixmap' : 'Positions'
         }
 

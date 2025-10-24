@@ -1,6 +1,6 @@
 ## FreeCAD Plot Workbench
 
-![Plot Workbench Logo](freecad/plot/resources/icons/Plot_Workbench.svg)
+![Icon-Addon]
 
 **Welcome to FreeCAD-Plot!**
 
@@ -13,43 +13,43 @@ It currently offers the following tools:
 
 ### Save plot
 
-![Plot_Save Icon](freecad/plot/resources/icons/Plot_Save.svg)
+![Icon-Save]
 
 An extended version of the default saving tools, which offers a plethora of outut formats, allowing also to set the image size.
 
 ### Configure axes
 
-![Plot_Axes Icon](freecad/plot/resources/icons/Plot_Axes.svg)
+![Icon-Axes]
 
 Enhaces the configure subplots default tool adding the possiblity to add/remove axes, edit each axes independently or all of them at once.
 
 ### Configure series
 
-![Plot_Series Icon](freecad/plot/resources/icons/Plot_Series.svg)
+![Icon-Series]
 
 With this tool you can remove plotted series, or edit their style.
 
 ### Show/Hide grid
 
-![Plot_Grid Icon](freecad/plot/resources/icons/Plot_Grid.svg)
+![Icon-Grid]
 
 Enable/disable the plot grid.
 
 ### Show/Hide legend
 
-![Plot_Legend Icon](freecad/plot/resources/icons/Plot_Legend.svg)
+![Icon-Legend]
 
 Enable/disable the plot legend.
 
 ### Set labels
 
-![Plot_Labels Icon](freecad/plot/resources/icons/Plot_Labels.svg)
+![Icon-Labels]
 
 Allows you to set the plot title and the axes labels.
 
 ### Set positions and sizes
 
-![Plot_Positions Icon](freecad/plot/resources/icons/Plot_Positions.svg)
+![Icon-Positions]
 
 Allows you to move and resize some plot elements, like the title, the labels of the axes and the legend.
 
@@ -77,3 +77,13 @@ Please open tickets in the [issue queue](https://github.com/FreeCAD/freecad.plot
 ## Authors
 
 Jose Luis Cercós Pita <jlcercos@gmail.com>
+
+
+[Icon-Positions]: freecad/plot/Resources/Icons/Positions.svg
+[Icon-Labels]: freecad/plot/Resources/Icons/Labels.svg
+[Icon-Series]: freecad/plot/Resources/Icons/Series.svg
+[Icon-Legend]: freecad/plot/Resources/Icons/Legend.svg
+[Icon-Addon]: freecad/plot/Resources/Icons/Addon.svg
+[Icon-Grid]: freecad/plot/Resources/Icons/Grid.svg
+[Icon-Axes]: freecad/plot/Resources/Icons/Axes.svg
+[Icon-Save]: freecad/plot/Resources/Icons/Save.svg

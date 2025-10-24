@@ -1,14 +1,13 @@
 <RCC>
     <qresource>
-        <file>icons/Plot_Axes.svg</file>
-        <file>icons/Plot_Grid.svg</file>
-        <file>icons/Plot_Icon.svg</file>
-        <file>icons/Plot_Labels.svg</file>
-        <file>icons/Plot_Legend.svg</file>
-        <file>icons/Plot_Positions.svg</file>
-        <file>icons/Plot_Save.svg</file>
-        <file>icons/Plot_Series.svg</file>
-        <file>icons/Plot_Workbench.svg</file>
+        <file>../Resources/Icons/Axes.svg</file>
+        <file>../Resources/Icons/Grid.svg</file>
+        <file>../Resources/Icons/Addon.svg</file>
+        <file>../Resources/Icons/Labels.svg</file>
+        <file>../Resources/Icons/Legend.svg</file>
+        <file>../Resources/Icons/Positions.svg</file>
+        <file>../Resources/Icons/Save.svg</file>
+        <file>../Resources/Icons/Series.svg</file>
         <file>../Resources/Locales/Base.qm</file>
         <file>../Resources/Locales/jp.qm</file>
         <file>ui/Axes.ui</file>

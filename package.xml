@@ -18,14 +18,13 @@
     <url type="bugtracker">https://github.com/FreeCAD/freecad.pot/issues</url>
     <url type="documentation">https://wiki.freecad.org/Plot_Workbench</url>
 
-    <icon>freecad/plot/resources/icons/Plot_Icon.svg</icon>
+    <icon>freecad/plot/Resources/Icons/Addon.svg</icon>
 
     <content>
         <workbench>
         <name>Plot Workbench</name>
         <classname>PlotWorkbench</classname>
         <subdirectory>./</subdirectory>
-        <icon>freecad/plot/resources/icons/Plot_Icon.svg</icon>
         <depend>matplotlib</depend>
         <tag>plot</tag>
         </workbench>

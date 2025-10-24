@@ -37,5 +37,5 @@ class Legend:
         return {
             'MenuText' : text ,
             'ToolTip' : tooltip ,
-            'Pixmap' : 'Plot_Legend'
+            'Pixmap' : 'Legend'
         }

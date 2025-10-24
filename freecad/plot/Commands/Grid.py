@@ -37,6 +37,6 @@ class Grid:
         return {
             'MenuText' : text ,
             'ToolTip' : tooltip ,
-            'Pixmap' : 'Plot_Grid'
+            'Pixmap' : 'Grid'
         }
 

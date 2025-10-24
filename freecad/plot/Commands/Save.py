@@ -21,5 +21,5 @@ class Save :
         return {
             'MenuText' : text ,
             'ToolTip' : tooltip ,
-            'Pixmap' : 'Plot_Save'
+            'Pixmap' : 'Save'
         }

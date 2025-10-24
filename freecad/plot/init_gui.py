@@ -49,14 +49,14 @@ class PlotWorkbench ( Gui.Workbench ):
 
     MenuText = Workbench_Title
     ToolTip = Workbench_Tooltip
-    Icon = os.path.join(__dir__, 'resources', 'icons', 'Plot_Workbench.svg')
+    Icon = os.path.join(__dir__, 'Resources', 'Icons', 'Addon.svg')
 
     def __init__ ( self ):
 
         Gui.addLanguagePath(os.path.join(__dir__, 'Resources', 'Locales'))
         Gui.updateLocale()
 
-        Gui.addIconPath(os.path.join(__dir__, 'resources', 'icons'))
+        Gui.addIconPath(os.path.join(__dir__, 'Resources', 'Icons'))
 
         Gui.addCommand('Plot_SaveFig',Save())
         Gui.addCommand('Plot_Axes',Axes())
