@@ -8,11 +8,6 @@ from ..PySide import QtWidgets , QtCore
 
 from FreeCAD.Plot import Plot
 
-try:
-    unicode        # Python 2
-except NameError:
-    unicode = str  # Python 3
-
 
 class TaskPanel:
     def __init__(self):
@@ -196,9 +191,9 @@ class TaskPanel:
             self.updateUI()
             return
 
-        Plot.title(unicode(self.form.title.text()))
-        Plot.xlabel(unicode(self.form.xLabel.text()))
-        Plot.ylabel(unicode(self.form.yLabel.text()))
+        Plot.title(str(self.form.title.text()))
+        Plot.xlabel(str(self.form.xLabel.text()))
+        Plot.ylabel(str(self.form.yLabel.text()))
         plt.update()
 
     def onFontSizes(self, value):

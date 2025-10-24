@@ -9,11 +9,6 @@ from ..PySide import QtWidgets , QtCore
 from FreeCAD.Plot import Plot
 from freecad import plot
 
-try:
-    unicode        # Python 2
-except NameError:
-    unicode = str  # Python 3
-
 
 class TaskPanel:
     def __init__(self):
@@ -407,8 +402,8 @@ class TaskPanel:
                 if loc in ['left', 'right']:
                     spine.set_position(('outward', self.form.yOffset.value()))
             # Now we can restore axes labels
-            Plot.xlabel(unicode(x))
-            Plot.ylabel(unicode(y))
+            Plot.xlabel(str(x))
+            Plot.ylabel(str(y))
         plt.update()
 
     def onScales(self):
