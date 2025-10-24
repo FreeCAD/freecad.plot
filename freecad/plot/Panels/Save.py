@@ -16,7 +16,7 @@ class TaskPanel:
 
         self.name = 'plot save'
         self.ui = os.path.join(os.path.dirname(__file__),
-                               '../resources/ui/',
+                               '../Resources/Interface/',
                                'Save.ui')
 
         form = Gui.PySideUic.loadUi(( self.ui , ))

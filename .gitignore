@@ -94,4 +94,4 @@ ENV/
 .ropeproject
 
 
-freecad/plot/resources/ui/*.py
+freecad/plot/Resources/Interface/*.py

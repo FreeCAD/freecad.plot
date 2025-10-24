@@ -17,7 +17,7 @@ class TaskPanel:
     def __init__(self):
         self.name = "plot series editor"
         self.ui = os.path.join(os.path.dirname(__file__),
-                               "../resources/ui/",
+                               "../Resources/Interface/",
                                "Series.ui")
         self.form = Gui.PySideUic.loadUi(self.ui)
         self.skip = False

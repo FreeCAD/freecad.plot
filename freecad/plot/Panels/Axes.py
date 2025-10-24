@@ -14,7 +14,7 @@ class TaskPanel:
     def __init__(self):
         self.name = "plot axes"
         self.ui = os.path.join(os.path.dirname(__file__),
-                               "../resources/ui/",
+                               "../Resources/Interface/",
                                "Axes.ui")
         self.form = Gui.PySideUic.loadUi(self.ui)
         self.skip = False

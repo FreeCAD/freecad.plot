@@ -1,0 +1,23 @@
+<RCC>
+    <qresource>
+        
+        <file>Icons/Positions.svg</file>
+        <file>Icons/Legend.svg</file>
+        <file>Icons/Labels.svg</file>
+        <file>Icons/Series.svg</file>
+        <file>Icons/Addon.svg</file>
+        <file>Icons/Axes.svg</file>
+        <file>Icons/Grid.svg</file>
+        <file>Icons/Save.svg</file>
+        
+        <file>Locales/Base.qm</file>
+        <file>Locales/jp.qm</file>
+
+        <file>Interface/Positions.ui</file>
+        <file>Interface/Labels.ui</file>
+        <file>Interface/Series.ui</file>
+        <file>Interface/Axes.ui</file>
+        <file>Interface/Save.ui</file>
+        
+    </qresource>
+</RCC>
