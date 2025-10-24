@@ -17,7 +17,7 @@ class TaskPanel:
         self.name = 'plot save'
         self.ui = os.path.join(os.path.dirname(__file__),
                                '../resources/ui/',
-                               'TaskPanel_plotSave.ui')
+                               'Save.ui')
 
         form = Gui.PySideUic.loadUi(( self.ui , ))
 
@@ -136,7 +136,7 @@ class TaskPanel:
 
         window = self.getMainWindow()
 
-        form = window.findChild(QtWidgets.QWidget,'TaskPanel_plotSave')
+        form = window.findChild(QtWidgets.QWidget,'Plot-Task-Save')
 
         return form.findChild(class_id,name)
 

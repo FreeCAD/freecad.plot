@@ -14,7 +14,7 @@ class TaskPanel:
         self.name = "plot positions"
         self.ui = os.path.join(os.path.dirname(__file__),
                                "../resources/ui/",
-                               "TaskPanel_plotPositions.ui")
+                               "Positions.ui")
         self.form = Gui.PySideUic.loadUi(self.ui)
         self.skip = False
         self.item = 0
@@ -93,7 +93,7 @@ class TaskPanel:
         name -- Name of the widget
         """
         mw = self.getMainWindow()
-        form = mw.findChild(QtWidgets.QWidget, "TaskPanel_plotPositions")
+        form = mw.findChild(QtWidgets.QWidget, "Plot-Task-Positions")
         return form.findChild(class_id, name)
 
     def retranslateUi(self):

@@ -20,7 +20,7 @@ class TaskPanel:
         self.name = "plot axes"
         self.ui = os.path.join(os.path.dirname(__file__),
                                "../resources/ui/",
-                               "TaskPanel_plotAxes.ui")
+                               "Axes.ui")
         self.form = Gui.PySideUic.loadUi(self.ui)
         self.skip = False
 
@@ -151,7 +151,7 @@ class TaskPanel:
         name -- Name of the widget
         """
         mw = self.getMainWindow()
-        form = mw.findChild(QtWidgets.QWidget, "TaskPanel_plotAxes")
+        form = mw.findChild(QtWidgets.QWidget, "Plot-Task-Axes")
         return form.findChild(class_id, name)
 
     def retranslateUi(self):
