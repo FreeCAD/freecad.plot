@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
-import os
 
-from FreeCAD import Gui , Qt
 from FreeCAD.Plot import Plot # type: ignore
-from ..PySide import QtWidgets , QtCore
+from ..PySide import QtWidgets
+from os.path import dirname , join
+from FreeCAD import Gui
 
 
 class TaskForm ( QtWidgets.QWidget ):
@@ -30,8 +30,8 @@ class TaskPanel:
 
     def __init__ ( self ):
 
-        path = os.path.join(
-            os.path.dirname(__file__) , '..' ,
+        path = join(
+            dirname(__file__) , '..' ,
             'Resources' , 'Interface' , 'Labels.ui'
         )
 
@@ -98,91 +98,144 @@ class TaskPanel:
         Plot.getMdiArea().subWindowActivated.connect(self.onMdiArea)
 
 
-    def onAxesId(self, value):
-        ''' Executed when axes index is modified. '''
-        if not self.skip:
-            self.skip = True
-            # No active plot case
-            plt = Plot.getPlot()
-            if not plt:
-                self.updateUI()
-                self.skip = False
-                return
+    def onAxesId ( self , value ):
 
-            self.form.axId.setMaximum(len(plt.axesList))
-            if self.form.axId.value() >= len(plt.axesList):
-                self.form.axId.setValue(len(plt.axesList) - 1)
-            # Send new control to Plot instance
-            plt.setActiveAxes(self.form.axId.value())
+        '''
+        Executed when axes index is modified.
+        '''
+
+        if self.skip :
+            return
+
+        self.skip = True
+
+        # No active plot case
+
+        plot = Plot.getPlot()
+
+        if not plot:
             self.updateUI()
             self.skip = False
+            return
 
-    def onLabels(self):
-        ''' Executed when labels have been modified. '''
-        plt = Plot.getPlot()
-        if not plt:
+        self.form.axId.setMaximum(len(plot.axesList))
+
+        if self.form.axId.value() >= len(plot.axesList):
+            self.form.axId.setValue(len(plot.axesList) - 1)
+
+        # Send new control to Plot instance
+
+        plot.setActiveAxes(self.form.axId.value())
+
+        self.updateUI()
+
+        self.skip = False
+
+
+    def onLabels ( self ):
+
+        '''
+        Executed when labels have been modified.
+        '''
+
+        plot = Plot.getPlot()
+
+        if not plot:
             self.updateUI()
             return
 
         Plot.title(str(self.form.title.text()))
-        Plot.xlabel(str(self.form.xLabel.text()))
-        Plot.ylabel(str(self.form.yLabel.text()))
-        plt.update()
 
-    def onFontSizes(self, value):
-        ''' Executed when font sizes have been modified. '''
+        Plot.xlabel(str(self.form.titleX.text()))
+        Plot.ylabel(str(self.form.titleY.text()))
+
+        plot.update()
+
+
+    def onFontSizes ( self , value ):
+
+        '''
+        Executed when font sizes have been modified.
+        '''
+
         # Get apply environment
-        plt = Plot.getPlot()
-        if not plt:
+
+        plot = Plot.getPlot()
+
+        if not plot:
             self.updateUI()
             return
 
-        ax = plt.axes
-        ax.title.set_fontsize(self.form.titleSize.value())
-        ax.xaxis.label.set_fontsize(self.form.xSize.value())
-        ax.yaxis.label.set_fontsize(self.form.ySize.value())
-        plt.update()
+        axes = plot.axes
 
-    def onMdiArea(self, subWin):
-        ''' Executed when window is selected on mdi area.
+        axes.title.set_fontsize(self.form.titleSize.value())
+
+        axes.xaxis.label.set_fontsize(self.form.xSize.value())
+        axes.yaxis.label.set_fontsize(self.form.ySize.value())
+
+        plot.update()
+
+
+    def onMdiArea ( self , subWin ):
+
+        '''
+        Executed when window is selected on mdi area.
 
         Keyword arguments:
         subWin -- Selected window.
         '''
+
         plt = Plot.getPlot()
+
         if plt != subWin:
             self.updateUI()
 
-    def updateUI(self):
-        ''' Setup UI controls values if possible '''
 
-        plt = Plot.getPlot()
-        self.form.axId.setEnabled(bool(plt))
-        self.form.title.setEnabled(bool(plt))
-        self.form.titleSize.setEnabled(bool(plt))
-        self.form.xLabel.setEnabled(bool(plt))
-        self.form.xSize.setEnabled(bool(plt))
-        self.form.yLabel.setEnabled(bool(plt))
-        self.form.ySize.setEnabled(bool(plt))
-        if not plt:
+    def updateUI ( self ):
+
+        '''
+        Setup UI controls values if possible
+        '''
+
+        plot = Plot.getPlot()
+
+        self.form.axId.setEnabled(bool(plot))
+        self.form.title.setEnabled(bool(plot))
+        self.form.titleSize.setEnabled(bool(plot))
+        self.form.titleX.setEnabled(bool(plot))
+        self.form.xSize.setEnabled(bool(plot))
+        self.form.titleY.setEnabled(bool(plot))
+        self.form.ySize.setEnabled(bool(plot))
+
+        if not plot:
             return
+
         # Ensure that active axes is correct
-        index = min(self.form.axId.value(), len(plt.axesList) - 1)
+
+        index = min(self.form.axId.value(), len(plot.axesList) - 1)
+
         self.form.axId.setValue(index)
+
         # Store data before starting changing it.
 
-        ax = plt.axes
+        ax = plot.axes
+
         t = ax.get_title()
         x = ax.get_xlabel()
         y = ax.get_ylabel()
+
         tt = ax.title.get_fontsize()
         xx = ax.xaxis.label.get_fontsize()
         yy = ax.yaxis.label.get_fontsize()
+
         # Set labels
+
         self.form.title.setText(t)
-        self.form.xLabel.setText(x)
-        self.form.yLabel.setText(y)
+        self.form.titleX.setText(x)
+        self.form.titleY.setText(y)
+
         # Set font sizes
+
         self.form.titleSize.setValue(tt)
         self.form.xSize.setValue(xx)
         self.form.ySize.setValue(yy)

@@ -1,13 +1,12 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
-import os
 
 from matplotlib.colors import colorConverter
 from matplotlib.lines import Line2D
 from FreeCAD.Plot import Plot # type: ignore
-from FreeCAD import Gui , Qt
-
 from ..PySide import QtWidgets , QtCore
+from os.path import dirname , join
+from FreeCAD import Gui
 
 
 
@@ -29,6 +28,7 @@ class TaskForm ( QtWidgets.QWidget ):
 class TaskPanel :
 
     form : TaskForm
+
     plot : object = None
     skip : bool = False
     name : str = 'plot series editor'
@@ -37,9 +37,9 @@ class TaskPanel :
 
     def __init__ ( self ):
 
-        path = os.path.join(
-            os.path.dirname(__file__),'..',
-            'Resources','Interface/','Series.ui'
+        path = join(
+            dirname(__file__) , '..' ,
+            'Resources' , 'Interface' , 'Series.ui'
         )
 
         self.form = Gui.PySideUic.loadUi(path) # type: ignore

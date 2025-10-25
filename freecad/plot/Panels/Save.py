@@ -1,10 +1,11 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
-import os
 
 from FreeCAD.Plot import Plot # type: ignore
 from ..PySide import QtWidgets
+from os.path import splitext , dirname , extsep , join
 from FreeCAD import Console , Gui , Qt
+from os import getenv
 from re import search
 
 
@@ -22,17 +23,18 @@ class TaskForm ( QtWidgets.QWidget ):
 class TaskPanel:
 
     form : TaskForm
+
     name : str = 'plot save'
+
 
     def __init__ ( self ):
 
-        path = os.path.join(os.path.dirname(__file__),
-                               '../Resources/Interface/',
-                               'Save.ui')
+        path = join(
+            dirname(__file__) , '..' ,
+            'Resources' , 'Interface' , 'Save.ui'
+        )
 
-        form = Gui.PySideUic.loadUi(path) # type: ignore
-
-        self.form = form
+        self.form = Gui.PySideUic.loadUi(path) # type: ignore
 
 
     def accept ( self ):
@@ -92,7 +94,7 @@ class TaskPanel:
 
     def setupUi ( self ):
 
-        home = os.getenv('USERPROFILE') or os.getenv('HOME')
+        home = getenv('USERPROFILE') or getenv('HOME')
 
         if not home:
             Console.PrintWarning('No home user / home directory found.')
@@ -100,7 +102,7 @@ class TaskPanel:
 
         form = self.form
 
-        form.path.setText(os.path.join(home,'plot.png'))
+        form.path.setText(join(home,'plot.png'))
 
         self.updateUI()
 
@@ -167,7 +169,7 @@ class TaskPanel:
         if path == '' :
             return
 
-        [ root , extension ] = os.path.splitext(path)
+        [ root , extension ] = splitext(path)
 
         if extension == '' :
 
@@ -177,7 +179,7 @@ class TaskPanel:
 
                 extension = match.group(0)
 
-                path = f'{ path }{ os.path.extsep }{ extension }'
+                path = f'{ path }{ extsep }{ extension }'
 
         print('Path',path,extension)
 
@@ -199,7 +201,7 @@ class TaskPanel:
             self.updateUI()
 
 
-def createTask():
+def createTask ():
 
     panel = TaskPanel()
 
