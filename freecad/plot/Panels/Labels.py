@@ -68,8 +68,6 @@ class TaskPanel:
 
     def setupUi(self):
 
-        self.retranslateUi()
-
         # Look for active axes if can
 
         axId = 0
@@ -99,60 +97,6 @@ class TaskPanel:
 
         Plot.getMdiArea().subWindowActivated.connect(self.onMdiArea)
 
-
-    def retranslateUi ( self ):
-
-        '''
-        Set the user interface locale strings.
-        '''
-
-        form = self.form
-
-        form.setWindowTitle(Qt.translate(
-            'plot_labels',
-            'Set labels',
-            None))
-        self.widget(QtWidgets.QLabel, 'axesLabel').setText(
-            Qt.translate('plot_labels',
-                                         'Active axes',
-                                         None))
-        self.widget(QtWidgets.QLabel, 'titleLabel').setText(
-            Qt.translate('plot_labels',
-                                         'Title',
-                                         None))
-        self.widget(QtWidgets.QLabel, 'xLabel').setText(
-            Qt.translate('plot_labels',
-                                         'X label'))
-        self.widget(QtWidgets.QLabel, 'yLabel').setText(
-            Qt.translate('plot_labels',
-                                         'Y label'))
-        self.widget(QtWidgets.QSpinBox, 'axesIndex').setToolTip(Qt.translate(
-            'plot_labels',
-            'Index of the active axes'))
-        self.widget(QtWidgets.QLineEdit, 'title').setToolTip(
-            Qt.translate(
-                'plot_labels',
-                'Title (associated to active axes)'))
-        self.widget(QtWidgets.QSpinBox, 'titleSize').setToolTip(
-            Qt.translate(
-                'plot_labels',
-                'Title font size'))
-        self.widget(QtWidgets.QLineEdit, 'titleX').setToolTip(
-            Qt.translate(
-                'plot_labels',
-                'X axis title'))
-        self.widget(QtWidgets.QSpinBox, 'xSize').setToolTip(
-            Qt.translate(
-                'plot_labels',
-                'X axis title font size'))
-        self.widget(QtWidgets.QLineEdit, 'titleY').setToolTip(
-            Qt.translate(
-                'plot_labels',
-                'Y axis title'))
-        self.widget(QtWidgets.QSpinBox, 'ySize').setToolTip(
-            Qt.translate(
-                'plot_labels',
-                'Y axis title font size'))
 
     def onAxesId(self, value):
         ''' Executed when axes index is modified. '''

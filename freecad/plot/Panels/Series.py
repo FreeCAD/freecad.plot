@@ -78,7 +78,6 @@ class TaskPanel :
 
     def setupUi ( self ):
 
-        self.retranslateUi()
         self.fillStyles()
         self.updateUI()
 
@@ -96,32 +95,6 @@ class TaskPanel :
         form.color.pressed.connect(self.onColor)
 
         Plot.getMdiArea().subWindowActivated.connect(self.onMdiArea)
-
-
-    def retranslateUi ( self ):
-
-        '''
-        Set the user interface locale strings.
-        '''
-
-        form = self.form
-
-        form.setWindowTitle(Qt.translate('plot_series','Configure series'))
-
-        form.markerLabel.setText(Qt.translate('plot_series','Marker'))
-        form.styleLabel.setText(Qt.translate('plot_series','Line style'))
-        form.isLabel.setText(Qt.translate('plot_series','No label'))
-        form.remove.setText(Qt.translate('plot_series','Remove series'))
-
-        form.markerSize.setToolTip(Qt.translate('plot_series','Marker size'))
-        form.lineStyle.setToolTip(Qt.translate('plot_series','Line style'))
-        form.lineWidth.setToolTip(Qt.translate('plot_series','Line width'))
-        form.markers.setToolTip(Qt.translate('plot_series','Marker style'))
-        form.isLabel.setToolTip(Qt.translate('plot_series','If checked, series will not be considered for legend'))
-        form.remove.setToolTip(Qt.translate('plot_series','Removes this series'))
-        form.items.setToolTip(Qt.translate('plot_series','List of available series'))
-        form.label.setToolTip(Qt.translate('plot_series','Line title'))
-        form.color.setToolTip(Qt.translate('plot_series','Line and marker color'))
 
 
     def fillStyles ( self ):

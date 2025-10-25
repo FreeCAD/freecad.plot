@@ -92,8 +92,6 @@ class TaskPanel:
 
     def setupUi ( self ):
 
-        self.retranslateUi()
-
         home = os.getenv('USERPROFILE') or os.getenv('HOME')
 
         if not home:
@@ -109,64 +107,6 @@ class TaskPanel:
         form.pathButton.pressed.connect(self.onPathButton)
 
         Plot.getMdiArea().subWindowActivated.connect(self.onMdiArea)
-
-
-    def retranslateUi ( self ):
-
-        '''
-        Set the user interface locale strings.
-        '''
-
-        form = self.form
-
-        form.setWindowTitle(
-            Qt.translate(
-                'plot_save',
-                'Save figure'
-            ))
-
-        form.sizeLabel.setText(
-            Qt.translate(
-                'plot_save',
-                'Inches'
-            ))
-
-        form.dpiLabel.setText(
-            Qt.translate(
-                'plot_save',
-                'Dots per Inch'
-            ))
-
-        form.path.setToolTip(
-            Qt.translate(
-                'plot_save',
-                'Output image file path'
-            ))
-
-        form.pathButton.setToolTip(
-            Qt.translate(
-                'plot_save',
-                'Show a file selection dialog'
-            ))
-
-        form.sizeX.setToolTip(
-            Qt.translate(
-                'plot_save',
-                'X image size'
-            ))
-
-        form.sizeY.setToolTip(
-            Qt.translate(
-                'plot_save',
-                'Y image size'
-            ))
-
-        form.dpi.setToolTip(
-            Qt.translate(
-                'plot_save',
-                'Dots per point,with size will define output image'
-                ' resolution'
-            ))
 
 
     def updateUI ( self ):

@@ -70,7 +70,6 @@ class TaskPanel :
 
     def setupUi ( self ):
 
-        self.retranslateUi()
         self.updateUI()
 
         form = self.form
@@ -81,64 +80,6 @@ class TaskPanel :
         form.Y.valueChanged.connect(self.onData)
 
         Plot.getMdiArea().subWindowActivated.connect(self.onMdiArea)
-
-
-    def retranslateUi ( self ):
-
-        '''
-        Set the user interface locale strings.
-        '''
-
-        form = self.form
-
-        form.setWindowTitle(
-            Qt.translate(
-                'plot_positions',
-                'Set positions and sizes'
-            )
-        )
-
-        form.posLabel.setText(
-            Qt.translate(
-                'plot_positions',
-                'Position'
-            )
-        )
-
-        form.sizeLabel.setText(
-            Qt.translate(
-                'plot_positions',
-                'Size'
-            )
-        )
-
-        form.items.setToolTip(
-            Qt.translate(
-                'plot_positions' ,
-                'List of modifiable items'
-            )
-        )
-
-        form.X.setToolTip(
-            Qt.translate(
-                'plot_positions',
-                'X item position'
-            )
-        )
-
-        form.Y.setToolTip(
-            Qt.translate(
-                'plot_positions',
-                'Y item position'
-            )
-        )
-
-        form.Size.setToolTip(
-            Qt.translate(
-                'plot_positions',
-                'Item size'
-            )
-        )
 
 
     def onItem ( self , row ):

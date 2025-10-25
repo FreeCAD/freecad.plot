@@ -76,8 +76,6 @@ class TaskPanel:
         self.form.new = self.widget(QtWidgets.QPushButton, 'newAxesButton')
         self.form.all = self.widget(QtWidgets.QCheckBox, 'allAxes')
 
-        self.retranslateUi()
-
         # Look for active axes if can
 
         axId = 0
@@ -189,121 +187,6 @@ class TaskPanel:
         form = mw.findChild(QtWidgets.QWidget, 'Plot-Task-Axes')
         return form.findChild(class_id, name)
 
-    def retranslateUi(self):
-        '''Set the user interface locale strings.
-        '''
-        form = self.form
-        form.setWindowTitle(App.Qt.translate(
-            'plot_axes',
-            'Configure axes',
-            None))
-        self.widget(QtWidgets.QLabel, 'axesLabel').setText(
-            App.Qt.translate('plot_axes',
-                                         'Active axes',
-                                         None))
-        self.widget(QtWidgets.QCheckBox, 'allAxes').setText(
-            App.Qt.translate('plot_axes',
-                                         'Apply to all axes',
-                                         None))
-        self.widget(QtWidgets.QLabel, 'dimLabel').setText(
-            App.Qt.translate('plot_axes',
-                                         'Dimensions',
-                                         None))
-        self.widget(QtWidgets.QLabel, 'xPosLabel').setText(
-            App.Qt.translate('plot_axes',
-                                         'X axis position',
-                                         None))
-        self.widget(QtWidgets.QLabel, 'yPosLabel').setText(
-            App.Qt.translate('plot_axes',
-                                         'Y axis position',
-                                         None))
-        self.widget(QtWidgets.QLabel, 'scalesLabel').setText(
-            App.Qt.translate('plot_axes',
-                                         'Scales',
-                                         None))
-        self.widget(QtWidgets.QCheckBox, 'xAuto').setText(
-            App.Qt.translate('plot_axes',
-                                         'X auto',
-                                         None))
-        self.widget(QtWidgets.QCheckBox, 'yAuto').setText(
-            App.Qt.translate('plot_axes',
-                                         'Y auto',
-                                         None))
-        self.widget(QtWidgets.QCheckBox, 'allAxes').setText(
-            App.Qt.translate('plot_axes',
-                                         'Apply to all axes',
-                                         None))
-        self.widget(QtWidgets.QLabel, 'dimLabel').setText(
-            App.Qt.translate('plot_axes',
-                                         'Dimensions',
-                                         None))
-        self.widget(QtWidgets.QLabel, 'xPosLabel').setText(
-            App.Qt.translate('plot_axes',
-                                         'X axis position',
-                                         None))
-        self.widget(QtWidgets.QLabel, 'yPosLabel').setText(
-            App.Qt.translate('plot_axes',
-                                         'Y axis position',
-                                         None))
-        self.widget(QtWidgets.QSpinBox, 'axesIndex').setToolTip(
-            App.Qt.translate('plot_axes',
-                                         'Index of the active axes',
-                                         None))
-        self.widget(QtWidgets.QPushButton, 'newAxesButton').setToolTip(
-            App.Qt.translate(
-                'plot_axes',
-                'Add new axes to the plot',
-                None))
-        self.widget(QtWidgets.QPushButton, 'delAxesButton').setToolTip(
-            App.Qt.translate(
-                'plot_axes',
-                'Remove selected axes',
-                None))
-        self.widget(QtWidgets.QCheckBox, 'allAxes').setToolTip(
-            App.Qt.translate(
-                'plot_axes',
-                'Check it to apply transformations to all axes',
-                None))
-        self.widget(QtWidgets.QSlider, 'posXMin').setToolTip(
-            App.Qt.translate(
-                'plot_axes',
-                'Left bound of axes',
-                None))
-        self.widget(QtWidgets.QSlider, 'posXMax').setToolTip(
-            App.Qt.translate(
-                'plot_axes',
-                'Right bound of axes',
-                None))
-        self.widget(QtWidgets.QSlider, 'posYMin').setToolTip(
-            App.Qt.translate(
-                'plot_axes',
-                'Bottom bound of axes',
-                None))
-        self.widget(QtWidgets.QSlider, 'posYMax').setToolTip(
-            App.Qt.translate(
-                'plot_axes',
-                'Top bound of axes',
-                None))
-        self.widget(QtWidgets.QSpinBox, 'xOffset').setToolTip(
-            App.Qt.translate(
-                'plot_axes',
-                'Outward offset of X axis',
-                None))
-        self.widget(QtWidgets.QSpinBox, 'yOffset').setToolTip(
-            App.Qt.translate(
-                'plot_axes',
-                'Outward offset of Y axis',
-                None))
-        self.widget(QtWidgets.QCheckBox, 'xAuto').setToolTip(
-            App.Qt.translate(
-                'plot_axes',
-                'X axis scale autoselection',
-                None))
-        self.widget(QtWidgets.QCheckBox, 'yAuto').setToolTip(
-            App.Qt.translate(
-                'plot_axes',
-                'Y axis scale autoselection',
-                None))
 
     def onAxesId(self, value):
         '''Executed when axes index is modified.'''
