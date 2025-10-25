@@ -2,34 +2,44 @@
 
 import os
 
-from ..PySide import QtWidgets , QtCore
+from FreeCAD.Plot import Plot # type: ignore
+from ..PySide import QtWidgets
 from FreeCAD import Console , Gui , Qt
+from re import search
 
-from FreeCAD.Plot import Plot
+
+class TaskForm ( QtWidgets.QWidget ):
+
+    pathButton : QtWidgets.QPushButton
+    sizeLabel : QtWidgets.QLabel
+    dpiLabel : QtWidgets.QLabel
+    sizeX : QtWidgets.QDoubleSpinBox
+    sizeY : QtWidgets.QDoubleSpinBox
+    path : QtWidgets.QLineEdit
+    dpi : QtWidgets.QSpinBox
 
 
 class TaskPanel:
 
-    form : QtWidgets.QWidget
+    form : TaskForm
+    name : str = 'plot save'
 
     def __init__ ( self ):
 
-        self.name = 'plot save'
-        self.ui = os.path.join(os.path.dirname(__file__),
+        path = os.path.join(os.path.dirname(__file__),
                                '../Resources/Interface/',
                                'Save.ui')
 
-        form = Gui.PySideUic.loadUi(( self.ui , ))
+        form = Gui.PySideUic.loadUi(path) # type: ignore
 
-        if form :
-            self.form = form
+        self.form = form
 
 
     def accept ( self ):
 
-        plt = Plot.getPlot()
+        plot = Plot.getPlot()
 
-        if plt :
+        if plot :
 
             form = self.form
 
@@ -77,138 +87,105 @@ class TaskPanel:
         return True
 
     def open ( self ):
-        pass
+        self.setupUi()
 
 
     def setupUi ( self ):
-
-        form = self.form
-
-        form.pathButton = self.widget(QtWidgets.QPushButton,'pathButton')
-        form.sizeX = self.widget(QtWidgets.QDoubleSpinBox,'sizeX')
-        form.sizeY = self.widget(QtWidgets.QDoubleSpinBox,'sizeY')
-        form.path = self.widget(QtWidgets.QLineEdit,'path')
-        form.dpi = self.widget(QtWidgets.QSpinBox,'dpi')
 
         self.retranslateUi()
 
         home = os.getenv('USERPROFILE') or os.getenv('HOME')
 
+        if not home:
+            Console.PrintWarning('No home user / home directory found.')
+            return
+
+        form = self.form
+
         form.path.setText(os.path.join(home,'plot.png'))
 
         self.updateUI()
 
-        QtCore.QObject.connect(
-            form.pathButton ,
-            QtCore.SIGNAL('pressed()') ,
-            self.onPathButton
-        )
+        form.pathButton.pressed.connect(self.onPathButton)
 
-        QtCore.QObject.connect(
-            Plot.getMdiArea() ,
-            QtCore.SIGNAL('subWindowActivated(QMdiSubWindow*)') ,
-            self.onMdiArea
-        )
-
-        return False
-
-
-    def getMainWindow ( self ):
-
-        widgets = QtWidgets.QApplication.topLevelWidgets()
-
-        for widget in widgets :
-            if widget.metaObject().className() == 'Gui::MainWindow' :
-                return widget
-
-        raise RuntimeError('No main window found')
-
-
-    def widget ( self , class_id , name ):
-
-        '''
-        Return the selected widget.
-
-        Keyword arguments:
-        class_id -- Class identifier
-        name -- Name of the widget
-        '''
-
-        window = self.getMainWindow()
-
-        form = window.findChild(QtWidgets.QWidget,'Plot-Task-Save')
-
-        return form.findChild(class_id,name)
+        Plot.getMdiArea().subWindowActivated.connect(self.onMdiArea)
 
 
     def retranslateUi ( self ):
 
-        '''Set the user interface locale strings.'''
+        '''
+        Set the user interface locale strings.
+        '''
 
-        self.form.setWindowTitle(
+        form = self.form
+
+        form.setWindowTitle(
             Qt.translate(
                 'plot_save',
                 'Save figure'
             ))
 
-        self.widget(QtWidgets.QLabel,'sizeLabel').setText(
+        form.sizeLabel.setText(
             Qt.translate(
                 'plot_save',
                 'Inches'
             ))
 
-        self.widget(QtWidgets.QLabel,'dpiLabel').setText(
+        form.dpiLabel.setText(
             Qt.translate(
                 'plot_save',
                 'Dots per Inch'
             ))
 
-        self.widget(QtWidgets.QLineEdit,'path').setToolTip(
+        form.path.setToolTip(
             Qt.translate(
                 'plot_save',
                 'Output image file path'
             ))
 
-        self.widget(QtWidgets.QPushButton,'pathButton').setToolTip(
+        form.pathButton.setToolTip(
             Qt.translate(
                 'plot_save',
                 'Show a file selection dialog'
             ))
 
-        self.widget(QtWidgets.QDoubleSpinBox,'sizeX').setToolTip(
+        form.sizeX.setToolTip(
             Qt.translate(
                 'plot_save',
                 'X image size'
             ))
 
-        self.widget(QtWidgets.QDoubleSpinBox,'sizeY').setToolTip(
+        form.sizeY.setToolTip(
             Qt.translate(
                 'plot_save',
                 'Y image size'
             ))
 
-        self.widget(QtWidgets.QSpinBox,'dpi').setToolTip(
+        form.dpi.setToolTip(
             Qt.translate(
                 'plot_save',
                 'Dots per point,with size will define output image'
                 ' resolution'
             ))
 
+
     def updateUI ( self ):
 
-        ''' Setup UI controls values if possible '''
+        '''
+        Setup UI controls values if possible
+        '''
 
         plot = Plot.getPlot()
 
-        hasPlot = bool(plot)
+        enabled = bool(plot)
 
         form = self.form
 
-        form.pathButton.setEnabled(hasPlot)
-        form.sizeX.setEnabled(hasPlot)
-        form.sizeY.setEnabled(hasPlot)
-        form.path.setEnabled(hasPlot)
-        form.dpi.setEnabled(hasPlot)
+        form.pathButton.setEnabled(enabled)
+        form.sizeX.setEnabled(enabled)
+        form.sizeY.setEnabled(enabled)
+        form.path.setEnabled(enabled)
+        form.dpi.setEnabled(enabled)
 
         if not plot:
             return
@@ -225,28 +202,46 @@ class TaskPanel:
 
     def onPathButton ( self ):
 
-        '''Executed when the path selection button is pressed.'''
+        '''
+        Executed when the path selection button is pressed.
+        '''
 
         form = self.form
 
         path = form.path.text()
 
-        file_choices = (
-            'Portable Network Graphics (*.png)|*.png;;'
-            'Portable Document Format (*.pdf)|*.pdf;;'
-            'PostScript (*.ps)|*.ps;;'
-            'Encapsulated PostScript (*.eps)|*.eps'
-        )
+        formats = [
+            'Portable Network Graphics (*.png)' ,
+            'Portable Document Format (*.pdf)' ,
+            'Encapsulated PostScript (*.eps)' ,
+            'PostScript (*.ps)'
+        ]
 
-        path = QtWidgets.QFileDialog.getSaveFileName \
-            (None,'Save figure',path,file_choices)
+        filters = str.join(';;',formats)
 
-        if path :
+        [ path , format ] = QtWidgets.QFileDialog.getSaveFileName \
+            (None,'Save figure',path,filters)
 
-            try:
-                form.path.setText(path)
-            except TypeError:
-                form.path.setText(path[ 0 ])
+        print('Save Path',path)
+
+        if path == '' :
+            return
+
+        [ root , extension ] = os.path.splitext(path)
+
+        if extension == '' :
+
+            match = search(r'(?<=\*\.)\w+',format)
+
+            if match:
+
+                extension = match.group(0)
+
+                path = f'{ path }{ os.path.extsep }{ extension }'
+
+        print('Path',path,extension)
+
+        form.path.setText(path)
 
 
     def onMdiArea ( self , subWin ):
@@ -269,9 +264,3 @@ def createTask():
     panel = TaskPanel()
 
     Gui.Control.showDialog(panel)
-
-    if panel.setupUi():
-        Gui.Control.closeDialog()
-        return None
-
-    return panel

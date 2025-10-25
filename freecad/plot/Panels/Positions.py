@@ -1,256 +1,337 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
 import os
-import FreeCAD as App
-import FreeCADGui as Gui
+
+from FreeCAD.Plot import Plot # type: ignore
+from FreeCAD import Gui , Qt
 
 from ..PySide import QtWidgets , QtCore
 
-from FreeCAD.Plot import Plot
+
+class TaskForm ( QtWidgets.QWidget ):
+
+    sizeLabel : QtWidgets.QLabel
+    posLabel : QtWidgets.QLabel
+    items : QtWidgets.QListWidget
+    Size : QtWidgets.QDoubleSpinBox
+    X : QtWidgets.QDoubleSpinBox
+    Y : QtWidgets.QDoubleSpinBox
 
 
-class TaskPanel:
-    def __init__(self):
-        self.name = "plot positions"
-        self.ui = os.path.join(os.path.dirname(__file__),
-                               "../Resources/Interface/",
-                               "Positions.ui")
-        self.form = Gui.PySideUic.loadUi(self.ui)
-        self.skip = False
-        self.item = 0
-        self.names = []
-        self.objs = []
-        self.plt = None
+class TaskPanel :
 
-    def accept(self):
-        return True
+    form : TaskForm
 
-    def reject(self):
-        return True
+    names = []
+    name = 'plot positions'
+    skip = False
+    objs = []
+    item = 0
+    plot = None
 
-    def clicked(self, index):
-        pass
 
-    def open(self):
-        pass
+    def __init__ ( self ):
 
-    def needsFullSpace(self):
-        return True
+        path = os.path.join(
+            os.path.dirname(__file__), '..' ,
+            'Resources' , 'Interface' , 'Positions.ui'
+        )
 
-    def isAllowedAlterSelection(self):
+        self.form = Gui.PySideUic.loadUi(path) # type: ignore
+
+
+    def isAllowedAlterSelection ( self ):
         return False
 
-    def isAllowedAlterView(self):
-        return True
-
-    def isAllowedAlterDocument(self):
+    def isAllowedAlterDocument ( self ):
         return False
 
-    def helpRequested(self):
+    def isAllowedAlterView ( self ):
+        return True
+
+    def needsFullSpace ( self ):
+        return True
+
+    def helpRequested ( self ):
         pass
 
-    def setupUi(self):
-        self.form.items = self.widget(QtWidgets.QListWidget, "items")
-        self.form.x = self.widget(QtWidgets.QDoubleSpinBox, "x")
-        self.form.y = self.widget(QtWidgets.QDoubleSpinBox, "y")
-        self.form.s = self.widget(QtWidgets.QDoubleSpinBox, "size")
+    def clicked ( self , index ):
+        pass
+
+    def accept ( self ):
+        return True
+
+    def reject ( self ):
+        return True
+
+    def open ( self ):
+        self.setupUi()
+
+
+    def setupUi ( self ):
+
         self.retranslateUi()
         self.updateUI()
-        QtCore.QObject.connect(
-            self.form.items,
-            QtCore.SIGNAL("currentRowChanged(int)"),
-            self.onItem)
-        QtCore.QObject.connect(
-            self.form.x,
-            QtCore.SIGNAL("valueChanged(double)"),
-            self.onData)
-        QtCore.QObject.connect(
-            self.form.y,
-            QtCore.SIGNAL("valueChanged(double)"),
-            self.onData)
-        QtCore.QObject.connect(
-            self.form.s,
-            QtCore.SIGNAL("valueChanged(double)"),
-            self.onData)
-        QtCore.QObject.connect(
-            Plot.getMdiArea(),
-            QtCore.SIGNAL("subWindowActivated(QMdiSubWindow*)"),
-            self.onMdiArea)
-        return False
 
-    def getMainWindow(self):
-        toplevel = QtWidgets.QApplication.topLevelWidgets()
-        for i in toplevel:
-            if i.metaObject().className() == "Gui::MainWindow":
-                return i
-        raise RuntimeError("No main window found")
+        form = self.form
 
-    def widget(self, class_id, name):
-        """Return the selected widget.
+        form.items.currentRowChanged.connect(self.onItem)
+        form.Size.valueChanged.connect(self.onData)
+        form.X.valueChanged.connect(self.onData)
+        form.Y.valueChanged.connect(self.onData)
 
-        Keyword arguments:
-        class_id -- Class identifier
-        name -- Name of the widget
-        """
-        mw = self.getMainWindow()
-        form = mw.findChild(QtWidgets.QWidget, "Plot-Task-Positions")
-        return form.findChild(class_id, name)
+        Plot.getMdiArea().subWindowActivated.connect(self.onMdiArea)
 
-    def retranslateUi(self):
-        """Set the user interface locale strings."""
-        self.form.setWindowTitle(App.Qt.translate(
-            "plot_positions",
-            "Set positions and sizes",
-            None))
-        self.widget(QtWidgets.QLabel, "posLabel").setText(
-            App.Qt.translate(
-                "plot_positions",
-                "Position",
-                None))
-        self.widget(QtWidgets.QLabel, "sizeLabel").setText(
-            App.Qt.translate(
-                "plot_positions",
-                "Size",
-                None))
-        self.widget(QtWidgets.QListWidget, "items").setToolTip(
-            App.Qt.translate(
-                "plot_positions",
-                "List of modifiable items",
-                None))
-        self.widget(QtWidgets.QDoubleSpinBox, "x").setToolTip(
-            App.Qt.translate(
-                "plot_positions",
-                "X item position",
-                None))
-        self.widget(QtWidgets.QDoubleSpinBox, "y").setToolTip(
-            App.Qt.translate(
-                "plot_positions",
-                "Y item position",
-                None))
-        self.widget(QtWidgets.QDoubleSpinBox, "size").setToolTip(
-            App.Qt.translate(
-                "plot_positions",
-                "Item size",
-                None))
 
-    def onItem(self, row):
-        """ Executed when selected item is modified. """
+    def retranslateUi ( self ):
+
+        '''
+        Set the user interface locale strings.
+        '''
+
+        form = self.form
+
+        form.setWindowTitle(
+            Qt.translate(
+                'plot_positions',
+                'Set positions and sizes'
+            )
+        )
+
+        form.posLabel.setText(
+            Qt.translate(
+                'plot_positions',
+                'Position'
+            )
+        )
+
+        form.sizeLabel.setText(
+            Qt.translate(
+                'plot_positions',
+                'Size'
+            )
+        )
+
+        form.items.setToolTip(
+            Qt.translate(
+                'plot_positions' ,
+                'List of modifiable items'
+            )
+        )
+
+        form.X.setToolTip(
+            Qt.translate(
+                'plot_positions',
+                'X item position'
+            )
+        )
+
+        form.Y.setToolTip(
+            Qt.translate(
+                'plot_positions',
+                'Y item position'
+            )
+        )
+
+        form.Size.setToolTip(
+            Qt.translate(
+                'plot_positions',
+                'Item size'
+            )
+        )
+
+
+    def onItem ( self , row ):
+
+        '''
+        Executed when selected item is modified.
+        '''
+
         self.item = row
         self.updateUI()
 
-    def onData(self, value):
-        """ Executed when selected item data is modified. """
-        plt = Plot.getPlot()
-        if not plt:
+
+    def onData ( self , value ):
+
+        '''
+        Executed when selected item data is modified.
+        '''
+
+        plot = Plot.getPlot()
+
+        if not plot:
             self.updateUI()
             return
+
         if not self.skip:
+
             self.skip = True
+
             name = self.names[self.item]
             obj = self.objs[self.item]
-            x = self.form.x.value()
-            y = self.form.y.value()
-            s = self.form.s.value()
+            s = self.form.Size.value()
+            x = self.form.X.value()
+            y = self.form.Y.value()
+
             # x/y labels only have one position control
+
             if name.find('x label') >= 0:
-                self.form.y.setValue(x)
+                self.form.Y.setValue(x)
             elif name.find('y label') >= 0:
-                self.form.x.setValue(y)
+                self.form.X.setValue(y)
+
             # title and labels only have one size control
+
             if name.find('title') >= 0 or name.find('label') >= 0:
                 obj.set_position((x, y))
                 obj.set_size(s)
-            # legend have all controls
             else:
-                Plot.legend(plt.legend, (x, y), s)
-            plt.update()
+                # legend have all controls
+                Plot.legend(plot.legend, (x, y), s)
+
+            plot.update()
+
             self.skip = False
 
-    def onMdiArea(self, subWin):
-        """Executed when a new window is selected on the mdi area.
+    def onMdiArea ( self , subWin ):
+
+        '''
+        Executed when a new window is selected on the mdi area.
 
         Keyword arguments:
         subWin -- Selected window.
-        """
+        '''
+
         plt = Plot.getPlot()
+
         if plt != subWin:
             self.updateUI()
 
-    def updateUI(self):
-        """Setup the UI control values if it is possible."""
-        plt = Plot.getPlot()
-        self.form.items.setEnabled(bool(plt))
-        self.form.x.setEnabled(bool(plt))
-        self.form.y.setEnabled(bool(plt))
-        self.form.s.setEnabled(bool(plt))
-        if not plt:
-            self.plt = plt
-            self.form.items.clear()
+
+    def updateUI ( self ):
+
+        '''
+        Setup the UI control values if it is possible.
+        '''
+
+        plot = Plot.getPlot()
+
+        form = self.form
+
+        enabled = bool(plot)
+
+        form.items.setEnabled(enabled)
+        form.Size.setEnabled(enabled)
+        form.X.setEnabled(enabled)
+        form.Y.setEnabled(enabled)
+
+        if not plot:
+            self.plot = plot
+            form.items.clear()
             return
+
         # Refill items list only if Plot instance have been changed
-        if self.plt != plt:
-            self.plt = plt
-            self.plt.update()
+
+        if self.plot != plot:
+
+            self.plot = plot
+
+            self.plot.update()
             self.setList()
+
         # Get data for controls
+
         name = self.names[self.item]
         obj = self.objs[self.item]
+
         if name.find('title') >= 0 or name.find('label') >= 0:
+
             p = obj.get_position()
+
             x = p[0]
             y = p[1]
-            s = obj.get_size()
-            if name.find('x label') >= 0:
-                self.form.y.setEnabled(False)
-                self.form.y.setValue(x)
-            elif name.find('y label') >= 0:
-                self.form.x.setEnabled(False)
-                self.form.x.setValue(y)
-        else:
-            x = plt.legPos[0]
-            y = plt.legPos[1]
-            s = obj.get_texts()[-1].get_fontsize()
-        # Send it to controls
-        self.form.x.setValue(x)
-        self.form.y.setValue(y)
-        self.form.s.setValue(s)
 
-    def setList(self):
-        """ Setup UI controls values if possible """
+            s = obj.get_size()
+
+            if name.find('x label') >= 0:
+                form.Y.setEnabled(False)
+                form.Y.setValue(x)
+            elif name.find('y label') >= 0:
+                form.X.setEnabled(False)
+                form.X.setValue(y)
+        else:
+            x = plot.legPos[0]
+            y = plot.legPos[1]
+            s = obj.get_texts()[-1].get_fontsize()
+
+        # Send it to controls
+
+        form.Size.setValue(s)
+        form.X.setValue(x)
+        form.Y.setValue(y)
+
+
+    def setList ( self ):
+
+        '''
+        Setup UI controls values if possible
+        '''
+
         # Clear lists
+
         self.names = []
         self.objs = []
+
         # Fill lists with available objects
-        if self.plt:
+
+        if self.plot:
+
             # Axes data
-            for i in range(0, len(self.plt.axesList)):
-                ax = self.plt.axesList[i]
+
+            for i in range(0, len(self.plot.axesList)):
+
+                ax = self.plot.axesList[i]
+
                 # Each axes have title, xaxis and yaxis
+
                 self.names.append('title (axes {})'.format(i))
                 self.objs.append(ax.title)
                 self.names.append('x label (axes {})'.format(i))
                 self.objs.append(ax.xaxis.get_label())
                 self.names.append('y label (axes {})'.format(i))
                 self.objs.append(ax.yaxis.get_label())
+
             # Legend if exist
-            ax = self.plt.axesList[-1]
+
+            ax = self.plot.axesList[-1]
+
             if ax.legend_:
                 self.names.append('legend')
                 self.objs.append(ax.legend_)
+
+
+        form = self.form
+
         # Send list to widget
-        self.form.items.clear()
+
+        form.items.clear()
+
         for name in self.names:
-            self.form.items.addItem(name)
+            form.items.addItem(name)
+
         # Ensure that selected item is correct
+
         if self.item >= len(self.names):
+
             self.item = len(self.names) - 1
-            self.form.items.setCurrentIndex(self.item)
+
+            index = form.items.indexAt(QtCore.QPoint(0,self.item))
+
+            form.items.setCurrentIndex(index)
 
 
-def createTask():
+def createTask ():
+
     panel = TaskPanel()
+
     Gui.Control.showDialog(panel)
-    if panel.setupUi():
-        Gui.Control.closeDialog()
-        return None
-    return panel

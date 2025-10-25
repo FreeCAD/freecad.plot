@@ -1,34 +1,42 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
 import os
-import FreeCAD as App
-import FreeCADGui as Gui
 
+from FreeCAD import Gui , Qt
+from FreeCAD.Plot import Plot # type: ignore
 from ..PySide import QtWidgets , QtCore
 
-from FreeCAD.Plot import Plot
+
+class TaskForm ( QtWidgets.QWidget ):
+
+    titleSize : QtWidgets.QSpinBox
+    titleX : QtWidgets.QLineEdit
+    titleY : QtWidgets.QLineEdit
+    title : QtWidgets.QLineEdit
+
+    xSize : QtWidgets.QSpinBox
+    ySize : QtWidgets.QSpinBox
+
+    axId : QtWidgets.QSpinBox
+
 
 
 class TaskPanel:
-    def __init__(self):
-        self.name = "plot labels"
-        self.ui = os.path.join(os.path.dirname(__file__),
-                               "../Resources/Interface/",
-                               "Labels.ui")
-        self.form = Gui.PySideUic.loadUi(self.ui)
-        self.skip = False
 
-    def accept(self):
-        return True
+    form : TaskForm
 
-    def reject(self):
-        return True
+    name = 'plot labels'
+    skip = False
 
-    def clicked(self, index):
-        pass
+    def __init__ ( self ):
 
-    def open(self):
-        pass
+        path = os.path.join(
+            os.path.dirname(__file__) , '..' ,
+            'Resources' , 'Interface' , 'Labels.ui'
+        )
+
+        self.form = Gui.PySideUic.loadUi(path) # type: ignore
+
 
     def needsFullSpace(self):
         return True
@@ -45,128 +53,109 @@ class TaskPanel:
     def helpRequested(self):
         pass
 
+    def clicked ( self , index ):
+        pass
+
+    def accept ( self ):
+        return True
+
+    def reject ( self ):
+        return True
+
+    def open ( self ):
+        self.setupUi()
+
+
     def setupUi(self):
-        self.form.axId = self.widget(QtWidgets.QSpinBox, "axesIndex")
-        self.form.title = self.widget(QtWidgets.QLineEdit, "title")
-        self.form.titleSize = self.widget(QtWidgets.QSpinBox, "titleSize")
-        self.form.xLabel = self.widget(QtWidgets.QLineEdit, "titleX")
-        self.form.xSize = self.widget(QtWidgets.QSpinBox, "xSize")
-        self.form.yLabel = self.widget(QtWidgets.QLineEdit, "titleY")
-        self.form.ySize = self.widget(QtWidgets.QSpinBox, "ySize")
+
         self.retranslateUi()
+
         # Look for active axes if can
+
         axId = 0
-        plt = Plot.getPlot()
-        if plt:
-            while plt.axes != plt.axesList[axId]:
+
+        form = self.form
+
+        plot = Plot.getPlot()
+
+        if plot:
+
+            while plot.axes != plot.axesList[axId]:
                 axId = axId + 1
-            self.form.axId.setValue(axId)
+
+            form.axId.setValue(axId)
+
         self.updateUI()
-        QtCore.QObject.connect(self.form.axId,
-                               QtCore.SIGNAL('valueChanged(int)'),
-                               self.onAxesId)
-        QtCore.QObject.connect(self.form.title,
-                               QtCore.SIGNAL("editingFinished()"),
-                               self.onLabels)
-        QtCore.QObject.connect(self.form.xLabel,
-                               QtCore.SIGNAL("editingFinished()"),
-                               self.onLabels)
-        QtCore.QObject.connect(self.form.yLabel,
-                               QtCore.SIGNAL("editingFinished()"),
-                               self.onLabels)
-        QtCore.QObject.connect(self.form.titleSize,
-                               QtCore.SIGNAL("valueChanged(int)"),
-                               self.onFontSizes)
-        QtCore.QObject.connect(self.form.xSize,
-                               QtCore.SIGNAL("valueChanged(int)"),
-                               self.onFontSizes)
-        QtCore.QObject.connect(self.form.ySize,
-                               QtCore.SIGNAL("valueChanged(int)"),
-                               self.onFontSizes)
-        QtCore.QObject.connect(
-            Plot.getMdiArea(),
-            QtCore.SIGNAL("subWindowActivated(QMdiSubWindow*)"),
-            self.onMdiArea)
-        return False
 
-    def getMainWindow(self):
-        toplevel = QtWidgets.QApplication.topLevelWidgets()
-        for i in toplevel:
-            if i.metaObject().className() == "Gui::MainWindow":
-                return i
-        raise RuntimeError("No main window found")
+        form.titleSize.valueChanged.connect(self.onFontSizes)
+        form.titleX.editingFinished.connect(self.onLabels)
+        form.titleY.editingFinished.connect(self.onLabels)
+        form.title.editingFinished.connect(self.onLabels)
 
-    def widget(self, class_id, name):
-        """Return the selected widget.
+        form.xSize.valueChanged.connect(self.onFontSizes)
+        form.ySize.valueChanged.connect(self.onFontSizes)
 
-        Keyword arguments:
-        class_id -- Class identifier
-        name -- Name of the widget
-        """
-        mw = self.getMainWindow()
-        form = mw.findChild(QtWidgets.QWidget, "Plot-Task-Labels")
-        return form.findChild(class_id, name)
+        form.axId.valueChanged.connect(self.onAxesId)
 
-    def retranslateUi(self):
-        """ Set the user interface locale strings.
-        """
-        self.form.setWindowTitle(App.Qt.translate(
-            "plot_labels",
-            "Set labels",
+        Plot.getMdiArea().subWindowActivated.connect(self.onMdiArea)
+
+
+    def retranslateUi ( self ):
+
+        '''
+        Set the user interface locale strings.
+        '''
+
+        form = self.form
+
+        form.setWindowTitle(Qt.translate(
+            'plot_labels',
+            'Set labels',
             None))
-        self.widget(QtWidgets.QLabel, "axesLabel").setText(
-            App.Qt.translate("plot_labels",
-                                         "Active axes",
+        self.widget(QtWidgets.QLabel, 'axesLabel').setText(
+            Qt.translate('plot_labels',
+                                         'Active axes',
                                          None))
-        self.widget(QtWidgets.QLabel, "titleLabel").setText(
-            App.Qt.translate("plot_labels",
-                                         "Title",
+        self.widget(QtWidgets.QLabel, 'titleLabel').setText(
+            Qt.translate('plot_labels',
+                                         'Title',
                                          None))
-        self.widget(QtWidgets.QLabel, "xLabel").setText(
-            App.Qt.translate("plot_labels",
-                                         "X label",
-                                         None))
-        self.widget(QtWidgets.QLabel, "yLabel").setText(
-            App.Qt.translate("plot_labels",
-                                         "Y label",
-                                         None))
-        self.widget(QtWidgets.QSpinBox, "axesIndex").setToolTip(App.Qt.translate(
-            "plot_labels",
-            "Index of the active axes",
-            None))
-        self.widget(QtWidgets.QLineEdit, "title").setToolTip(
-            App.Qt.translate(
-                "plot_labels",
-                "Title (associated to active axes)",
-                None))
-        self.widget(QtWidgets.QSpinBox, "titleSize").setToolTip(
-            App.Qt.translate(
-                "plot_labels",
-                "Title font size",
-                None))
-        self.widget(QtWidgets.QLineEdit, "titleX").setToolTip(
-            App.Qt.translate(
-                "plot_labels",
-                "X axis title",
-                None))
-        self.widget(QtWidgets.QSpinBox, "xSize").setToolTip(
-            App.Qt.translate(
-                "plot_labels",
-                "X axis title font size",
-                None))
-        self.widget(QtWidgets.QLineEdit, "titleY").setToolTip(
-            App.Qt.translate(
-                "plot_labels",
-                "Y axis title",
-                None))
-        self.widget(QtWidgets.QSpinBox, "ySize").setToolTip(
-            App.Qt.translate(
-                "plot_labels",
-                "Y axis title font size",
-                None))
+        self.widget(QtWidgets.QLabel, 'xLabel').setText(
+            Qt.translate('plot_labels',
+                                         'X label'))
+        self.widget(QtWidgets.QLabel, 'yLabel').setText(
+            Qt.translate('plot_labels',
+                                         'Y label'))
+        self.widget(QtWidgets.QSpinBox, 'axesIndex').setToolTip(Qt.translate(
+            'plot_labels',
+            'Index of the active axes'))
+        self.widget(QtWidgets.QLineEdit, 'title').setToolTip(
+            Qt.translate(
+                'plot_labels',
+                'Title (associated to active axes)'))
+        self.widget(QtWidgets.QSpinBox, 'titleSize').setToolTip(
+            Qt.translate(
+                'plot_labels',
+                'Title font size'))
+        self.widget(QtWidgets.QLineEdit, 'titleX').setToolTip(
+            Qt.translate(
+                'plot_labels',
+                'X axis title'))
+        self.widget(QtWidgets.QSpinBox, 'xSize').setToolTip(
+            Qt.translate(
+                'plot_labels',
+                'X axis title font size'))
+        self.widget(QtWidgets.QLineEdit, 'titleY').setToolTip(
+            Qt.translate(
+                'plot_labels',
+                'Y axis title'))
+        self.widget(QtWidgets.QSpinBox, 'ySize').setToolTip(
+            Qt.translate(
+                'plot_labels',
+                'Y axis title font size'))
 
     def onAxesId(self, value):
-        """ Executed when axes index is modified. """
+        ''' Executed when axes index is modified. '''
         if not self.skip:
             self.skip = True
             # No active plot case
@@ -185,7 +174,7 @@ class TaskPanel:
             self.skip = False
 
     def onLabels(self):
-        """ Executed when labels have been modified. """
+        ''' Executed when labels have been modified. '''
         plt = Plot.getPlot()
         if not plt:
             self.updateUI()
@@ -197,7 +186,7 @@ class TaskPanel:
         plt.update()
 
     def onFontSizes(self, value):
-        """ Executed when font sizes have been modified. """
+        ''' Executed when font sizes have been modified. '''
         # Get apply environment
         plt = Plot.getPlot()
         if not plt:
@@ -211,17 +200,17 @@ class TaskPanel:
         plt.update()
 
     def onMdiArea(self, subWin):
-        """ Executed when window is selected on mdi area.
+        ''' Executed when window is selected on mdi area.
 
         Keyword arguments:
         subWin -- Selected window.
-        """
+        '''
         plt = Plot.getPlot()
         if plt != subWin:
             self.updateUI()
 
     def updateUI(self):
-        """ Setup UI controls values if possible """
+        ''' Setup UI controls values if possible '''
 
         plt = Plot.getPlot()
         self.form.axId.setEnabled(bool(plt))
@@ -255,10 +244,8 @@ class TaskPanel:
         self.form.ySize.setValue(yy)
 
 
-def createTask():
+def createTask ():
+
     panel = TaskPanel()
+
     Gui.Control.showDialog(panel)
-    if panel.setupUi():
-        Gui.Control.closeDialog()
-        return None
-    return panel

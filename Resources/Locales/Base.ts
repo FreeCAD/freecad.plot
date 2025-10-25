@@ -15,6 +15,186 @@
     </message>
 </context>
 <context>
+    <name>Plot-Task-Axes</name>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="20"/>
+        <source>Configure axes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="39"/>
+        <source>Active axes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="65"/>
+        <source>add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="84"/>
+        <source>del</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="93"/>
+        <source>Apply to all axes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="172"/>
+        <source>Dimensions:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="197"/>
+        <source>Y axis position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="211"/>
+        <source>Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="216"/>
+        <source>Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="249"/>
+        <source>Bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="254"/>
+        <source>Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="235"/>
+        <source>X axis position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="275"/>
+        <source>Scales</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="282"/>
+        <source>X auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="289"/>
+        <source>Y auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Plot-Task-Labels</name>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Labels.ui" line="20"/>
+        <source>Set labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Labels.ui" line="39"/>
+        <source>Active axes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Labels.ui" line="72"/>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Labels.ui" line="99"/>
+        <source>X label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Labels.ui" line="109"/>
+        <source>Y label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Plot-Task-Positions</name>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Positions.ui" line="20"/>
+        <source>Set positions and sizes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Positions.ui" line="43"/>
+        <source>Position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Positions.ui" line="82"/>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Plot-Task-Save</name>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Save.ui" line="14"/>
+        <source>Save figure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Save.ui" line="43"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Save.ui" line="73"/>
+        <source>x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Save.ui" line="99"/>
+        <source>Inches</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Save.ui" line="129"/>
+        <source>Dots per Inch</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Plot-Task-Series</name>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Series.ui" line="20"/>
+        <source>Configure series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Series.ui" line="69"/>
+        <source>Line style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Series.ui" line="76"/>
+        <source>Remove serie</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Series.ui" line="93"/>
+        <source>Markers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../freecad/plot/Resources/Interface/Series.ui" line="106"/>
+        <source>No label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Plot_Axes</name>
     <message>
         <location filename="../../freecad/plot/Commands/Axes.py" line="19"/>
@@ -106,186 +286,6 @@
     </message>
 </context>
 <context>
-    <name>TaskPanel_plotAxes</name>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="20"/>
-        <source>Configure axes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="39"/>
-        <source>Active axes:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="65"/>
-        <source>add</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="84"/>
-        <source>del</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="93"/>
-        <source>Apply to all axes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="172"/>
-        <source>Dimensions:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="197"/>
-        <source>Y axis position</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="211"/>
-        <source>y at Left</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="216"/>
-        <source>y at Right</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="235"/>
-        <source>X axis position</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="249"/>
-        <source>x at bottom</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="254"/>
-        <source>x at top</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="275"/>
-        <source>Scales</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="282"/>
-        <source>X auto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Axes.ui" line="289"/>
-        <source>Y auto</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TaskPanel_plotLabels</name>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Labels.ui" line="20"/>
-        <source>Set labels</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Labels.ui" line="39"/>
-        <source>Active axes:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Labels.ui" line="72"/>
-        <source>Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Labels.ui" line="99"/>
-        <source>X label</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Labels.ui" line="109"/>
-        <source>Y label</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TaskPanel_plotPositions</name>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Positions.ui" line="20"/>
-        <source>Set positions and sizes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Positions.ui" line="43"/>
-        <source>Position</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Positions.ui" line="82"/>
-        <source>Size</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TaskPanel_plotSave</name>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Save.ui" line="14"/>
-        <source>Save figure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Save.ui" line="43"/>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Save.ui" line="73"/>
-        <source>x</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Save.ui" line="99"/>
-        <source>Inches</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Save.ui" line="129"/>
-        <source>Dots per Inch</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TaskPanel_plotSeries</name>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Series.ui" line="20"/>
-        <source>Configure series</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Series.ui" line="69"/>
-        <source>Line style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Series.ui" line="76"/>
-        <source>Remove serie</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Series.ui" line="93"/>
-        <source>Markers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../freecad/plot/Resources/Interface/Series.ui" line="106"/>
-        <source>No label</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>Workbench</name>
     <message>
         <location filename="../../freecad/plot/init_gui.py" line="43"/>
@@ -301,111 +301,111 @@
 <context>
     <name>plot_axes</name>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="159"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="199"/>
         <source>Configure axes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="163"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="203"/>
         <source>Active axes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="167"/>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="195"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="207"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="235"/>
         <source>Apply to all axes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="171"/>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="199"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="211"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="239"/>
         <source>Dimensions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="175"/>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="203"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="215"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="243"/>
         <source>X axis position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="179"/>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="207"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="219"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="247"/>
         <source>Y axis position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="183"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="223"/>
         <source>Scales</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="187"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="227"/>
         <source>X auto</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="191"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="231"/>
         <source>Y auto</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="211"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="251"/>
         <source>Index of the active axes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="216"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="256"/>
         <source>Add new axes to the plot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="221"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="261"/>
         <source>Remove selected axes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="226"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="266"/>
         <source>Check it to apply transformations to all axes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="231"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="271"/>
         <source>Left bound of axes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="236"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="276"/>
         <source>Right bound of axes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="241"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="281"/>
         <source>Bottom bound of axes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="246"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="286"/>
         <source>Top bound of axes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="251"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="291"/>
         <source>Outward offset of X axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="256"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="296"/>
         <source>Outward offset of Y axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="261"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="301"/>
         <source>X axis scale autoselection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="266"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="306"/>
         <source>Y axis scale autoselection</source>
         <translation type="unfinished"></translation>
     </message>
@@ -418,7 +418,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="312"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="352"/>
         <source>Axes 0 can not be deleted</source>
         <translation type="unfinished"></translation>
     </message>
@@ -590,68 +590,68 @@
 <context>
     <name>plot_series</name>
     <message>
-        <location filename="../../freecad/plot/Panels/Series.py" line="132"/>
+        <location filename="../../freecad/plot/Panels/Series.py" line="161"/>
         <source>Configure series</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Series.py" line="137"/>
+        <location filename="../../freecad/plot/Panels/Series.py" line="164"/>
         <source>No label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Series.py" line="142"/>
+        <location filename="../../freecad/plot/Panels/Series.py" line="167"/>
         <source>Remove series</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Series.py" line="147"/>
-        <location filename="../../freecad/plot/Panels/Series.py" line="172"/>
+        <location filename="../../freecad/plot/Panels/Series.py" line="170"/>
+        <location filename="../../freecad/plot/Panels/Series.py" line="185"/>
         <source>Line style</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Series.py" line="152"/>
+        <location filename="../../freecad/plot/Panels/Series.py" line="173"/>
         <source>Marker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Series.py" line="157"/>
+        <location filename="../../freecad/plot/Panels/Series.py" line="176"/>
         <source>List of available series</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Series.py" line="162"/>
+        <location filename="../../freecad/plot/Panels/Series.py" line="179"/>
         <source>Line title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Series.py" line="167"/>
+        <location filename="../../freecad/plot/Panels/Series.py" line="182"/>
         <source>If checked, series will not be considered for legend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Series.py" line="177"/>
+        <location filename="../../freecad/plot/Panels/Series.py" line="188"/>
         <source>Marker style</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Series.py" line="182"/>
+        <location filename="../../freecad/plot/Panels/Series.py" line="191"/>
         <source>Line width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Series.py" line="187"/>
+        <location filename="../../freecad/plot/Panels/Series.py" line="194"/>
         <source>Marker size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Series.py" line="192"/>
+        <location filename="../../freecad/plot/Panels/Series.py" line="197"/>
         <source>Line and marker color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Series.py" line="197"/>
+        <location filename="../../freecad/plot/Panels/Series.py" line="200"/>
         <source>Removes this series</source>
         <translation type="unfinished"></translation>
     </message>

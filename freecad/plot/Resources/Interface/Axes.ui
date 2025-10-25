@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>TaskPanel_plotAxes</class>
- <widget class="QWidget" name="TaskPanel_plotAxes">
+ <class>Plot-Task-Axes</class>
+ <widget class="QWidget" name="Plot-Task-Axes">
   <property name="geometry">
    <rect>
     <x>0</x>

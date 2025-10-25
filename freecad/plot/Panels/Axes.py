@@ -11,25 +11,21 @@ from freecad import plot
 
 
 class TaskPanel:
-    def __init__(self):
-        self.name = "plot axes"
+
+    def __init__ ( self ):
+
+        self.name = 'plot axes'
+
         self.ui = os.path.join(os.path.dirname(__file__),
-                               "../Resources/Interface/",
-                               "Axes.ui")
+                               '../Resources/Interface/',
+                               'Axes.ui')
+
         self.form = Gui.PySideUic.loadUi(self.ui)
+
         self.skip = False
 
-    def accept(self):
-        return True
 
-    def reject(self):
-        return True
 
-    def clicked(self, index):
-        pass
-
-    def open(self):
-        pass
 
     def needsFullSpace(self):
         return True
@@ -46,227 +42,271 @@ class TaskPanel:
     def helpRequested(self):
         pass
 
+    def accept(self):
+        return True
+
+    def reject(self):
+        return True
+
+    def clicked(self, index):
+        pass
+
+    def open(self):
+        pass
+
+
     def setupUi(self):
-        self.form.axId = self.widget(QtWidgets.QSpinBox, "axesIndex")
-        self.form.new = self.widget(QtWidgets.QPushButton, "newAxesButton")
-        self.form.remove = self.widget(QtWidgets.QPushButton, "delAxesButton")
-        self.form.all = self.widget(QtWidgets.QCheckBox, "allAxes")
-        self.form.xMin = self.widget(QtWidgets.QSlider, "posXMin")
-        self.form.xMax = self.widget(QtWidgets.QSlider, "posXMax")
-        self.form.yMin = self.widget(QtWidgets.QSlider, "posYMin")
-        self.form.yMax = self.widget(QtWidgets.QSlider, "posYMax")
-        self.form.xAlign = self.widget(QtWidgets.QComboBox, "xAlign")
-        self.form.yAlign = self.widget(QtWidgets.QComboBox, "yAlign")
-        self.form.xOffset = self.widget(QtWidgets.QSpinBox, "xOffset")
-        self.form.yOffset = self.widget(QtWidgets.QSpinBox, "yOffset")
-        self.form.xAuto = self.widget(QtWidgets.QCheckBox, "xAuto")
-        self.form.yAuto = self.widget(QtWidgets.QCheckBox, "yAuto")
-        self.form.xSMin = self.widget(QtWidgets.QLineEdit, "xMin")
-        self.form.xSMax = self.widget(QtWidgets.QLineEdit, "xMax")
-        self.form.ySMin = self.widget(QtWidgets.QLineEdit, "yMin")
-        self.form.ySMax = self.widget(QtWidgets.QLineEdit, "yMax")
+
+        self.form.remove = self.widget(QtWidgets.QPushButton, 'delAxesButton')
+        self.form.yOffset = self.widget(QtWidgets.QSpinBox, 'yOffset')
+        self.form.xOffset = self.widget(QtWidgets.QSpinBox, 'xOffset')
+        self.form.xAlign = self.widget(QtWidgets.QComboBox, 'xAlign')
+        self.form.yAlign = self.widget(QtWidgets.QComboBox, 'yAlign')
+        self.form.xAuto = self.widget(QtWidgets.QCheckBox, 'xAuto')
+        self.form.yAuto = self.widget(QtWidgets.QCheckBox, 'yAuto')
+        self.form.xSMin = self.widget(QtWidgets.QLineEdit, 'xMin')
+        self.form.xSMax = self.widget(QtWidgets.QLineEdit, 'xMax')
+        self.form.ySMin = self.widget(QtWidgets.QLineEdit, 'yMin')
+        self.form.ySMax = self.widget(QtWidgets.QLineEdit, 'yMax')
+        self.form.axId = self.widget(QtWidgets.QSpinBox, 'axesIndex')
+        self.form.xMin = self.widget(QtWidgets.QSlider, 'posXMin')
+        self.form.xMax = self.widget(QtWidgets.QSlider, 'posXMax')
+        self.form.yMin = self.widget(QtWidgets.QSlider, 'posYMin')
+        self.form.yMax = self.widget(QtWidgets.QSlider, 'posYMax')
+        self.form.new = self.widget(QtWidgets.QPushButton, 'newAxesButton')
+        self.form.all = self.widget(QtWidgets.QCheckBox, 'allAxes')
+
         self.retranslateUi()
+
         # Look for active axes if can
+
         axId = 0
+
         plt = Plot.getPlot()
+
         if plt:
+
             while plt.axes != plt.axesList[axId]:
                 axId = axId + 1
+
             self.form.axId.setValue(axId)
+
         self.updateUI()
+
         QtCore.QObject.connect(self.form.axId,
                                QtCore.SIGNAL('valueChanged(int)'),
                                self.onAxesId)
+
         QtCore.QObject.connect(self.form.new,
-                               QtCore.SIGNAL("pressed()"),
+                               QtCore.SIGNAL('pressed()'),
                                self.onNew)
+
         QtCore.QObject.connect(self.form.remove,
-                               QtCore.SIGNAL("pressed()"),
+                               QtCore.SIGNAL('pressed()'),
                                self.onRemove)
+
         QtCore.QObject.connect(self.form.xMin,
-                               QtCore.SIGNAL("valueChanged(int)"),
+                               QtCore.SIGNAL('valueChanged(int)'),
                                self.onDims)
+
         QtCore.QObject.connect(self.form.xMax,
-                               QtCore.SIGNAL("valueChanged(int)"),
+                               QtCore.SIGNAL('valueChanged(int)'),
                                self.onDims)
+
         QtCore.QObject.connect(self.form.yMin,
-                               QtCore.SIGNAL("valueChanged(int)"),
+                               QtCore.SIGNAL('valueChanged(int)'),
                                self.onDims)
+
         QtCore.QObject.connect(self.form.yMax,
-                               QtCore.SIGNAL("valueChanged(int)"),
+                               QtCore.SIGNAL('valueChanged(int)'),
                                self.onDims)
+
         QtCore.QObject.connect(self.form.xAlign,
-                               QtCore.SIGNAL("currentIndexChanged(int)"),
+                               QtCore.SIGNAL('currentIndexChanged(int)'),
                                self.onAlign)
+
         QtCore.QObject.connect(self.form.yAlign,
-                               QtCore.SIGNAL("currentIndexChanged(int)"),
+                               QtCore.SIGNAL('currentIndexChanged(int)'),
                                self.onAlign)
+
         QtCore.QObject.connect(self.form.xOffset,
-                               QtCore.SIGNAL("valueChanged(int)"),
+                               QtCore.SIGNAL('valueChanged(int)'),
                                self.onOffset)
+
         QtCore.QObject.connect(self.form.yOffset,
-                               QtCore.SIGNAL("valueChanged(int)"),
+                               QtCore.SIGNAL('valueChanged(int)'),
                                self.onOffset)
+
         QtCore.QObject.connect(self.form.xAuto,
-                               QtCore.SIGNAL("stateChanged(int)"),
+                               QtCore.SIGNAL('stateChanged(int)'),
                                self.onScales)
+
         QtCore.QObject.connect(self.form.yAuto,
-                               QtCore.SIGNAL("stateChanged(int)"),
+                               QtCore.SIGNAL('stateChanged(int)'),
                                self.onScales)
+
         QtCore.QObject.connect(self.form.xSMin,
-                               QtCore.SIGNAL("editingFinished()"),
+                               QtCore.SIGNAL('editingFinished()'),
                                self.onScales)
+
         QtCore.QObject.connect(self.form.xSMax,
-                               QtCore.SIGNAL("editingFinished()"),
+                               QtCore.SIGNAL('editingFinished()'),
                                self.onScales)
+
         QtCore.QObject.connect(self.form.ySMin,
-                               QtCore.SIGNAL("editingFinished()"),
+                               QtCore.SIGNAL('editingFinished()'),
                                self.onScales)
+
         QtCore.QObject.connect(self.form.ySMax,
-                               QtCore.SIGNAL("editingFinished()"),
+                               QtCore.SIGNAL('editingFinished()'),
                                self.onScales)
+
         QtCore.QObject.connect(
             Plot.getMdiArea(),
-            QtCore.SIGNAL("subWindowActivated(QMdiSubWindow*)"),
+            QtCore.SIGNAL('subWindowActivated(QMdiSubWindow*)'),
             self.onMdiArea)
+
         return False
 
-    def getMainWindow(self):
-        toplevel = QtWidgets.QApplication.topLevelWidgets()
-        for i in toplevel:
-            if i.metaObject().className() == "Gui::MainWindow":
-                return i
-        raise RuntimeError("No main window found")
+    def getMainWindow ( self ):
+
+        widgets = QtWidgets.QApplication.topLevelWidgets()
+
+        for widget in widgets:
+            if widget.metaObject().className() == 'Gui::MainWindow':
+                return widget
+
+        raise RuntimeError('No main window found')
 
     def widget(self, class_id, name):
-        """Return the selected widget.
+        '''Return the selected widget.
 
         Keyword arguments:
         class_id -- Class identifier
         name -- Name of the widget
-        """
+        '''
         mw = self.getMainWindow()
-        form = mw.findChild(QtWidgets.QWidget, "Plot-Task-Axes")
+        form = mw.findChild(QtWidgets.QWidget, 'Plot-Task-Axes')
         return form.findChild(class_id, name)
 
     def retranslateUi(self):
-        """Set the user interface locale strings.
-        """
+        '''Set the user interface locale strings.
+        '''
         form = self.form
         form.setWindowTitle(App.Qt.translate(
-            "plot_axes",
-            "Configure axes",
+            'plot_axes',
+            'Configure axes',
             None))
-        self.widget(QtWidgets.QLabel, "axesLabel").setText(
-            App.Qt.translate("plot_axes",
-                                         "Active axes",
+        self.widget(QtWidgets.QLabel, 'axesLabel').setText(
+            App.Qt.translate('plot_axes',
+                                         'Active axes',
                                          None))
-        self.widget(QtWidgets.QCheckBox, "allAxes").setText(
-            App.Qt.translate("plot_axes",
-                                         "Apply to all axes",
+        self.widget(QtWidgets.QCheckBox, 'allAxes').setText(
+            App.Qt.translate('plot_axes',
+                                         'Apply to all axes',
                                          None))
-        self.widget(QtWidgets.QLabel, "dimLabel").setText(
-            App.Qt.translate("plot_axes",
-                                         "Dimensions",
+        self.widget(QtWidgets.QLabel, 'dimLabel').setText(
+            App.Qt.translate('plot_axes',
+                                         'Dimensions',
                                          None))
-        self.widget(QtWidgets.QLabel, "xPosLabel").setText(
-            App.Qt.translate("plot_axes",
-                                         "X axis position",
+        self.widget(QtWidgets.QLabel, 'xPosLabel').setText(
+            App.Qt.translate('plot_axes',
+                                         'X axis position',
                                          None))
-        self.widget(QtWidgets.QLabel, "yPosLabel").setText(
-            App.Qt.translate("plot_axes",
-                                         "Y axis position",
+        self.widget(QtWidgets.QLabel, 'yPosLabel').setText(
+            App.Qt.translate('plot_axes',
+                                         'Y axis position',
                                          None))
-        self.widget(QtWidgets.QLabel, "scalesLabel").setText(
-            App.Qt.translate("plot_axes",
-                                         "Scales",
+        self.widget(QtWidgets.QLabel, 'scalesLabel').setText(
+            App.Qt.translate('plot_axes',
+                                         'Scales',
                                          None))
-        self.widget(QtWidgets.QCheckBox, "xAuto").setText(
-            App.Qt.translate("plot_axes",
-                                         "X auto",
+        self.widget(QtWidgets.QCheckBox, 'xAuto').setText(
+            App.Qt.translate('plot_axes',
+                                         'X auto',
                                          None))
-        self.widget(QtWidgets.QCheckBox, "yAuto").setText(
-            App.Qt.translate("plot_axes",
-                                         "Y auto",
+        self.widget(QtWidgets.QCheckBox, 'yAuto').setText(
+            App.Qt.translate('plot_axes',
+                                         'Y auto',
                                          None))
-        self.widget(QtWidgets.QCheckBox, "allAxes").setText(
-            App.Qt.translate("plot_axes",
-                                         "Apply to all axes",
+        self.widget(QtWidgets.QCheckBox, 'allAxes').setText(
+            App.Qt.translate('plot_axes',
+                                         'Apply to all axes',
                                          None))
-        self.widget(QtWidgets.QLabel, "dimLabel").setText(
-            App.Qt.translate("plot_axes",
-                                         "Dimensions",
+        self.widget(QtWidgets.QLabel, 'dimLabel').setText(
+            App.Qt.translate('plot_axes',
+                                         'Dimensions',
                                          None))
-        self.widget(QtWidgets.QLabel, "xPosLabel").setText(
-            App.Qt.translate("plot_axes",
-                                         "X axis position",
+        self.widget(QtWidgets.QLabel, 'xPosLabel').setText(
+            App.Qt.translate('plot_axes',
+                                         'X axis position',
                                          None))
-        self.widget(QtWidgets.QLabel, "yPosLabel").setText(
-            App.Qt.translate("plot_axes",
-                                         "Y axis position",
+        self.widget(QtWidgets.QLabel, 'yPosLabel').setText(
+            App.Qt.translate('plot_axes',
+                                         'Y axis position',
                                          None))
-        self.widget(QtWidgets.QSpinBox, "axesIndex").setToolTip(
-            App.Qt.translate("plot_axes",
-                                         "Index of the active axes",
+        self.widget(QtWidgets.QSpinBox, 'axesIndex').setToolTip(
+            App.Qt.translate('plot_axes',
+                                         'Index of the active axes',
                                          None))
-        self.widget(QtWidgets.QPushButton, "newAxesButton").setToolTip(
+        self.widget(QtWidgets.QPushButton, 'newAxesButton').setToolTip(
             App.Qt.translate(
-                "plot_axes",
-                "Add new axes to the plot",
+                'plot_axes',
+                'Add new axes to the plot',
                 None))
-        self.widget(QtWidgets.QPushButton, "delAxesButton").setToolTip(
+        self.widget(QtWidgets.QPushButton, 'delAxesButton').setToolTip(
             App.Qt.translate(
-                "plot_axes",
-                "Remove selected axes",
+                'plot_axes',
+                'Remove selected axes',
                 None))
-        self.widget(QtWidgets.QCheckBox, "allAxes").setToolTip(
+        self.widget(QtWidgets.QCheckBox, 'allAxes').setToolTip(
             App.Qt.translate(
-                "plot_axes",
-                "Check it to apply transformations to all axes",
+                'plot_axes',
+                'Check it to apply transformations to all axes',
                 None))
-        self.widget(QtWidgets.QSlider, "posXMin").setToolTip(
+        self.widget(QtWidgets.QSlider, 'posXMin').setToolTip(
             App.Qt.translate(
-                "plot_axes",
-                "Left bound of axes",
+                'plot_axes',
+                'Left bound of axes',
                 None))
-        self.widget(QtWidgets.QSlider, "posXMax").setToolTip(
+        self.widget(QtWidgets.QSlider, 'posXMax').setToolTip(
             App.Qt.translate(
-                "plot_axes",
-                "Right bound of axes",
+                'plot_axes',
+                'Right bound of axes',
                 None))
-        self.widget(QtWidgets.QSlider, "posYMin").setToolTip(
+        self.widget(QtWidgets.QSlider, 'posYMin').setToolTip(
             App.Qt.translate(
-                "plot_axes",
-                "Bottom bound of axes",
+                'plot_axes',
+                'Bottom bound of axes',
                 None))
-        self.widget(QtWidgets.QSlider, "posYMax").setToolTip(
+        self.widget(QtWidgets.QSlider, 'posYMax').setToolTip(
             App.Qt.translate(
-                "plot_axes",
-                "Top bound of axes",
+                'plot_axes',
+                'Top bound of axes',
                 None))
-        self.widget(QtWidgets.QSpinBox, "xOffset").setToolTip(
+        self.widget(QtWidgets.QSpinBox, 'xOffset').setToolTip(
             App.Qt.translate(
-                "plot_axes",
-                "Outward offset of X axis",
+                'plot_axes',
+                'Outward offset of X axis',
                 None))
-        self.widget(QtWidgets.QSpinBox, "yOffset").setToolTip(
+        self.widget(QtWidgets.QSpinBox, 'yOffset').setToolTip(
             App.Qt.translate(
-                "plot_axes",
-                "Outward offset of Y axis",
+                'plot_axes',
+                'Outward offset of Y axis',
                 None))
-        self.widget(QtWidgets.QCheckBox, "xAuto").setToolTip(
+        self.widget(QtWidgets.QCheckBox, 'xAuto').setToolTip(
             App.Qt.translate(
-                "plot_axes",
-                "X axis scale autoselection",
+                'plot_axes',
+                'X axis scale autoselection',
                 None))
-        self.widget(QtWidgets.QCheckBox, "yAuto").setToolTip(
+        self.widget(QtWidgets.QCheckBox, 'yAuto').setToolTip(
             App.Qt.translate(
-                "plot_axes",
-                "Y axis scale autoselection",
+                'plot_axes',
+                'Y axis scale autoselection',
                 None))
 
     def onAxesId(self, value):
-        """Executed when axes index is modified."""
+        '''Executed when axes index is modified.'''
         if not self.skip:
             self.skip = True
             # No active plot case
@@ -284,7 +324,7 @@ class TaskPanel:
             self.skip = False
 
     def onNew(self):
-        """Executed when new axes must be created."""
+        '''Executed when new axes must be created.'''
         # Ensure that we can work
         plt = Plot.getPlot()
         if not plt:
@@ -296,7 +336,7 @@ class TaskPanel:
         plt.update()
 
     def onRemove(self):
-        """Executed when axes must be deleted."""
+        '''Executed when axes must be deleted.'''
         # Ensure that we can work
         plt = Plot.getPlot()
         if not plt:
@@ -306,10 +346,10 @@ class TaskPanel:
         # Don't remove first axes
         if not self.form.axId.value():
             msg = App.Qt.translate(
-                "plot_console",
-                "Axes 0 can not be deleted",
+                'plot_console',
+                'Axes 0 can not be deleted',
                 None)
-            App.Console.PrintError(msg + "\n")
+            App.Console.PrintError(msg + '\n')
             return
         # Remove axes
         ax = plt.axes
@@ -321,7 +361,7 @@ class TaskPanel:
         plt.update()
 
     def onDims(self, value):
-        """Executed when axes dims have been modified."""
+        '''Executed when axes dims have been modified.'''
         # Ensure that we can work
         plt = Plot.getPlot()
         if not plt:
@@ -341,7 +381,7 @@ class TaskPanel:
         plt.update()
 
     def onAlign(self, value):
-        """Executed when axes align have been modified."""
+        '''Executed when axes align have been modified.'''
         # Ensure that we can work
         plt = Plot.getPlot()
         if not plt:
@@ -380,7 +420,7 @@ class TaskPanel:
         plt.update()
 
     def onOffset(self, value):
-        """Executed when axes offsets have been modified."""
+        '''Executed when axes offsets have been modified.'''
         # Ensure that we can work
         plt = Plot.getPlot()
         if not plt:
@@ -407,7 +447,7 @@ class TaskPanel:
         plt.update()
 
     def onScales(self):
-        """Executed when axes scales have been modified."""
+        '''Executed when axes scales have been modified.'''
         # Ensure that we can work
         plt = Plot.getPlot()
         if not plt:
@@ -471,17 +511,17 @@ class TaskPanel:
             self.skip = False
 
     def onMdiArea(self, subWin):
-        """Executed when window is selected on mdi area.
+        '''Executed when window is selected on mdi area.
 
         Keyword arguments:
         subWin -- Selected window.
-        """
+        '''
         plt = Plot.getPlot()
         if plt != subWin:
             self.updateUI()
 
     def updateUI(self):
-        """Setup UI controls values if possible"""
+        '''Setup UI controls values if possible'''
         plt = Plot.getPlot()
         # Enable/disable them
         self.form.axId.setEnabled(bool(plt))
