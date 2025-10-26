@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
+from FreeCAD.Plot import Plot # type: ignore
 from ..Panels import createSeries
 from FreeCAD import Qt
 
@@ -18,6 +19,9 @@ class Series :
             'ToolTip' : Tooltip ,
             'Pixmap' : 'Series'
         }
+
+    def IsActive ( self ):
+        return bool( Plot.getPlot() )
 
     def Activated ( self ):
         createSeries()

@@ -4,12 +4,12 @@
 <context>
     <name>Plot</name>
     <message>
-        <location filename="../../freecad/plot/init_gui.py" line="45"/>
+        <location filename="../../freecad/plot/init_gui.py" line="43"/>
         <source>Plot edition tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/init_gui.py" line="48"/>
+        <location filename="../../freecad/plot/init_gui.py" line="46"/>
         <source>Plot</source>
         <translation type="unfinished">PPPPPLLLLLOOOOTTTT</translation>
     </message>
@@ -197,12 +197,12 @@
 <context>
     <name>Plot_Axes</name>
     <message>
-        <location filename="../../freecad/plot/Commands/Axes.py" line="19"/>
+        <location filename="../../freecad/plot/Commands/Axes.py" line="11"/>
         <source>Configure the axes parameters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Commands/Axes.py" line="21"/>
+        <location filename="../../freecad/plot/Commands/Axes.py" line="14"/>
         <source>Configure axes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -210,12 +210,12 @@
 <context>
     <name>Plot_Grid</name>
     <message>
-        <location filename="../../freecad/plot/Commands/Grid.py" line="35"/>
+        <location filename="../../freecad/plot/Commands/Grid.py" line="10"/>
         <source>Show/Hide grid on selected plot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Commands/Grid.py" line="37"/>
+        <location filename="../../freecad/plot/Commands/Grid.py" line="13"/>
         <source>Show/Hide grid</source>
         <translation type="unfinished"></translation>
     </message>
@@ -223,12 +223,12 @@
 <context>
     <name>Plot_Labels</name>
     <message>
-        <location filename="../../freecad/plot/Commands/Labels.py" line="19"/>
+        <location filename="../../freecad/plot/Commands/Labels.py" line="11"/>
         <source>Set title and axes labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Commands/Labels.py" line="21"/>
+        <location filename="../../freecad/plot/Commands/Labels.py" line="14"/>
         <source>Set labels</source>
         <translation type="unfinished"></translation>
     </message>
@@ -236,12 +236,12 @@
 <context>
     <name>Plot_Legend</name>
     <message>
-        <location filename="../../freecad/plot/Commands/Legend.py" line="33"/>
+        <location filename="../../freecad/plot/Commands/Legend.py" line="11"/>
         <source>Show/Hide legend on selected plot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Commands/Legend.py" line="35"/>
+        <location filename="../../freecad/plot/Commands/Legend.py" line="14"/>
         <source>Show/Hide legend</source>
         <translation type="unfinished"></translation>
     </message>
@@ -249,12 +249,12 @@
 <context>
     <name>Plot_Positions</name>
     <message>
-        <location filename="../../freecad/plot/Commands/Positions.py" line="18"/>
+        <location filename="../../freecad/plot/Commands/Positions.py" line="11"/>
         <source>Set labels and legend positions and sizes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Commands/Positions.py" line="20"/>
+        <location filename="../../freecad/plot/Commands/Positions.py" line="14"/>
         <source>Set positions and sizes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -262,12 +262,12 @@
 <context>
     <name>Plot_SaveFig</name>
     <message>
-        <location filename="../../freecad/plot/Commands/Save.py" line="19"/>
+        <location filename="../../freecad/plot/Commands/Save.py" line="11"/>
         <source>Save the plot as an image file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Commands/Save.py" line="21"/>
+        <location filename="../../freecad/plot/Commands/Save.py" line="14"/>
         <source>Save plot</source>
         <translation type="unfinished"></translation>
     </message>
@@ -275,12 +275,12 @@
 <context>
     <name>Plot_Series</name>
     <message>
-        <location filename="../../freecad/plot/Commands/Series.py" line="19"/>
+        <location filename="../../freecad/plot/Commands/Series.py" line="11"/>
         <source>Configure series drawing style and label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Commands/Series.py" line="21"/>
+        <location filename="../../freecad/plot/Commands/Series.py" line="14"/>
         <source>Configure series</source>
         <translation type="unfinished"></translation>
     </message>
@@ -288,12 +288,12 @@
 <context>
     <name>Workbench</name>
     <message>
-        <location filename="../../freecad/plot/init_gui.py" line="43"/>
+        <location filename="../../freecad/plot/init_gui.py" line="41"/>
         <source>The Plot module is used to edit/save output plots performed by other tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/init_gui.py" line="44"/>
+        <location filename="../../freecad/plot/init_gui.py" line="42"/>
         <source>Plot</source>
         <translation type="unfinished">PPPPPLLLLLOOOOTTTT</translation>
     </message>
@@ -316,17 +316,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/init_gui.py" line="94"/>
+        <location filename="../../freecad/plot/init_gui.py" line="92"/>
         <source>matplotlib not found, Plot module will be disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Commands/Legend.py" line="27"/>
+        <location filename="../../freecad/plot/Commands/Legend.py" line="40"/>
         <source>The legend must be activated on top of a plot document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Commands/Grid.py" line="28"/>
+        <location filename="../../freecad/plot/Commands/Grid.py" line="40"/>
         <source>The grid must be activated on top of a plot document</source>
         <translation type="unfinished"></translation>
     </message>

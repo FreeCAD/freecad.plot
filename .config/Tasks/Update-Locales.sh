@@ -20,6 +20,7 @@ updateLocale (){
     "$update" "${files[@]}"                         \
         -source-language en_US                      \
         -target-language "${locale}"                \
+        -no-obsolete                                \
         -ts "${file}"
 }
 
