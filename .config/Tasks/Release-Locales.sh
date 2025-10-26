@@ -5,13 +5,16 @@ set -euo pipefail
 
 release='/usr/lib/qt6/bin/lrelease'
 
+output='freecad/plot/Resources/Locales'
+input='Resources/Locales'
+
 
 releaseLocale (){
 
     local file=$1
     
-    local source="Resources/Locales/${file}.ts"
-    local target="freecad/plot/Resources/Locales/${file}.qm"
+    local source="${input}/${file}.ts"
+    local target="${output}/Plot_${file}.qm"
 
     "$release"          \
         -nounfinished   \
@@ -20,5 +23,4 @@ releaseLocale (){
 }
 
 
-releaseLocale 'Base'
-releaseLocale 'jp'
+releaseLocale 'ja'

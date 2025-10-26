@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="jp" sourcelanguage="en_US">
+<TS version="2.1" language="ja" sourcelanguage="en_US">
 <context>
     <name>Plot</name>
     <message>
-        <location filename="../../freecad/plot/init_gui.py" line="44"/>
+        <location filename="../../freecad/plot/init_gui.py" line="45"/>
         <source>Plot edition tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/init_gui.py" line="47"/>
+        <location filename="../../freecad/plot/init_gui.py" line="48"/>
         <source>Plot</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">PPPPPLLLLLOOOOTTTT</translation>
     </message>
 </context>
 <context>
@@ -236,12 +236,12 @@
 <context>
     <name>Plot_Legend</name>
     <message>
-        <location filename="../../freecad/plot/Commands/Legend.py" line="35"/>
+        <location filename="../../freecad/plot/Commands/Legend.py" line="33"/>
         <source>Show/Hide legend on selected plot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Commands/Legend.py" line="37"/>
+        <location filename="../../freecad/plot/Commands/Legend.py" line="35"/>
         <source>Show/Hide legend</source>
         <translation type="unfinished"></translation>
     </message>
@@ -288,14 +288,14 @@
 <context>
     <name>Workbench</name>
     <message>
-        <location filename="../../freecad/plot/init_gui.py" line="42"/>
+        <location filename="../../freecad/plot/init_gui.py" line="43"/>
         <source>The Plot module is used to edit/save output plots performed by other tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/init_gui.py" line="43"/>
+        <location filename="../../freecad/plot/init_gui.py" line="44"/>
         <source>Plot</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">PPPPPLLLLLOOOOTTTT</translation>
     </message>
 </context>
 <context>
@@ -306,7 +306,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Panels/Axes.py" line="210"/>
+        <location filename="../../freecad/plot/Panels/Axes.py" line="211"/>
         <source>Axes 0 can not be deleted</source>
         <translation type="unfinished"></translation>
     </message>
@@ -316,12 +316,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/init_gui.py" line="93"/>
+        <location filename="../../freecad/plot/init_gui.py" line="94"/>
         <source>matplotlib not found, Plot module will be disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../freecad/plot/Commands/Legend.py" line="29"/>
+        <location filename="../../freecad/plot/Commands/Legend.py" line="27"/>
         <source>The legend must be activated on top of a plot document</source>
         <translation type="unfinished"></translation>
     </message>
