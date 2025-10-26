@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 
 update='/usr/lib/qt6/bin/lupdate'
 

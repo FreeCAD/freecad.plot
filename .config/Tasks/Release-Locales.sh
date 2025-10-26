@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 
 release='/usr/lib/qt6/bin/lrelease'
 
