@@ -1,3 +1,7 @@
 {
-    "qtForPython.uic.liveExecution.enabled": false
+    "qtForPython.uic.liveExecution.enabled" : false ,
+
+    "files.associations" : {
+        "**/Resources/Locales/*.ts": "xml",
+    }
 }
