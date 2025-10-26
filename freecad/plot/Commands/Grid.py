@@ -1,14 +1,24 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
-
 from FreeCAD.Plot import Plot # type: ignore
 from FreeCAD import Console , Qt
 
 
-QT_TRANSLATE_NOOP = Qt.QT_TRANSLATE_NOOP
+translate = Qt.translate
+
+Tooltip = translate('Plot_Grid','Show/Hide grid on selected plot')
+Title = translate('Plot_Grid','Show/Hide grid')
+
 
 
 class Grid:
+
+    def GetResources ( self ):
+        return {
+            'MenuText' : Title ,
+            'ToolTip' : Tooltip ,
+            'Pixmap' : 'Grid'
+        }
 
     def Activated ( self ):
 
@@ -26,17 +36,3 @@ class Grid:
         )
 
         Console.PrintError(f'{ message }\n')
-
-
-
-    def GetResources ( self ):
-
-        tooltip = QT_TRANSLATE_NOOP('Plot_Grid','Show/Hide grid on selected plot')
-        text = QT_TRANSLATE_NOOP('Plot_Grid','Show/Hide grid')
-
-        return {
-            'MenuText' : text ,
-            'ToolTip' : tooltip ,
-            'Pixmap' : 'Grid'
-        }
-

@@ -35,13 +35,12 @@ ion()
 __dir__ = dirname(__file__)
 
 
-QT_TRANSLATE_NOOP = Qt.QT_TRANSLATE_NOOP
+translate = Qt.translate
 
-
-Workbench_Tooltip = QT_TRANSLATE_NOOP('Workbench','The Plot module is used to edit/save output plots performed by other tools')
-Workbench_Title = QT_TRANSLATE_NOOP('Workbench','Plot')
-Toolbar_Title = QT_TRANSLATE_NOOP('Plot','Plot edition tools')
-Menu_Title = QT_TRANSLATE_NOOP('Plot','Plot')
+Workbench_Tooltip = translate('Workbench','The Plot module is used to edit/save output plots performed by other tools')
+Workbench_Title = translate('Workbench','Plot')
+Toolbar_Title = translate('Plot','Plot edition tools')
+Menu_Title = translate('Plot','Plot')
 
 
 class PlotWorkbench ( Gui.Workbench ):

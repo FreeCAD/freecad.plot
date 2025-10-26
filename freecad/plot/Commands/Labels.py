@@ -5,22 +5,23 @@ from ..Panels import createLabels
 from FreeCAD import Qt
 
 
-QT_TRANSLATE_NOOP = Qt.QT_TRANSLATE_NOOP
+translate = Qt.translate
+
+Tooltip = translate('Plot_Labels','Set title and axes labels')
+Title = translate('Plot_Labels','Set labels')
 
 
 class Labels:
 
+    def GetResources ( self ):
+        return {
+            'MenuText' : Title ,
+            'ToolTip' : Tooltip ,
+            'Pixmap' : 'Labels'
+        }
+
     def Activated ( self ):
         createLabels()
 
-    def GetResources ( self ):
 
-        tooltip = QT_TRANSLATE_NOOP('Plot_Labels','Set title and axes labels')
-        text = QT_TRANSLATE_NOOP('Plot_Labels','Set labels')
-
-        return {
-            'MenuText' : text ,
-            'ToolTip' : tooltip ,
-            'Pixmap' : 'Labels'
-        }
 

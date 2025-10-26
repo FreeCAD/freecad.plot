@@ -1,14 +1,23 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
-
 from FreeCAD.Plot import Plot # type: ignore
 from FreeCAD import Console , Qt
 
 
-QT_TRANSLATE_NOOP = Qt.QT_TRANSLATE_NOOP
+translate = Qt.translate
+
+Tooltip = translate('Plot_Legend','Show/Hide legend on selected plot')
+Title = translate('Plot_Legend','Show/Hide legend')
 
 
 class Legend:
+
+    def GetResources ( self ):
+        return {
+            'MenuText' : Title ,
+            'ToolTip' : Tooltip ,
+            'Pixmap' : 'Legend'
+        }
 
     def Activated ( self ):
 
@@ -25,15 +34,3 @@ class Legend:
         )
 
         Console.PrintError(f'{ message }\n')
-
-
-    def GetResources ( self ):
-
-        tooltip = QT_TRANSLATE_NOOP('Plot_Legend','Show/Hide legend on selected plot')
-        text = QT_TRANSLATE_NOOP('Plot_Legend','Show/Hide legend')
-
-        return {
-            'MenuText' : text ,
-            'ToolTip' : tooltip ,
-            'Pixmap' : 'Legend'
-        }
