@@ -9,6 +9,8 @@ from FreeCAD import Gui
 
 class TaskForm ( QtWidgets.QWidget ):
 
+    axesIndex : QtWidgets.QSpinBox
+
     titleSize : QtWidgets.QSpinBox
     titleX : QtWidgets.QLineEdit
     titleY : QtWidgets.QLineEdit
@@ -16,9 +18,6 @@ class TaskForm ( QtWidgets.QWidget ):
 
     xSize : QtWidgets.QSpinBox
     ySize : QtWidgets.QSpinBox
-
-    axId : QtWidgets.QSpinBox
-
 
 
 class TaskPanel:
@@ -38,17 +37,21 @@ class TaskPanel:
         self.form = Gui.PySideUic.loadUi(path) # type: ignore
 
 
-    def needsFullSpace(self):
-        return True
 
     def isAllowedAlterSelection(self):
+        return False
+
+    def isAllowedAlterDocument(self):
         return False
 
     def isAllowedAlterView(self):
         return True
 
-    def isAllowedAlterDocument(self):
-        return False
+    def getStandardButtons ( self ):
+        return QtWidgets.QDialogButtonBox.StandardButton.Close
+
+    def needsFullSpace(self):
+        return True
 
     def helpRequested(self):
         pass
@@ -70,7 +73,7 @@ class TaskPanel:
 
         # Look for active axes if can
 
-        axId = 0
+        axesIndex = 0
 
         form = self.form
 
@@ -78,10 +81,10 @@ class TaskPanel:
 
         if plot:
 
-            while plot.axes != plot.axesList[axId]:
-                axId = axId + 1
+            while plot.axes != plot.axesList[axesIndex]:
+                axesIndex = axesIndex + 1
 
-            form.axId.setValue(axId)
+            form.axesIndex.setValue(axesIndex)
 
         self.updateUI()
 
@@ -93,7 +96,7 @@ class TaskPanel:
         form.xSize.valueChanged.connect(self.onFontSizes)
         form.ySize.valueChanged.connect(self.onFontSizes)
 
-        form.axId.valueChanged.connect(self.onAxesId)
+        form.axesIndex.valueChanged.connect(self.onAxesId)
 
         Plot.getMdiArea().subWindowActivated.connect(self.onMdiArea)
 
@@ -118,14 +121,14 @@ class TaskPanel:
             self.skip = False
             return
 
-        self.form.axId.setMaximum(len(plot.axesList))
+        self.form.axesIndex.setMaximum(len(plot.axesList))
 
-        if self.form.axId.value() >= len(plot.axesList):
-            self.form.axId.setValue(len(plot.axesList) - 1)
+        if self.form.axesIndex.value() >= len(plot.axesList):
+            self.form.axesIndex.setValue(len(plot.axesList) - 1)
 
         # Send new control to Plot instance
 
-        plot.setActiveAxes(self.form.axId.value())
+        plot.setActiveAxes(self.form.axesIndex.value())
 
         self.updateUI()
 
@@ -199,7 +202,7 @@ class TaskPanel:
 
         plot = Plot.getPlot()
 
-        self.form.axId.setEnabled(bool(plot))
+        self.form.axesIndex.setEnabled(bool(plot))
         self.form.title.setEnabled(bool(plot))
         self.form.titleSize.setEnabled(bool(plot))
         self.form.titleX.setEnabled(bool(plot))
@@ -212,9 +215,9 @@ class TaskPanel:
 
         # Ensure that active axes is correct
 
-        index = min(self.form.axId.value(), len(plot.axesList) - 1)
+        index = min(self.form.axesIndex.value(), len(plot.axesList) - 1)
 
-        self.form.axId.setValue(index)
+        self.form.axesIndex.setValue(index)
 
         # Store data before starting changing it.
 

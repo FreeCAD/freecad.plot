@@ -76,6 +76,9 @@ class TaskPanel:
     def isAllowedAlterView ( self ):
         return True
 
+    def getStandardButtons ( self ):
+        return QtWidgets.QDialogButtonBox.StandardButton.Save | QtWidgets.QDialogButtonBox.StandardButton.Cancel
+
     def needsFullSpace ( self ):
         return True
 
