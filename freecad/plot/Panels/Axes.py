@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
 
+from matplotlib.spines import Spines
 from FreeCAD.Plot import Plot # type: ignore
 from ..PySide import QtWidgets
 from os.path import dirname , join
@@ -10,6 +11,7 @@ from FreeCAD import Console , Gui , Qt
 class TaskForm ( QtWidgets.QWidget ):
 
     newAxesButton : QtWidgets.QPushButton
+    delAxesButton : QtWidgets.QPushButton
     axesIndex : QtWidgets.QSpinBox
     allAxes : QtWidgets.QCheckBox
     xOffset : QtWidgets.QSpinBox
@@ -18,19 +20,14 @@ class TaskForm ( QtWidgets.QWidget ):
     posXMax : QtWidgets.QSlider
     posYMin : QtWidgets.QSlider
     posYMax : QtWidgets.QSlider
-    remove : QtWidgets.QPushButton
     xAlign : QtWidgets.QComboBox
     yAlign : QtWidgets.QComboBox
     xAuto : QtWidgets.QCheckBox
     yAuto : QtWidgets.QCheckBox
-    xSMin : QtWidgets.QLineEdit
-    ySMin : QtWidgets.QLineEdit
-    xSMax : QtWidgets.QLineEdit
-    ySMax : QtWidgets.QLineEdit
-    xMin : QtWidgets.QSlider
-    yMin : QtWidgets.QSlider
-    xMax : QtWidgets.QSlider
-    yMax : QtWidgets.QSlider
+    xMin : QtWidgets.QLineEdit
+    yMin : QtWidgets.QLineEdit
+    xMax : QtWidgets.QLineEdit
+    yMax : QtWidgets.QLineEdit
 
 
 class TaskPanel:
@@ -99,13 +96,14 @@ class TaskPanel:
         self.updateUI()
 
         form.axesIndex.valueChanged.connect(self.onAxesId)
-        form.newAxesButton.pressed.connect(self.onNew)
-        form.remove.pressed.connect(self.onRemove)
 
-        form.xMin.valueChanged.connect(self.onDims)
-        form.xMax.valueChanged.connect(self.onDims)
-        form.yMin.valueChanged.connect(self.onDims)
-        form.yMax.valueChanged.connect(self.onDims)
+        form.delAxesButton.pressed.connect(self.onRemove)
+        form.newAxesButton.pressed.connect(self.onNew)
+
+        form.posXMin.valueChanged.connect(self.onDims)
+        form.posXMax.valueChanged.connect(self.onDims)
+        form.posYMin.valueChanged.connect(self.onDims)
+        form.posYMax.valueChanged.connect(self.onDims)
 
         form.xAlign.currentIndexChanged.connect(self.onAlign)
         form.yAlign.currentIndexChanged.connect(self.onAlign)
@@ -115,10 +113,10 @@ class TaskPanel:
 
         form.xAuto.stateChanged.connect(self.onScales)
         form.yAuto.stateChanged.connect(self.onScales)
-        form.xSMin.editingFinished.connect(self.onScales)
-        form.xSMax.editingFinished.connect(self.onScales)
-        form.ySMin.editingFinished.connect(self.onScales)
-        form.ySMax.editingFinished.connect(self.onScales)
+        form.xMin.editingFinished.connect(self.onScales)
+        form.xMax.editingFinished.connect(self.onScales)
+        form.yMin.editingFinished.connect(self.onScales)
+        form.yMax.editingFinished.connect(self.onScales)
 
         Plot.getMdiArea().subWindowActivated.connect(self.onMdiArea)
 
@@ -248,11 +246,11 @@ class TaskPanel:
 
         # Set new dimensions
 
-        xmin = self.form.xMin.value() / 100.0
-        xmax = self.form.xMax.value() / 100.0
+        xmin = self.form.posXMin.value() / 100.0
+        xmax = self.form.posXMax.value() / 100.0
 
-        ymin = self.form.yMin.value() / 100.0
-        ymax = self.form.yMax.value() / 100.0
+        ymin = self.form.posYMin.value() / 100.0
+        ymax = self.form.posYMax.value() / 100.0
 
         for axes in axesList:
             axes.set_position([xmin, ymin, xmax - xmin, ymax - ymin])
@@ -326,9 +324,11 @@ class TaskPanel:
             self.updateUI()
             return
 
-        axesList = [plot.axes]
+        form = self.form
 
-        if self.form.allAxes.isChecked():
+        axesList = [ plot.axes ]
+
+        if form.allAxes.isChecked():
             axesList = plot.axesList
 
         # Set new offset
@@ -341,13 +341,15 @@ class TaskPanel:
             x = axes.get_xlabel()
             y = axes.get_ylabel()
 
-            for loc, spine in axes.spines.iteritems():
+            spines : Spines = axes.spines
 
-                if loc in ['bottom', 'top']:
-                    spine.set_position(('outward', self.form.xOffset.value()))
+            for loc , spine in spines.items() :
 
-                if loc in ['left', 'right']:
-                    spine.set_position(('outward', self.form.yOffset.value()))
+                if loc in [ 'bottom', 'top' ]:
+                    spine.set_position(('outward',form.xOffset.value()))
+
+                if loc in [ 'left' , 'right' ]:
+                    spine.set_position(('outward',form.yOffset.value()))
 
             # Now we can restore axes labels
 
@@ -388,30 +390,30 @@ class TaskPanel:
             for ax in axesList:
                 ax.set_autoscalex_on(True)
 
-            self.form.xSMin.setEnabled(False)
-            self.form.xSMax.setEnabled(False)
+            self.form.xMin.setEnabled(False)
+            self.form.xMax.setEnabled(False)
 
             lim = plot.axes.get_xlim()
 
-            self.form.xSMin.setText(str(lim[0]))
-            self.form.xSMax.setText(str(lim[1]))
+            self.form.xMin.setText(str(lim[0]))
+            self.form.xMax.setText(str(lim[1]))
 
         else:
 
-            self.form.xSMin.setEnabled(True)
-            self.form.xSMax.setEnabled(True)
+            self.form.xMin.setEnabled(True)
+            self.form.xMax.setEnabled(True)
 
             try:
-                xMin = float(self.form.xSMin.text())
+                xMin = float(self.form.xMin.text())
             except:
                 xMin = plot.axes.get_xlim()[0]
-                self.form.xSMin.setText(str(xMin))
+                self.form.xMin.setText(str(xMin))
 
             try:
-                xMax = float(self.form.xSMax.text())
+                xMax = float(self.form.xMax.text())
             except:
                 xMax = plot.axes.get_xlim()[1]
-                self.form.xSMax.setText(str(xMax))
+                self.form.xMax.setText(str(xMax))
 
             for ax in axesList:
                 ax.set_xlim((xMin, xMax))
@@ -423,30 +425,30 @@ class TaskPanel:
             for ax in axesList:
                 ax.set_autoscaley_on(True)
 
-            self.form.ySMin.setEnabled(False)
-            self.form.ySMax.setEnabled(False)
+            self.form.yMin.setEnabled(False)
+            self.form.yMax.setEnabled(False)
 
             lim = plot.axes.get_ylim()
 
-            self.form.ySMin.setText(str(lim[0]))
-            self.form.ySMax.setText(str(lim[1]))
+            self.form.yMin.setText(str(lim[0]))
+            self.form.yMax.setText(str(lim[1]))
 
         else:
 
-            self.form.ySMin.setEnabled(True)
-            self.form.ySMax.setEnabled(True)
+            self.form.yMin.setEnabled(True)
+            self.form.yMax.setEnabled(True)
 
             try:
-                yMin = float(self.form.ySMin.text())
+                yMin = float(self.form.yMin.text())
             except:
                 yMin = plot.axes.get_ylim()[0]
-                self.form.ySMin.setText(str(yMin))
+                self.form.yMin.setText(str(yMin))
 
             try:
-                yMax = float(self.form.ySMax.text())
+                yMax = float(self.form.yMax.text())
             except:
                 yMax = plot.axes.get_ylim()[1]
-                self.form.ySMax.setText(str(yMax))
+                self.form.yMax.setText(str(yMax))
 
             for ax in axesList:
                 ax.set_ylim((yMin, yMax))
@@ -481,24 +483,24 @@ class TaskPanel:
 
         form = self.form
 
-        form.axesIndex.setEnabled(bool(plot))
         form.newAxesButton.setEnabled(bool(plot))
-        form.remove.setEnabled(bool(plot))
+        form.delAxesButton.setEnabled(bool(plot))
+        form.axesIndex.setEnabled(bool(plot))
         form.allAxes.setEnabled(bool(plot))
-        form.xMin.setEnabled(bool(plot))
-        form.xMax.setEnabled(bool(plot))
-        form.yMin.setEnabled(bool(plot))
-        form.yMax.setEnabled(bool(plot))
+        form.posXMin.setEnabled(bool(plot))
+        form.posXMax.setEnabled(bool(plot))
+        form.posYMin.setEnabled(bool(plot))
+        form.posYMax.setEnabled(bool(plot))
         form.xAlign.setEnabled(bool(plot))
         form.yAlign.setEnabled(bool(plot))
         form.xOffset.setEnabled(bool(plot))
         form.yOffset.setEnabled(bool(plot))
         form.xAuto.setEnabled(bool(plot))
         form.yAuto.setEnabled(bool(plot))
-        form.xSMin.setEnabled(bool(plot))
-        form.xSMax.setEnabled(bool(plot))
-        form.ySMin.setEnabled(bool(plot))
-        form.ySMax.setEnabled(bool(plot))
+        form.xMin.setEnabled(bool(plot))
+        form.xMax.setEnabled(bool(plot))
+        form.yMin.setEnabled(bool(plot))
+        form.yMax.setEnabled(bool(plot))
 
         if not plot:
             form.axesIndex.setValue(0)
@@ -514,10 +516,10 @@ class TaskPanel:
         ax = plot.axes
         bb = ax.get_position()
 
-        form.xMin.setValue(int(100 * bb.min[0]))
-        form.xMax.setValue(int(100 * bb.max[0]))
-        form.yMin.setValue(int(100 * bb.min[1]))
-        form.yMax.setValue(int(100 * bb.max[1]))
+        form.posXMin.setValue(int(100 * bb.min[0]))
+        form.posXMax.setValue(int(100 * bb.max[0]))
+        form.posYMin.setValue(int(100 * bb.min[1]))
+        form.posYMax.setValue(int(100 * bb.max[1]))
 
         # Set alignment and offset
 
@@ -545,31 +547,31 @@ class TaskPanel:
 
         if ax.get_autoscalex_on():
             form.xAuto.setChecked(True)
-            form.xSMin.setEnabled(False)
-            form.xSMax.setEnabled(False)
+            form.xMin.setEnabled(False)
+            form.xMax.setEnabled(False)
         else:
             form.xAuto.setChecked(False)
-            form.xSMin.setEnabled(True)
-            form.xSMax.setEnabled(True)
+            form.xMin.setEnabled(True)
+            form.xMax.setEnabled(True)
 
         lim = ax.get_xlim()
 
-        form.xSMin.setText(str(lim[0]))
-        form.xSMax.setText(str(lim[1]))
+        form.xMin.setText(str(lim[0]))
+        form.xMax.setText(str(lim[1]))
 
         if ax.get_autoscaley_on():
             form.yAuto.setChecked(True)
-            form.ySMin.setEnabled(False)
-            form.ySMax.setEnabled(False)
+            form.yMin.setEnabled(False)
+            form.yMax.setEnabled(False)
         else:
             form.yAuto.setChecked(False)
-            form.ySMin.setEnabled(True)
-            form.ySMax.setEnabled(True)
+            form.yMin.setEnabled(True)
+            form.yMax.setEnabled(True)
 
         lim = ax.get_ylim()
 
-        form.ySMin.setText(str(lim[0]))
-        form.ySMax.setText(str(lim[1]))
+        form.yMin.setText(str(lim[0]))
+        form.yMax.setText(str(lim[1]))
 
 
 def createTask ():

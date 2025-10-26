@@ -130,8 +130,6 @@ class TaskPanel :
         Executed when the selected item is modified.
         '''
 
-        print('onItem Row',type(row))
-
         if self.skip:
             return
 
@@ -261,9 +259,11 @@ class TaskPanel :
 
         # Remove serie
 
-        Plot.removeSerie(self.item)
+        removeSeries(self.item)
+
         self.setList()
         self.updateUI()
+
         plt.update()
 
 
@@ -417,3 +417,29 @@ def createTask ():
     panel = TaskPanel()
 
     Gui.Control.showDialog(panel)
+
+
+def removeSeries ( index : int ):
+
+    plot = Plot.getPlot()
+
+    if not plot :
+        return
+
+    series = plot.series
+
+    if not series :
+        return
+
+    serie = series[ index ]
+
+    if not serie :
+        return
+
+    axes = serie.axes
+
+    axes.lines[ serie.lid ].remove()
+
+    del plot.series[ index ]
+
+    plot.update()

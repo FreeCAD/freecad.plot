@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
 
-from FreeCAD.Plot import Plot
+from FreeCAD.Plot import Plot # type: ignore
 from FreeCAD import Console , Qt
 
 
@@ -12,13 +12,11 @@ class Legend:
 
     def Activated ( self ):
 
-        plt = Plot.getPlot()
+        plot = Plot.getPlot()
 
-        if plt :
-
-            flag = plt.isLegend()
-            Plot.legend(not flag)
-
+        if plot :
+            isLegend = plot.isLegend()
+            Plot.legend(not isLegend)
             return
 
         message = Qt.translate(

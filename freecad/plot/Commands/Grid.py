@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
 
-from FreeCAD.Plot import Plot
+from FreeCAD.Plot import Plot # type: ignore
 from FreeCAD import Console , Qt
 
 
@@ -12,12 +12,12 @@ class Grid:
 
     def Activated ( self ):
 
-        plt = Plot.getPlot()
+        plot = Plot.getPlot()
 
-        if plt:
+        if plot :
 
-            flag = plt.isGrid()
-            Plot.grid(not flag)
+            isGrid = plot.isGrid()
+            Plot.grid(not isGrid)
             return
 
         message = Qt.translate(

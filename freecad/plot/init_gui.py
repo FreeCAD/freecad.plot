@@ -1,19 +1,18 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
-import FreeCAD
-import FreeCADGui as Gui
-import os
 
-import matplotlib
-
-import matplotlib.pyplot as plt
-from matplotlib import style
+from matplotlib.pyplot import style , ion
+from matplotlib import rcParams , use
 from .Commands import Positions , Legend , Labels , Series , Axes , Grid  , Save
+from FreeCAD import Console , Gui , Qt
+from os.path import dirname , join
 
-matplotlib.use('module://freecad.plot.freecad_backend')
+
+use('module://freecad.plot.freecad_backend')
+
 
 style_list = [ 'default' , 'classic' ] + sorted(
-    style for style in plt.style.available
+    style for style in style.available
     if style != 'classic' and not style.startswith('_') and 'colorblind' in style
 )
 
@@ -24,19 +23,19 @@ if len(sorted_style_list) > 1:
 elif len(sorted_style_list) == 1:
     style.use(sorted_style_list[ 0 ])
 else:
-    FreeCAD.Console.PrintWarning(
-        FreeCAD.Qt.translate('plot_console', 'matplotlib style sheets not found') + '\n'
+    Console.PrintWarning(
+        Qt.translate('plot_console', 'matplotlib style sheets not found') + '\n'
     )
 
-matplotlib.rcParams[ 'figure.facecolor' ] = 'efefef'
-matplotlib.rcParams[ 'axes.facecolor' ] = 'efefef'
+rcParams[ 'figure.facecolor' ] = 'efefef'
+rcParams[ 'axes.facecolor' ] = 'efefef'
 
-plt.ion()
+ion()
 
-__dir__ = os.path.dirname(__file__)
+__dir__ = dirname(__file__)
 
 
-QT_TRANSLATE_NOOP = FreeCAD.Qt.QT_TRANSLATE_NOOP
+QT_TRANSLATE_NOOP = Qt.QT_TRANSLATE_NOOP
 
 
 Workbench_Tooltip = QT_TRANSLATE_NOOP('Workbench','The Plot module is used to edit/save output plots performed by other tools')
@@ -49,14 +48,16 @@ class PlotWorkbench ( Gui.Workbench ):
 
     MenuText = Workbench_Title
     ToolTip = Workbench_Tooltip
-    Icon = os.path.join(__dir__, 'Resources', 'Icons', 'Addon.svg')
+
+    Icon = join(__dir__, 'Resources', 'Icons', 'Addon.svg')
+
 
     def __init__ ( self ):
 
-        Gui.addLanguagePath(os.path.join(__dir__, 'Resources', 'Locales'))
+        Gui.addLanguagePath(join(__dir__, 'Resources', 'Locales'))
         Gui.updateLocale()
 
-        Gui.addIconPath(os.path.join(__dir__, 'Resources', 'Icons'))
+        Gui.addIconPath(join(__dir__, 'Resources', 'Icons'))
 
         Gui.addCommand('Plot_SaveFig',Save())
         Gui.addCommand('Plot_Axes',Axes())
@@ -85,8 +86,8 @@ class PlotWorkbench ( Gui.Workbench ):
         try:
             import matplotlib
         except ImportError:
-            FreeCAD.Console.PrintMessage(
-                FreeCAD.Qt.translate(
+            Console.PrintMessage(
+                Qt.translate(
                     'plot_console', 'matplotlib not found, Plot module will be disabled'
                 )
                 + '\n'
