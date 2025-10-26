@@ -20,8 +20,5 @@ class Series :
             'Pixmap' : 'Series'
         }
 
-    def IsActive ( self ):
-        return bool( Plot.getPlot() )
-
     def Activated ( self ):
         createSeries()

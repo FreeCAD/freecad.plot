@@ -20,9 +20,6 @@ class Labels :
             'Pixmap' : 'Labels'
         }
 
-    def IsActive ( self ):
-        return bool( Plot.getPlot() )
-
     def Activated ( self ):
         createLabels()
 

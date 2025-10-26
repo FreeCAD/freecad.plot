@@ -20,8 +20,5 @@ class Save :
             'Pixmap' : 'Save'
         }
 
-    def IsActive ( self ):
-        return bool( Plot.getPlot() )
-
     def Activated ( self ):
         createSave()

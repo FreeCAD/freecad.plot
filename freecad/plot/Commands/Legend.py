@@ -2,7 +2,7 @@
 
 from FreeCAD.Plot import Plot # type: ignore
 from FreeCAD.Plot import Plot # type: ignore
-from FreeCAD import Qt
+from FreeCAD import Console , Qt
 
 
 translate = Qt.translate
@@ -19,9 +19,6 @@ class Legend :
             'ToolTip' : Tooltip ,
             'Pixmap' : 'Legend'
         }
-
-    def IsActive ( self ):
-        return bool( Plot.getPlot() )
 
     def Activated ( self ):
 

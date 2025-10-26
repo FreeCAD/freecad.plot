@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
 from FreeCAD.Plot import Plot # type: ignore
-from FreeCAD import Qt
+from FreeCAD import Console , Qt
 
 
 translate = Qt.translate
@@ -18,9 +18,6 @@ class Grid :
             'ToolTip' : Tooltip ,
             'Pixmap' : 'Grid'
         }
-
-    def IsActive ( self ):
-        return bool( Plot.getPlot() )
 
     def Activated ( self ):
 

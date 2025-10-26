@@ -20,8 +20,5 @@ class Positions :
             'Pixmap' : 'Positions'
         }
 
-    def IsActive ( self ):
-        return bool( Plot.getPlot() )
-
     def Activated ( self ):
         createPositions()

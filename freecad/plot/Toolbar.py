@@ -1,12 +1,13 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
+from FreeCAD.Plot import Plot # type: ignore
+from .PySide import QtWidgets , QtCore
 from FreeCAD import Gui , Qt
 
 
 translate = Qt.translate
 
-Toolbar_Title = translate('Plot','Plot edition tools')
-Menu_Title = translate('Plot','Plot')
+Toolbar_Title = translate('Plot','Plot')
 
 commands = [
     'Plot_SaveFig' ,
@@ -20,5 +21,45 @@ commands = [
 
 
 def createToolbar ( workbench : Gui.Workbench ):
+
     workbench.appendToolbar(Toolbar_Title,commands)
-    workbench.appendMenu(Menu_Title,commands)
+
+    listenForActivation()
+
+
+def getToolbar ():
+
+    window = Gui.getMainWindow()
+
+    widgets = window.children()
+
+    for widget in widgets:
+
+        if not isinstance(widget,QtWidgets.QToolBar):
+            continue
+
+        if widget.objectName() != Toolbar_Title:
+            continue
+
+        return widget
+
+    return None
+
+
+def listenForActivation ():
+
+    def update ():
+
+        plot = Plot.getPlot()
+
+        active = bool( plot )
+
+        toolbar = getToolbar()
+
+        if toolbar :
+            toolbar.setEnabled(active)
+
+
+    Plot.getMdiArea().subWindowActivated.connect(update)
+
+    QtCore.QTimer.singleShot(100,update)
