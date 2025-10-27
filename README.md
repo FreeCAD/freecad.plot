@@ -1,57 +1,45 @@
-## FreeCAD Plot Workbench
+# <img height = '24' src = 'freecad/plot/Resources/Icons/Addon.svg' /> Plot
 
-![Icon-Addon]
 
-**Welcome to FreeCAD-Plot!**
+The Plot workbench provides some additional  
+tools to modify Plots created within [FreeCAD].
 
-FreeCAD-Plot is a workbench for [FreeCAD](https://www.freecadweb.org) which
-provides some additional tools to edit the plots made within FreeCAD.
+![Preview]
 
-![image](https://user-images.githubusercontent.com/1668392/170647436-72383071-331c-43e4-92ff-9cf2583ffdd1.png)
+<br/>
 
-It currently offers the following tools:
+## Tools
 
-### Save plot
+### <img height = '16' src = 'freecad/plot/Resources/Icons/Save.svg' /> Save
 
-![Icon-Save]
+Extended plot saving dialog with more options.
 
-An extended version of the default saving tools, which offers a plethora of outut formats, allowing also to set the image size.
+### <img height = '16' src = 'freecad/plot/Resources/Icons/Axes.svg' /> Axes
 
-### Configure axes
+Modify axes ranges & scaling or add new ones. 
 
-![Icon-Axes]
+### <img height = '16' src = 'freecad/plot/Resources/Icons/Series.svg' /> Series
 
-Enhaces the configure subplots default tool adding the possiblity to add/remove axes, edit each axes independently or all of them at once.
+Edit the style of series or remove them.
 
-### Configure series
+### <img height = '16' src = 'freecad/plot/Resources/Icons/Grid.svg' /> Grid
 
-![Icon-Series]
+Enable / disable the grid of the plot.
 
-With this tool you can remove plotted series, or edit their style.
+### <img height = '16' src = 'freecad/plot/Resources/Icons/Legend.svg' /> Legend
 
-### Show/Hide grid
+Enable / disable the legend of the plot.
 
-![Icon-Grid]
+### <img height = '16' src = 'freecad/plot/Resources/Icons/Labels.svg' /> Labels
 
-Enable/disable the plot grid.
+Set the plot title and axes labels.
 
-### Show/Hide legend
+### <img height = '16' src = 'freecad/plot/Resources/Icons/Positions.svg' /> Positions & Sizes
 
-![Icon-Legend]
+Resize and move plot elements  
+like titles, labels and legends.
 
-Enable/disable the plot legend.
-
-### Set labels
-
-![Icon-Labels]
-
-Allows you to set the plot title and the axes labels.
-
-### Set positions and sizes
-
-![Icon-Positions]
-
-Allows you to move and resize some plot elements, like the title, the labels of the axes and the legend.
+<br/>
 
 ## Install
 
@@ -66,24 +54,16 @@ Documentation for this workbench is available on the [Plot Workbench wiki page](
 * Official Plot Workbench Tutorial [Part 1](https://wiki.freecadweb.org/Plot_Basic_tutorial)
 * Official Plot Workbench Tutorial [Part 2](https://wiki.freecadweb.org/Plot_MultiAxes_tutorial)
 
-## Discussion/Feedback
-
-Discuss bugs, feedback, thoughts etc.. on the official [FreeCAD forum thread](https://forum.freecadweb.org/viewtopic.php?f=8&t=60885)
-
-## Bugs/Enhancements
-
-Please open tickets in the [issue queue](https://github.com/FreeCAD/freecad.plot/issues)
-
-## Authors
-
-Jose Luis Cercós Pita <jlcercos@gmail.com>
-
+<!----------------------------------------------------------------------------->
 
 [Icon-Positions]: freecad/plot/Resources/Icons/Positions.svg
 [Icon-Labels]: freecad/plot/Resources/Icons/Labels.svg
 [Icon-Series]: freecad/plot/Resources/Icons/Series.svg
 [Icon-Legend]: freecad/plot/Resources/Icons/Legend.svg
-[Icon-Addon]: freecad/plot/Resources/Icons/Addon.svg
 [Icon-Grid]: freecad/plot/Resources/Icons/Grid.svg
 [Icon-Axes]: freecad/plot/Resources/Icons/Axes.svg
 [Icon-Save]: freecad/plot/Resources/Icons/Save.svg
+
+[Preview]: Resources/Images/Preview-Toolbar.webp
+
+[FreeCAD]: https://freecad.org
