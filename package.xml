@@ -53,8 +53,12 @@
     <!--[ License ]――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-->
 
     <license
-        file = 'LICENSE'
+        file = 'LICENSE-CODE'
     >LGPL-2.1-or-later</license>
+
+    <license
+        file = 'LICENSE-ICON'
+    >CC-BY-SA-4.0</license>
 
     <!--[ Icon ]―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-->
 
@@ -77,7 +81,7 @@
 
     <url
         type = 'readme'
-    >https://github.com/FreeCAD/Plot/issues/blob/Latest/README.md</url>
+    >https://github.com/FreeCAD/Plot/blob/Latest/README.md</url>
 
     <!--[ Content ]――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-->
 

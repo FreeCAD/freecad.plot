@@ -3,5 +3,6 @@
 
     "files.associations" : {
         "**/Resources/Locales/*.ts": "xml",
+        "LICENSE-*" : "txt"
     }
 }
