@@ -48,14 +48,14 @@
 root = true
 
 
-[*.{toml,xml,py,md}]
+[*.{toml,xml,py,md,svg}]
 insert_final_newline = false
 indent_style = space
 end_of_line = lf
 indent_size = 4
 charset = utf-8
 
-[*.{toml,xml,py}]
+[*.{toml,xml,py,svg}]
 trim_trailing_whitespace = true
 
 [*.{md}]
