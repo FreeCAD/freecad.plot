@@ -1,10 +1,43 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<package format="1" xmlns="https://wiki.freecad.org/Package_Metadata">
-    <name>Plot Workbench</name>
-    <description>Some tools to manipulate the FreeCAD plots</description>
+<?xml
+    version = '1.0'
+    encoding = 'UTF-8'
+    standalone = 'no'
+?>
+<package
+    format = '1'
+    xmlns = 'https://wiki.freecad.org/Package_Metadata'
+>
+
+    <!--[ Versions ]―――――――――――――――――――――――――――――――――――――――――――――――――――――――――-->
+
+    <freecadmin>1.0.0</freecadmin>
     <version>2024.11.26</version>
     <date>2024-11-26</date>
-    <maintainer email="jlcercos@gmail.com">Jose Luis Cercós Pita</maintainer>
+
+    <!--[ Dependencies ]―――――――――――――――――――――――――――――――――――――――――――――――――――――-->
+
+    <depend>matplotlib</depend>
+
+    <!--[ Info ]―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-->
+
+    <description>Tools to modify existing plots.</description>
+    <name>Plot</name>
+
+    <!--[ Tags ]―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-->
+
+    <tag>Legend</tag>
+    <tag>Figure</tag>
+    <tag>Plot</tag>
+    <tag>Axes</tag>
+    <tag>Grid</tag>
+
+    <!--[ Maintainer ]―――――――――――――――――――――――――――――――――――――――――――――――――――――――-->
+
+    <maintainer
+        email = 'PhoneDroid.FGL@proton.me'
+    >PhoneDroid</maintainer>
+
+    <!--[ Authors ]――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-->
 
     <author
         email = 'jlcercos@gmail.com'
@@ -13,21 +46,49 @@
     <author>looooo</author>
     <author>hasecilu</author>
 
-    <license file="LICENSE">LGPL-2.1-or-later</license>
-    <url type="repository" branch="master">https://github.com/FreeCAD/freecad.plot</url>
-    <url type="bugtracker">https://github.com/FreeCAD/freecad.pot/issues</url>
-    <url type="documentation">https://wiki.freecad.org/Plot_Workbench</url>
+    <author
+        email = 'PhoneDroid.FGL@proton.me'
+    >PhoneDroid</author>
 
-    <icon>freecad/plot/resources/icons/Plot_Icon.svg</icon>
+    <!--[ License ]――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-->
+
+    <license
+        file = 'LICENSE-CODE'
+    >LGPL-2.1-or-later</license>
+
+    <license
+        file = 'LICENSE-ICON'
+    >CC-BY-SA-4.0</license>
+
+    <!--[ Icon ]―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-->
+
+    <icon>freecad/plot/Resources/Icons/Addon.svg</icon>
+
+    <!--[ Urls ]―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-->
+
+    <url
+        type = 'documentation'
+    >https://wiki.freecad.org/Plot_Workbench</url>
+
+    <url
+        branch = 'Latest'
+        type = 'repository'
+    >https://github.com/FreeCAD/Plot</url>
+
+    <url
+        type = 'bugtracker'
+    >https://github.com/FreeCAD/Plot/issues</url>
+
+    <url
+        type = 'readme'
+    >https://github.com/FreeCAD/Plot/blob/Latest/README.md</url>
+
+    <!--[ Content ]――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-->
 
     <content>
         <workbench>
-        <name>Plot Workbench</name>
-        <classname>PlotWorkbench</classname>
-        <subdirectory>./</subdirectory>
-        <icon>freecad/plot/resources/icons/Plot_Icon.svg</icon>
-        <depend>matplotlib</depend>
-        <tag>plot</tag>
+            <subdirectory>./</subdirectory>
+            <classname>PlotWorkbench</classname>
         </workbench>
     </content>
 

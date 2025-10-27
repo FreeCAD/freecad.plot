@@ -1,0 +1,12 @@
+
+[project]
+version = '0.0.0'
+name = 'Plot'
+
+requires-python = '>=3.10'
+
+dependencies = [
+    'freecad-stubs>=1.0.21' ,
+    'matplotlib>=3.10.7' ,
+    'pyside6>=6.9.2'
+]

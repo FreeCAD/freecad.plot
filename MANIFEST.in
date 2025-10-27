@@ -1,2 +1,0 @@
-recursive-include freecad/plot/resources *
-recursive-include freecad/plot *.ui
