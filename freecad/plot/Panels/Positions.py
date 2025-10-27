@@ -21,10 +21,10 @@ class TaskPanel :
 
     form : TaskForm
 
+    objects = []
     names = []
     name = 'plot positions'
     skip = False
-    objs = []
     item = 0
     plot = None
 
@@ -102,52 +102,50 @@ class TaskPanel :
 
         plot = Plot.getPlot()
 
-        if not plot:
+        if not plot :
             self.updateUI()
             return
 
-        if not self.skip:
+        if self.skip :
+            return
 
-            self.skip = True
+        self.skip = True
 
-            name = self.names[self.item]
-            obj = self.objs[self.item]
-            s = self.form.Size.value()
-            x = self.form.X.value()
-            y = self.form.Y.value()
+        object = self.objects[ self.item ]
+        name = self.names[ self.item ]
 
-            # x/y labels only have one position control
+        form = self.form
 
-            if name.find('x label') >= 0:
-                self.form.Y.setValue(x)
-            elif name.find('y label') >= 0:
-                self.form.X.setValue(y)
+        size = form.Size.value()
+        x = form.X.value()
+        y = form.Y.value()
 
-            # title and labels only have one size control
+        # x/y labels only have one position control
 
-            if name.find('title') >= 0 or name.find('label') >= 0:
-                obj.set_position((x, y))
-                obj.set_size(s)
-            else:
-                # legend have all controls
-                Plot.legend(plot.legend, (x, y), s)
+        if name.find('x label') >= 0 :
+            form.Y.setValue(x)
+        elif name.find('y label') >= 0 :
+            form.X.setValue(y)
 
-            plot.update()
+        # title and labels only have one size control
 
-            self.skip = False
+        if name.find('title') >= 0 or name.find('label') >= 0:
+            object.set_position((x,y))
+            object.set_size(size)
+        else:
+            # legend have all controls
+            Plot.legend(plot.legend, (x, y), size)
 
-    def onMdiArea ( self , subWin ):
+        plot.update()
 
-        '''
-        Executed when a new window is selected on the mdi area.
+        self.skip = False
 
-        Keyword arguments:
-        subWin -- Selected window.
-        '''
 
-        plt = Plot.getPlot()
+    def onMdiArea ( self , window : Plot ):
 
-        if plt != subWin:
+        plot = Plot.getPlot()
+
+        if plot != window :
             self.updateUI()
 
 
@@ -168,48 +166,66 @@ class TaskPanel :
         form.X.setEnabled(enabled)
         form.Y.setEnabled(enabled)
 
-        if not plot:
+        if not plot :
             self.plot = plot
             form.items.clear()
             return
 
         # Refill items list only if Plot instance have been changed
 
-        if self.plot != plot:
+        if self.plot != plot :
 
             self.plot = plot
 
             self.plot.update()
             self.setList()
 
+        anyItems = len( self.objects ) > 0
+
+        form.Size.setEnabled(anyItems)
+        form.Y.setEnabled(anyItems)
+        form.X.setEnabled(anyItems)
+
+        if not anyItems :
+            return
+
         # Get data for controls
 
-        name = self.names[self.item]
-        obj = self.objs[self.item]
+        object = self.objects[ self.item ]
+        name = self.names[ self.item ]
 
-        if name.find('title') >= 0 or name.find('label') >= 0:
 
-            p = obj.get_position()
+        if name.find('title') >= 0 or name.find('label') >= 0 :
 
-            x = p[0]
-            y = p[1]
+            position = object.get_position()
 
-            s = obj.get_size()
+            x = position[ 0 ]
+            y = position[ 1 ]
 
-            if name.find('x label') >= 0:
+            size = object.get_size()
+
+            if name.find('x label') >= 0 :
                 form.Y.setEnabled(False)
                 form.Y.setValue(x)
-            elif name.find('y label') >= 0:
+            elif name.find('y label') >= 0 :
                 form.X.setEnabled(False)
                 form.X.setValue(y)
-        else:
-            x = plot.legPos[0]
-            y = plot.legPos[1]
-            s = obj.get_texts()[-1].get_fontsize()
+
+        else :
+
+            x = plot.legPos[ 0 ]
+            y = plot.legPos[ 1 ]
+
+            texts = object.get_texts()
+
+            if len( texts ) > 0 :
+                size = texts[ -1 ].get_fontsize()
+            else :
+                size = 10
 
         # Send it to controls
 
-        form.Size.setValue(s)
+        form.Size.setValue(size)
         form.X.setValue(x)
         form.Y.setValue(y)
 
@@ -222,8 +238,8 @@ class TaskPanel :
 
         # Clear lists
 
+        self.objects = []
         self.names = []
-        self.objs = []
 
         # Fill lists with available objects
 
@@ -233,24 +249,44 @@ class TaskPanel :
 
             for i in range(0, len(self.plot.axesList)):
 
-                ax = self.plot.axesList[i]
+                axes = self.plot.axesList[i]
 
                 # Each axes have title, xaxis and yaxis
 
-                self.names.append('title (axes {})'.format(i))
-                self.objs.append(ax.title)
-                self.names.append('x label (axes {})'.format(i))
-                self.objs.append(ax.xaxis.get_label())
-                self.names.append('y label (axes {})'.format(i))
-                self.objs.append(ax.yaxis.get_label())
+                title = axes.title
+                text = title.get_text()
+
+                if len( text ) > 0 :
+                    self.names.append(f'title (axes { i })')
+                    self.objects.append(title)
+
+
+                label = axes.xaxis.label
+                text = label.get_text()
+
+                if len( text ) > 0 :
+                    self.objects.append(label)
+                    self.names.append(f'x label (axes { i })')
+
+
+                label = axes.yaxis.label
+                text = label.get_text()
+
+                if len( text ) > 0 :
+                    self.objects.append(label)
+                    self.names.append(f'y label (axes { i })')
 
             # Legend if exist
 
-            ax = self.plot.axesList[-1]
+            axes = self.plot.axesList[ -1 ]
 
-            if ax.legend_:
-                self.names.append('legend')
-                self.objs.append(ax.legend_)
+            legend = axes.legend_
+
+            if legend :
+
+                if len( legend.get_texts() ) > 0 :
+                    self.objects.append(axes.legend_)
+                    self.names.append('legend')
 
 
         form = self.form

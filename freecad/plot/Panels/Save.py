@@ -103,9 +103,11 @@ class TaskPanel:
             Console.PrintWarning('No home user / home directory found.')
             return
 
+        path = join(home,'Plot.png')
+
         form = self.form
 
-        form.path.setText(join(home,'plot.png'))
+        form.path.setText(path)
 
         self.updateUI()
 
