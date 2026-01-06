@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: LGPL-2.1-or-later
 
 from .Positions import Positions
 from .Labels import Labels

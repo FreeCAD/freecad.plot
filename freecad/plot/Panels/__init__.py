@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: LGPL-2.1-or-later
 
 from .Positions import createTask as createPositions
 from .Labels import createTask as createLabels
