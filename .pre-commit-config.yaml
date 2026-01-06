@@ -2,3 +2,7 @@
 # SPDX-FileNotice: Part of the Plot addon.
 
 # Stub file to shut the pre-commit hook up!
+
+repos:
+  - repo: local
+    hooks: []
