@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
+# SPDX-FileNotice: Part of the Plot addon.
 
 from matplotlib.pyplot import style , ion
 from matplotlib import rcParams , use

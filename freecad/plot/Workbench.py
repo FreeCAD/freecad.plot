@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
+# SPDX-FileNotice: Part of the Plot addon.
 
 from .Commands import Positions , Legend , Labels , Series , Axes , Grid  , Save
 from .Toolbar import createToolbar
