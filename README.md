@@ -43,16 +43,16 @@ like titles, labels and legends.
 
 ## Install
 
-This workbench is available for download via the FreeCAD [Addon Manager](https://wiki.freecadweb.org/Addon_manager)
+Install this addon via the Addon Manager.
 
 ## Usage
 
-Documentation for this workbench is available on the [Plot Workbench wiki page](https://wiki.freecadweb.org/Plot_Workbench)
+Documentation for this workbench is available on the [Plot Workbench wiki page](https://wiki.freecad.org/Plot_Workbench)
 
 ## Tutorials
 
-* Official Plot Workbench Tutorial [Part 1](https://wiki.freecadweb.org/Plot_Basic_tutorial)
-* Official Plot Workbench Tutorial [Part 2](https://wiki.freecadweb.org/Plot_MultiAxes_tutorial)
+* Official Plot Workbench Tutorial [Part 1](https://wiki.freecad.org/Plot_Basic_tutorial)
+* Official Plot Workbench Tutorial [Part 2](https://wiki.freecad.org/Plot_MultiAxes_tutorial)
 
 <!----------------------------------------------------------------------------->
 
