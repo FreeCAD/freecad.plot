@@ -6,7 +6,7 @@ from matplotlib.backends.backend_qt import NavigationToolbar2QT
 from matplotlib._pylab_helpers import Gcf
 from matplotlib.backend_bases import FigureManagerBase , FigureCanvasBase
 from matplotlib.pyplot import gca
-from .PySide import QtWidgets , QtCore
+from PySide6 import QtWidgets , QtCore
 from FreeCAD import Gui
 
 

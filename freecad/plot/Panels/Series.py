@@ -5,7 +5,7 @@
 from matplotlib.colors import colorConverter
 from matplotlib.lines import Line2D
 from FreeCAD.Plot import Plot # type: ignore
-from ..PySide import QtWidgets , QtCore
+from PySide6 import QtWidgets , QtCore
 from os.path import dirname , join
 from FreeCAD import Gui
 

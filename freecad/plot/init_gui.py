@@ -3,6 +3,7 @@
 
 from .Workbench import PlotWorkbench
 from .MatPlot import initMatPlot
+
 from FreeCAD import Gui
 
 

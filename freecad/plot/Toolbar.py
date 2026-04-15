@@ -2,7 +2,7 @@
 # SPDX-FileNotice: Part of the Plot addon.
 
 from FreeCAD.Plot import Plot # type: ignore
-from .PySide import QtWidgets , QtCore
+from PySide6 import QtWidgets , QtCore
 from FreeCAD import Gui , Qt
 
 
