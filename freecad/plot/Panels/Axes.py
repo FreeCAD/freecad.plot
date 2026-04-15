@@ -4,7 +4,7 @@
 
 from matplotlib.spines import Spines
 from FreeCAD.Plot import Plot # type: ignore
-from ..PySide import QtWidgets
+from PySide6 import QtWidgets
 from os.path import dirname , join
 from FreeCAD import Console , Gui , Qt
 
